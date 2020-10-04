@@ -1,0 +1,8 @@
+
+.loading {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    height: 95px;
+    justify-content: space-between;
+}

@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
@@ -10,30 +10,47 @@ import { ExamplesModule } from './examples/examples.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from 'environments/credentials';
+import { MaterialModule } from './core/material/material.module';
+import { UserService } from './ui/services/user.service';
+import { UserRepository } from './ui/repositories/user.repository';
+import { ParserModule } from './ui/repositories/parser/parser.module';
+import { LoginComponent } from './ui/pages/login/login.component';
+import { ProfileComponent } from './examples/profile/profile.component';
+import { LoadingService } from './ui/services/loading.service';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent
+        NavbarComponent,
+        LoginComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserAnimationsModule,
         NgbModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
         ExamplesModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule,
-        AngularFireAuthModule, // auth
-        AngularFireStorageModule // storage
+        AngularFireAuthModule,
+        AngularFireStorageModule,
+        MaterialModule,
+        ParserModule.forRoot()
     ],
-    providers: [],
+    providers: [
+        AngularFireAuth,
+        UserService,
+        UserRepository,
+        LoadingService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,7 @@ import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NgbdModalBasic } from './modal/modal.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
     imports: [
@@ -30,8 +31,9 @@ import { NgbdModalBasic } from './modal/modal.component';
         TypographyComponent,
         NucleoiconsComponent,
         NotificationComponent,
-        NgbdModalBasic
+        NgbdModalBasic,
+        LoadingComponent
     ],
-    exports:[ ComponentsComponent ]
+    exports:[ ComponentsComponent, LoadingComponent ]
 })
 export class ComponentsModule { }
