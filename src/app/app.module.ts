@@ -21,13 +21,15 @@ import { ParserModule } from './ui/repositories/parser/parser.module';
 import { LoginComponent } from './ui/pages/login/login.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 import { LoadingService } from './ui/services/loading.service';
+import { RegisterComponent } from './ui/page/register/register.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
         LoginComponent,
-        ProfileComponent
+        ProfileComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserAnimationsModule,

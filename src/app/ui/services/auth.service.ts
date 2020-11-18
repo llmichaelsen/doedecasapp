@@ -36,13 +36,20 @@ export class AuthService {
     async authenticate(email, password): Promise<UserApp> {
         try {
             const result = await this.authRepository.authenticate(email, password)
-            this.updateLogin();
-            const user = await this.userRepository.getUser(result.user.uid);
-            localStorage.setItem('userApp', JSON.stringify(user));
-            return user;
+            this.updateLogin();            
+            return this.setUserApp(result.user.uid);
         } catch (error) {
             return error;
         }
+    }
+
+    async setUserApp(uid?): Promise<UserApp> {
+        if(!uid){
+            uid = await (await this.getUser()).uid;
+        }
+        const user = await this.userRepository.getUser(uid);
+        localStorage.setItem('userApp', JSON.stringify(user));
+        return user;
     }
 
     async logout() {

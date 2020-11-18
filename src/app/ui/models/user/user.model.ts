@@ -24,7 +24,9 @@ export class UserApp {
     getUpdateObject(): Object {
         return {
             firstName: this.firstName,
-            lastName: this.lastName
+            lastName: this.lastName,
+            address: this.address,
+            obs: this.obs
         }
     }
 }

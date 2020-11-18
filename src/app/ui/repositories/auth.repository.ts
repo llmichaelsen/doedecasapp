@@ -13,7 +13,7 @@ export class AuthRepository {
     ) {}
 
   authenticate(email, password) :Promise<firebase.auth.UserCredential> {
-    debugger;
+    ;
     return new Promise((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(email, password)
         .then((result) => resolve(result))

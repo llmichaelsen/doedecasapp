@@ -19,18 +19,14 @@ export class FirebaseGateway {
     }
 
     updateItem(list: string, item: any) {       
-        debugger; 
         const ref = firebase.database().ref(list + '/' + item.key);
         const obj = item.getUpdateObject()
         return new Promise((resolve, reject) => {
-            
             ref.update(obj)
                 .then((r) => {
-                    debugger
                     resolve(r)
                 })
                 .catch(error => {
-                    debugger
                     reject(error)
                 })
         });
@@ -57,7 +53,7 @@ export class FirebaseGateway {
     }
 
     getItem(list, column, value): Promise<any> {
-        debugger
+        
         return new Promise((resolve, reject) => {
             this.db.list(list, ref => ref.orderByChild(column).equalTo(value).limitToFirst(1))
                 .snapshotChanges()

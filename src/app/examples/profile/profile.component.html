@@ -30,20 +30,14 @@
     <div class="section">
         <div class="container">
             <div class="button-container">
-                <a (click)="openEdit(classic)" class="btn btn-primary btn-round btn-lg">Editar Perfil</a>
-                <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip"
-                    title="Follow me on Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip"
-                    title="Follow me on Instagram">
-                    <i class="fab fa-instagram"></i>
+                <a (click)="openEdit(classic)" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                <a (click)="deleteAccount()" class="btn btn-danger btn-round btn-lg">
+                    <i class="fas fa-trash-alt"></i>
+                    Excluir Conta
                 </a>
             </div>
-            <h3 class="title">About me</h3>
-            <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised,
-                Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm,
-                intimate feel with a solid groove structure. An artist of considerable range.</h5>
+            <h3 class="title">Sobre mim</h3>
+            <h5 class="description">{{authServ.getUserApp().obs}}</h5>
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="title text-center">My Portfolio</h4>

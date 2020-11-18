@@ -13,8 +13,14 @@ export class UserService {
         private authService: AuthService
     ){}
 
-    public async saveUser(user: UserApp): Promise<void> {
-         return await this.userRepository.saveUser(user);
+    public async saveUser(user: UserApp): Promise<boolean> {
+        try {
+            const uid = await this.userRepository.saveUser(user);
+            this.authService.setUserApp(uid);
+            return true;
+        } catch (error) {
+            return error;
+        }         
     }
 
     public async getUsers(type: UserType): Promise<UserApp[]> {

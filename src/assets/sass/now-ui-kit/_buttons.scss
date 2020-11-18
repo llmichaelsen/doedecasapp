@@ -62,7 +62,8 @@
         }
 
         &:not(.btn-footer) i.now-ui-icons,
-        &:not(.btn-footer) i.fab{
+        &:not(.btn-footer) i.fab,
+        &:not(.btn-footer) i.fas{
             position: absolute;
             top: 50%;
             left: 50%;

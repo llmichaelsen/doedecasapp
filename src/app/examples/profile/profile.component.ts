@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Address } from 'app/ui/models/user/address.model';
 import { UserType } from 'app/ui/models/user/user-type.enum';
 import { UserApp } from 'app/ui/models/user/user.model';
@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   focus1;
   profileForm: FormGroup;
   user: UserApp;
+  editModal: NgbModalRef;
 
   constructor(
     public authServ: AuthService,
@@ -34,9 +35,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() {
-
-    this.user = this.authServ.getUserApp();
+  ngOnInit() {    
 
     this.createForm();
     var rellaxHeader = new Rellax('.rellax-header');
@@ -54,6 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   createForm(): void {
+    this.user = this.authServ.getUserApp();
     this.profileForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
@@ -83,9 +83,11 @@ export class ProfileComponent implements OnInit {
       .finally(() => this.loadingServ.close(load));
   }
 
-  successMessage(formDirective: FormGroupDirective): void {
-    this.profileForm.reset();
+  async successMessage(formDirective: FormGroupDirective): Promise<void> {
+    await this.authServ.setUserApp();
+    this.createForm();
     formDirective.resetForm();
+    this.editModal.close();
   }
 
   private createUser(): UserApp {
@@ -96,6 +98,7 @@ export class ProfileComponent implements OnInit {
     user.lastName = this.profileForm.controls.lastName.value;
     user.email = this.profileForm.controls.email.value;
     user.password = this.profileForm.controls.password.value;
+    user.obs = this.profileForm.controls.obs.value;
     user.type = UserType.Doador;
 
     const addressForm = this.profileForm.controls.address as FormGroup;
@@ -108,7 +111,12 @@ export class ProfileComponent implements OnInit {
   }
 
   openEdit(content): void {
-    this.modalService.open(content, { size: 'lg' });
+    this.editModal = this.modalService.open(content, { size: 'lg' });
+  }
+
+  async deleteAccount(): Promise<void> {
+    await this.userServ.deleteUser(this.user)
+    await this.authServ.logout()
   }
 
 }

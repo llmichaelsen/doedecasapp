@@ -20,7 +20,7 @@ export class UserRepository {
             user.uid = userFirebase.user.uid;
             const gateway = new FirebaseGateway(this.db);
             const result = await gateway.addItem('user', user);
-            return Promise.resolve(result);
+            return Promise.resolve(user.uid);
         } catch (error) {
             return await Promise.reject(error);
         }
