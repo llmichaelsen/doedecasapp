@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { UserApp } from 'app/ui/models/user/user.model';
+import { UserApp } from 'app/ui/models/user/user-app.model';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthRepository {
   
   constructor(

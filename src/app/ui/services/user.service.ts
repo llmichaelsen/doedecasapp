@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { UserApp } from "app/ui/models/user/user.model";
+import { UserApp } from "app/ui/models/user/user-app.model";
 import { UserType } from "../models/user/user-type.enum";
 import { UserRepository } from "../repositories/user.repository";
 import { AuthService } from "./auth.service";
@@ -32,6 +32,14 @@ export class UserService {
         try {
             const user = await this.authService.getUser();
             return await this.userRepository.getUser(user.uid);
+        } catch (error) {
+            return error;
+        }
+    }
+    
+    public async getUseById(uid): Promise<UserApp> {
+        try {
+            return await this.userRepository.getUser(uid);
         } catch (error) {
             return error;
         }

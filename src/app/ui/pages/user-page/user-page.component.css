@@ -1,0 +1,21 @@
+
+.photo-container img {
+    background: white;
+    padding: 10px;
+}
+
+.button-container {
+    height: 90px;
+}
+
+a.btn-primary {
+    color: #fff;
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mat-form-field {
+    width: 100%;
+}

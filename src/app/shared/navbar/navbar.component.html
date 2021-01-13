@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" data-nav-image="assets/img/blurred-image-1.jpg" data-color="orange">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#pablo">
+          <a class="nav-link" [routerLink]="'/instituicoes'">
             <i class="now-ui-icons objects_globe"></i>
             <p>Doe Agora</p>
           </a>
@@ -36,7 +36,7 @@
             <div ngbDropdownMenu>
               <a class="dropdown-header">Opções do Usuário</a>
               <a class="dropdown-item" routerLink="/perfil">Perfil</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" routerLink="/minhas-doacoes">Minhas Doações</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="logout()">Sair</a>
             </div>

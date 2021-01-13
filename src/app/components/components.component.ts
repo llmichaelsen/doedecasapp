@@ -45,7 +45,8 @@ export class ComponentsComponent implements OnInit, OnDestroy {
         return date.month !== current.month;
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+
       var rellaxHeader = new Rellax('.rellax-header');
 
         var navbar = document.getElementsByTagName('nav')[0];

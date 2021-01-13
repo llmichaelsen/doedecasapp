@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthService } from 'app/ui/services/auth.service';
-import { UserApp } from 'app/ui/models/user/user.model';
+import { UserApp } from 'app/ui/models/user/user-app.model';
 import { UserService } from 'app/ui/services/user.service';
 
 @Component({

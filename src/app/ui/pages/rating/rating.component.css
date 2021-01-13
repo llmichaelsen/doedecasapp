@@ -1,0 +1,17 @@
+
+.section-basic {
+    margin-top: 70px;
+}
+
+.form-check {
+    display: inline-block;
+}
+
+textarea {
+    width: 100%;
+}
+
+.clearboth {
+    display: flex;
+    flex-direction: row-reverse;
+}

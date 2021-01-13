@@ -1,4 +1,4 @@
-import { UserApp } from "app/ui/models/user/user.model";
+import { UserApp } from "app/ui/models/user/user-app.model";
 import { AbstractParser } from "./parser";
 import { AddressParser } from "./address.parser";
 import { Injectable } from "@angular/core";
@@ -22,6 +22,7 @@ export class UserParser extends AbstractParser<UserApp> {
         user.lastName = data.lastName;
         user.password = data.password;
         user.type = data.type;
+        user.uid = data.uid;
         user.email = data.email;
         user.obs = data.obs;
         user.address = this.addressParser.parse(data.address);
@@ -41,6 +42,7 @@ export class UserParser extends AbstractParser<UserApp> {
         user.lastName = data.lastName;
         user.password = data.password;
         user.type = data.type;
+        user.uid = data.uid;
         user.email = data.email;
         user.obs = data.obs;
         user.address = this.addressParser.parse(data.address);

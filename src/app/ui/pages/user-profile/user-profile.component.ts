@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'app/ui/services/user.service';
-import { UserApp } from 'app/ui/models/user/user.model';
+import { UserApp } from 'app/ui/models/user/user-app.model';
 import { Address } from 'app/ui/models/user/address.model';
 import { FormGroup, FormControl, FormBuilder, Validators, Form, FormGroupDirective } from '@angular/forms';
 import { LoadingService } from 'app/ui/services/loading.service';

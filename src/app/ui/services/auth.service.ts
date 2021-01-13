@@ -6,7 +6,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { UserService } from "./user.service";
 import { UserType } from "../models/user/user-type.enum";
 import { UserRepository } from "../repositories/user.repository";
-import { UserApp } from "../models/user/user.model";
+import { UserApp } from "../models/user/user-app.model";
 import { UserParser } from "../repositories/parser/user.parser";
 import * as firebase from "firebase";
 

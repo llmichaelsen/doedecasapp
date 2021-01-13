@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { UserApp } from "app/ui/models/user/user.model";
+import { UserApp } from "app/ui/models/user/user-app.model";
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { UserParser } from "./parser/user.parser";

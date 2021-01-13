@@ -20,7 +20,7 @@
             }
 
             .navbar-translate{
-                @include transform-translate-x(-300px);
+                @include transform-translate-x(-250px);
             }
 
             &.menu-on-left{

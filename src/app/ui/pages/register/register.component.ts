@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Router } from '@angular/router';
 import { Address } from 'app/ui/models/user/address.model';
 import { UserType } from 'app/ui/models/user/user-type.enum';
-import { UserApp } from 'app/ui/models/user/user.model';
+import { UserApp } from 'app/ui/models/user/user-app.model';
 import { LoadingService } from 'app/ui/services/loading.service';
 import { UserService } from 'app/ui/services/user.service';
 

@@ -450,8 +450,9 @@
 }
 
 .brand .n-logo {
-    max-width: 100px;
-    margin-bottom: 40px;
+    width: 70px;
+    margin-bottom: 15px;
+    filter: brightness(5);
 }
 
 .invision-logo {

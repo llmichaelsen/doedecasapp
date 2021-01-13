@@ -1,6 +1,8 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { AddressParser } from "./address.parser";
 import { UserParser } from "./user.parser";
+import { DonationParser } from "./donation.parser";
+import { FoodParser } from './food.parser';
 
 @NgModule({})
 export class ParserModule {
@@ -9,7 +11,9 @@ export class ParserModule {
             ngModule: ParserModule,
             providers: [
                 AddressParser,
-                UserParser
+                UserParser,
+                DonationParser,
+                FoodParser
             ]
         }
     }

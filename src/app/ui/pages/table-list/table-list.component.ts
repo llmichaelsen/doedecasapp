@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'app/ui/services/user.service';
-import { UserApp } from 'app/ui/models/user/user.model';
+import { UserApp } from 'app/ui/models/user/user-app.model';
 import { UserType } from 'app/ui/models/user/user-type.enum';
 import { LoadingService } from 'app/ui/services/loading.service';
 import { FirebaseGateway } from 'app/ui/gateway/firebase.gateway';
