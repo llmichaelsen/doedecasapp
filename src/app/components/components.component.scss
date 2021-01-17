@@ -1,0 +1,13 @@
+.page-header {
+    height: calc(100vh - 61px);
+}
+.category-absolute {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50% );
+}
+    
+ngb-progressbar {
+    margin-top: 5rem;
+}

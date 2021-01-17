@@ -9,6 +9,7 @@ import { UserRepository } from "../repositories/user.repository";
 import { UserApp } from "../models/user/user-app.model";
 import { UserParser } from "../repositories/parser/user.parser";
 import * as firebase from "firebase";
+import { debug } from 'console';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +28,7 @@ export class AuthService {
             if (user) {
                 this.user = user;
                 localStorage.setItem('user', JSON.stringify(this.user));
+                this.setUserApp()
             } else {
                 localStorage.setItem('user', null);
             }
@@ -39,7 +41,7 @@ export class AuthService {
             this.updateLogin();            
             return this.setUserApp(result.user.uid);
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -58,10 +60,11 @@ export class AuthService {
     }
 
     updateLogin() {
-        this.afAuth.authState.subscribe(user => {
+        this.afAuth.authState.subscribe(async user => {
             if (user) {
                 this.user = user;
                 localStorage.setItem('user', JSON.stringify(this.user));
+                await this.setUserApp();
             } else {
                 localStorage.setItem('user', null);
                 localStorage.setItem('userApp', null);

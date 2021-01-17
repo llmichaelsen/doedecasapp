@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { UserParser } from "./parser/user.parser";
 import { FirebaseGateway } from "app/ui/gateway/firebase.gateway";
 import { AuthRepository } from "./auth.repository";
+import { debug } from 'console';
 
 @Injectable()
 export class UserRepository {
@@ -17,9 +18,8 @@ export class UserRepository {
     public async saveUser(user: UserApp): Promise<any> {
         try {
             const userFirebase = await this.authRepository.register(user);
-            user.uid = userFirebase.user.uid;
             const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.addItem('user', user);
+            const result = await gateway.addCustomItem('user', user, userFirebase.user.uid);
             return Promise.resolve(user.uid);
         } catch (error) {
             return await Promise.reject(error);
@@ -49,9 +49,9 @@ export class UserRepository {
     public async getUser(uid): Promise<UserApp> {
         try {
             const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.getItem('user', 'uid', uid);
-            
-            return Promise.resolve(this.userParser.parse(result[0]));
+            const result = await gateway.getItemByKey('user', uid);
+            result.uid = uid;
+            return Promise.resolve(this.userParser.parse(result));
         } catch (error) {
             return await Promise.reject(error);
         }

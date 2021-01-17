@@ -15,17 +15,14 @@ export class UserParser extends AbstractParser<UserApp> {
         const user = new UserApp;
         if(!payload) return user;
 
-        const data = payload.payload.val();
-
-        user.key = payload.payload.key;
-        user.firstName = data.firstName;
-        user.lastName = data.lastName;
-        user.password = data.password;
-        user.type = data.type;
-        user.uid = data.uid;
-        user.email = data.email;
-        user.obs = data.obs;
-        user.address = this.addressParser.parse(data.address);
+        user.firstName = payload.firstName;
+        user.lastName = payload.lastName;
+        user.password = payload.password;
+        user.type = payload.type;
+        user.uid = payload.uid;
+        user.email = payload.email;
+        user.obs = payload.obs;
+        user.address = this.addressParser.parse(payload.address);
 
         return user;
     }

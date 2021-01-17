@@ -29,10 +29,9 @@ export class ProfileComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() {    
+  ngOnInit() {
 
     this.createForm();
-    var rellaxHeader = new Rellax('.rellax-header');
 
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('profile-page');
@@ -87,7 +86,7 @@ export class ProfileComponent implements OnInit {
   private createUser(): UserApp {
     const user = new UserApp();
     const address = new Address();
-    user.key = this.user.key;
+    user.key = this.user.uid;
     user.firstName = this.profileForm.controls.firstName.value;
     user.lastName = this.profileForm.controls.lastName.value;
     user.email = this.profileForm.controls.email.value;

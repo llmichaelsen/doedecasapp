@@ -7,12 +7,10 @@ import { ComponentsComponent } from "./components/components.component";
 import { LandingComponent } from "./examples/landing/landing.component";
 import { ProfileComponent } from "./examples/profile/profile.component";
 import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.component";
-import { LoginComponent } from "./ui/pages/login/login.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
 import { UserPageComponent } from "./ui/pages/user-page/user-page.component";
 import { MinhasDoacoesComponent } from "./ui/pages/minhas-doacoes/minhas-doacoes.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
-import { RegisterComponent } from "./ui/pages/register/register.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "index", pathMatch: "full" },
