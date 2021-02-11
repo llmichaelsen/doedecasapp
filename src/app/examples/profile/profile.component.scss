@@ -7,3 +7,12 @@ a.btn-primary {
 mat-form-field {
     width: 100%;
 }
+
+.button-container {
+    margin-top: 0;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+}

@@ -14,7 +14,6 @@ export class MapComponent implements OnInit {
   markers: Marker[] = [];
 
   ngOnInit(): void {
-    console.log('')
     this.requestPosition();
   }
 
