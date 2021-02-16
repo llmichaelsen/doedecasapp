@@ -19,7 +19,7 @@ export class AuthRepository {
     }) 
   }
     
-  register(user: UserApp): Promise<firebase.auth.UserCredential> {
+  async register(user: UserApp): Promise<firebase.auth.UserCredential> {
     return new Promise((resolve, reject) => {
         this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
             .then(e => resolve(e))
@@ -34,7 +34,7 @@ export class AuthRepository {
         .then(async ()  => {
           var user = await firebase.currentUser;
           user.delete();
-          resolve();
+          resolve('');
         })
         .catch(error => reject(error));
     });

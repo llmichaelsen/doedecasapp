@@ -8,8 +8,8 @@
                 <div class="photo-container">
                     <img src="assets/img/instituicao.png" alt="">
                 </div>
-                <h3 class="title">{{instituicao?.getFullName()}}</h3>
-                <p class="category">{{instituicao?.getTypeName()}}</p>
+                <h3 class="title">{{instituicao?.name}}</h3>
+                <p class="category">{{instituicao?.description}}</p>
                 <div class="content">
                     <div class="social-description">
                         <h2>26</h2>
@@ -33,9 +33,9 @@
                 <a (click)="donation(classic)" class="btn btn-primary btn-round btn-lg ancor">Fazer Doação</a>
             </div>
             <h3 class="title">Sobre mim</h3>
-            <h5 class="description">{{instituicao?.obs}}</h5>
+            <h5 class="description">{{instituicao?.description}}</h5>
             <h3 class="title">Endereço</h3>
-            <h5 class="description">{{instituicao?.getFullAddress()}}</h5>
+            <h5 class="description">{{instituicao?.address.getFullAddress()}}</h5>
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="title text-center">My Portfolio</h4>

@@ -1,3 +1,4 @@
+import { Donator } from './../../ui/models/user/donator.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +18,7 @@ import * as Rellax from 'rellax';
 export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
-  user: UserApp;
+  user: Donator;
   editModal: NgbModalRef;
 
   constructor(
@@ -42,7 +43,7 @@ export class ProfileComponent implements OnInit {
   }
 
   createForm(): void {
-    this.user = this.authServ.getUserApp();
+    this.user = this.authServ.getUserApp() as Donator;
     this.profileForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
@@ -79,8 +80,8 @@ export class ProfileComponent implements OnInit {
     this.editModal.close();
   }
 
-  private createUser(): UserApp {
-    const user = new UserApp();
+  private createUser(): Donator {
+    const user = new Donator();
     const address = new Address();
     user.key = this.user.uid;
     user.firstName = this.profileForm.controls.firstName.value;
@@ -88,7 +89,6 @@ export class ProfileComponent implements OnInit {
     user.email = this.profileForm.controls.email.value;
     user.password = this.profileForm.controls.password.value;
     user.obs = this.profileForm.controls.obs.value;
-    user.type = UserType.Doador;
 
     const addressForm = this.profileForm.controls.address as FormGroup;
     address.street = addressForm.controls.street.value;

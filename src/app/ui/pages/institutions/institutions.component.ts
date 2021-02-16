@@ -1,7 +1,6 @@
+import { Institution } from './../../models/user/institution.model';
+import { InstitutionService } from './../../services/institution.service';
 import { Component, OnInit } from '@angular/core';
-import { UserType } from 'app/ui/models/user/user-type.enum';
-import { UserApp } from 'app/ui/models/user/user-app.model';
-import { UserService } from 'app/ui/services/user.service';
 
 @Component({
   selector: 'app-institutions',
@@ -10,10 +9,10 @@ import { UserService } from 'app/ui/services/user.service';
 })
 export class InstitutionsComponent implements OnInit {
 
-  institutions: UserApp[];
+  institutions: Institution[];
 
   constructor(
-    private service: UserService
+    private service: InstitutionService
   ) { }
 
   async ngOnInit() {
@@ -28,6 +27,6 @@ export class InstitutionsComponent implements OnInit {
   }
 
   async loadPage(): Promise<void> {
-    this.institutions = await this.service.getUsers(UserType.Instituiçao)
+    this.institutions = await this.service.list();
   }
 }

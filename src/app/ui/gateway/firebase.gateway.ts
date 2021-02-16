@@ -18,7 +18,7 @@ export class FirebaseGateway {
     });
   }
 
-  addCustomItem(list: string, item: any, key: string) {
+  async addCustomItem(list: string, item: any, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db.database
         .ref(list)

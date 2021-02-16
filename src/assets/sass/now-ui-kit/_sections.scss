@@ -19,7 +19,7 @@
 }
 
 .page-header{
-    height: 100vh;
+    height: calc(100vh - 61px);
     max-height: 1050px;
     padding: 0;
     color: $white-color;

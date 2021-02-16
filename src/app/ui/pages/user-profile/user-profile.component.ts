@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'app/ui/services/user.service';
 import { UserApp } from 'app/ui/models/user/user-app.model';
 import { Address } from 'app/ui/models/user/address.model';
-import { FormGroup, FormControl, FormBuilder, Validators, Form, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, Form, FormGroupDirective } from '@angular/forms';
 import { LoadingService } from 'app/ui/services/loading.service';
 import { UserType } from 'app/ui/models/user/user-type.enum';
 
@@ -11,8 +11,8 @@ import { UserType } from 'app/ui/models/user/user-type.enum';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
-
+export class UserProfileComponent {
+/*
   profileForm: FormGroup;
 
   constructor(
@@ -72,5 +72,5 @@ export class UserProfileComponent implements OnInit {
     user.address = address;
     return user;
   }
-
+*/
 }

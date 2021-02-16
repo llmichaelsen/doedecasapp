@@ -1,11 +1,13 @@
 <div class="wrapper">
     <div class="page-header clear-filter" filter-color="orange">
-        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/bg6.jpg');">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+            style="background-image: url('assets/img/bg6.jpg');">
         </div>
         <div class="container">
             <div class="content-center">
                 <h1 class="title">Conheça as instituições participantes</h1>
-              </div>
+                <button [routerLink]="['/register/institution']" class="btn btn-primary btn-round" type="button">Cadastre sua instituição</button>
+            </div>
         </div>
     </div>
     <div class="section section-team text-center">
@@ -16,9 +18,10 @@
                     <div class="col-md-4" *ngFor="let inst of institutions">
                         <div class="team-player">
                             <img src="assets/img/instituicao.png" class="rounded-circle img-fluid img-raised">
-                            <p class="category text-primary">{{ inst.getFullName() }}</p>
-                            <p class="description">{{ inst.obs }}</p>
-                            <a [routerLink]="'/perfil/'+ inst.uid" type="button" class="btn btn-primary btn-round">Ver Mais</a>
+                            <p class="category text-primary">{{ inst.name }}</p>
+                            <p class="description">{{ inst.description }}</p>
+                            <a [routerLink]="'/perfil/'+ inst.uid" type="button" class="btn btn-primary btn-round">Ver
+                                Mais</a>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,9 @@
+import { DonatorService } from './../../services/donator.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'app/ui/services/user.service';
 import { UserApp } from 'app/ui/models/user/user-app.model';
 import { UserType } from 'app/ui/models/user/user-type.enum';
 import { LoadingService } from 'app/ui/services/loading.service';
-import { FirebaseGateway } from 'app/ui/gateway/firebase.gateway';
-import { AuthService } from 'app/ui/services/auth.service';
 
 @Component({
   selector: 'app-table-list',
@@ -15,11 +14,11 @@ export class TableListComponent implements OnInit {
 
   users: UserApp[];
 
-  constructor(private userServ: UserService,
+  constructor(private service: DonatorService,
     private loadingServ: LoadingService) { }
 
   async ngOnInit() {
-    const a = await this.userServ.getUser();
+    const a = await this.service.list();
     console.log(a)
     this.loadUsers();
   }
@@ -27,7 +26,7 @@ export class TableListComponent implements OnInit {
   async loadUsers(): Promise<void> {
     const load = this.loadingServ.show();
     try {
-      this.users = await this.userServ.getUsers(UserType.Doador);
+      this.users = await this.service.list();
     }
     finally {
       load.close();
@@ -35,7 +34,7 @@ export class TableListComponent implements OnInit {
   }
 
   async deleteUser(user: UserApp) :Promise<void> {
-    const result = await this.userServ.deleteUser(user);
+    //await this.service.deleteUser(user);
     this.loadUsers()
   }
 

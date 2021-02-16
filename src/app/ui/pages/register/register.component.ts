@@ -1,11 +1,12 @@
+import { AuthService } from 'app/ui/services/auth.service';
+import { DonatorService } from './../../services/donator.service';
+import { Donator } from './../../models/user/donator.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'app/ui/models/user/address.model';
-import { UserType } from 'app/ui/models/user/user-type.enum';
-import { UserApp } from 'app/ui/models/user/user-app.model';
 import { LoadingService } from 'app/ui/services/loading.service';
-import { UserService } from 'app/ui/services/user.service';
+import { UserType } from 'app/ui/models/user/user-type.enum';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   profileForm: FormGroup;
 
   constructor(
-    private userServ: UserService,
+    private donatorServ: DonatorService,
     private loadingServ: LoadingService,
     private fb: FormBuilder,
     private router: Router) { }
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  async onSubmit(formDirective: FormGroupDirective): Promise<void> {
+  async onSubmit(): Promise<void> {
     
     if(this.profileForm.invalid){
       return;
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
     const load = this.loadingServ.show();
     const user = this.createUser();
-    this.userServ.saveUser(user)
+    this.donatorServ.saveDonator(user)
       .then(()=> this.successMessage())
       .catch(error => console.log(error))
       .finally(() => this.loadingServ.close(load));
@@ -60,23 +61,23 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  private createUser(): UserApp {
-    const user = new UserApp();
+  private createUser(): Donator {
+    const donator = new Donator();
     const address = new Address();
-    user.firstName = this.profileForm.controls.firstName.value;
-    user.lastName = this.profileForm.controls.lastName.value;
-    user.email = this.profileForm.controls.email.value;
-    user.password = this.profileForm.controls.password.value;
-    user.type = UserType.Doador;
-    user.obs = this.profileForm.controls.obs.value;
+    donator.type = UserType.Doador;
+    donator.firstName = this.profileForm.controls.firstName.value;
+    donator.lastName = this.profileForm.controls.lastName.value;
+    donator.email = this.profileForm.controls.email.value;
+    donator.password = this.profileForm.controls.password.value;
+    donator.obs = this.profileForm.controls.obs.value;
 
     const addressForm = this.profileForm.controls.address as FormGroup;
     address.street = addressForm.controls.street.value;
     address.number = addressForm.controls.number.value;
     address.district = addressForm.controls.district.value;
     address.city = addressForm.controls.city.value;
-    user.address = address;
-    return user;
+    donator.address = address;
+    return donator;
   }
 
 }

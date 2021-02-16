@@ -1,3 +1,5 @@
+import { InstitutionService } from './institution.service';
+import { DonatorService } from './donator.service';
 import { DonationService } from './donation.service';
 import { UserService } from './user.service';
 import { LoadingService } from './loading.service';
@@ -12,7 +14,9 @@ export class ServiceModule {
             providers: [
                 LoadingService,
                 UserService,
-                DonationService
+                DonationService,
+                DonatorService,
+                InstitutionService
             ]
         }
     }

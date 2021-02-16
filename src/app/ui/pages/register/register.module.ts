@@ -6,10 +6,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RegisterRoutingModule } from './register-routing.module';
+import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, RegisterInstitutionComponent],
   imports: [
     CommonModule,
     RegisterRoutingModule,

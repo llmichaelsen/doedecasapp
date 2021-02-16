@@ -1,3 +1,5 @@
+import { InstitutionService } from './../../services/institution.service';
+import { Institution } from './../../models/user/institution.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -16,14 +18,14 @@ import { UserService } from 'app/ui/services/user.service';
 export class UserPageComponent implements OnInit {
 
   userLogado: UserApp;
-  instituicao: UserApp;
+  instituicao: Institution;
   uid: string;
   editModal: NgbModalRef;
 
   donationForm: FormGroup;
 
   constructor(
-    private userServ: UserService,
+    private institutionServ: InstitutionService,
     private loadingServ: LoadingService,
     public authServ: AuthService,
     private route: ActivatedRoute,
@@ -39,8 +41,9 @@ export class UserPageComponent implements OnInit {
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('profile-page');
 
-    this.instituicao = await this.userServ.getUseById(this.uid);
-    this.userLogado = await this.userServ.getUser();
+    this.instituicao = await this.institutionServ.getItem(this.uid);
+    console.log(this.instituicao)
+    this.userLogado = await this.authServ.getUserApp();
     this.createForm();
   }
 

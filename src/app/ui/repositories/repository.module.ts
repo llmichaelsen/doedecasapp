@@ -1,3 +1,5 @@
+import { DonatorRepository } from './donator.repository';
+import { InstitutionRepository } from './institution.repository';
 import { UserRepository } from './user.repository';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DonationRepository } from './donation.repository';
@@ -12,7 +14,9 @@ export class RepositoryModule {
             providers: [
                 DonationRepository,
                 FoodRepository,
-                UserRepository
+                UserRepository,
+                InstitutionRepository,
+                DonatorRepository
             ]
         }
     }

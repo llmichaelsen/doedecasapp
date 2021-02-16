@@ -6,8 +6,9 @@ export class Address {
     number: string;
     district: string;
     city: string;
+    uf: string;
 
-    getFullAdress() :string {
-        return `${this.street}, ${this.number}, ${this.district} - ${this.city}`;
+    getFullAddress() :string {
+        return `${this.street}, ${this.number}, ${this.district}, ${this.city} - ${this.uf}`;
     }
 }

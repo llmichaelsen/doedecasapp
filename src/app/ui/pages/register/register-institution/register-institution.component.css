@@ -1,7 +1,11 @@
 
 .register {
+    background-color: #fff;
     overflow: auto;
     height: 100%;
+}
+
+h3 {
 }
 
 .back-dark {

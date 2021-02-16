@@ -1,13 +1,16 @@
+import { InstitutionParser } from './institution.parser';
+import { DonatorParser } from './donator.parser';
 import { AbstractParser } from "./parser";
 import { Injectable } from "@angular/core";
 import { Donation } from 'app/ui/models/donation/donation';
-import { UserParser } from './user.parser';
+import { UserParser } from './user-app.parser';
 
 @Injectable()
 export class DonationParser extends AbstractParser<Donation> {
 
     constructor(
-        private userParser: UserParser
+        private donatorParser: DonatorParser,
+        private institutionParser: InstitutionParser
     ){
         super();
     }
@@ -18,9 +21,9 @@ export class DonationParser extends AbstractParser<Donation> {
 
         const data = payload.payload.val();
 
-        donation.instituicao = this.userParser.reparse(data.instituicao);
+        donation.instituicao = this.institutionParser.reparse(data.instituicao);
         donation.createdAt = new Date(data.createdAt);
-        donation.doador = this.userParser.reparse(data.doador);
+        donation.doador = this.donatorParser.reparse(data.doador);
         donation.tipo = data.tipo;
         donation.quantidade = data.quantidade;
         donation.mensagem = data.mensagem;

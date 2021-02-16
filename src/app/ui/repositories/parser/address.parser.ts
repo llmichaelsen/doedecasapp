@@ -13,6 +13,7 @@ export class AddressParser extends AbstractParser<Address> {
         address.number = payload.number;
         address.district = payload.district;
         address.city = payload.city;
+        address.uf = payload.uf;
         return address;
     }
 }

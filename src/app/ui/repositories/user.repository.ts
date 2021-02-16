@@ -1,11 +1,12 @@
+import { Institution } from './../models/user/institution.model';
+import { Donator } from './../models/user/donator.model';
 import { Injectable } from "@angular/core";
 import { UserApp } from "app/ui/models/user/user-app.model";
 import { AngularFireDatabase } from '@angular/fire/database';
 
-import { UserParser } from "./parser/user.parser";
+import { UserParser } from "./parser/user-app.parser";
 import { FirebaseGateway } from "app/ui/gateway/firebase.gateway";
 import { AuthRepository } from "./auth.repository";
-import { debug } from 'console';
 
 @Injectable()
 export class UserRepository {
@@ -14,17 +15,6 @@ export class UserRepository {
                 private userParser: UserParser,
                 private authRepository: AuthRepository
                 ){}
-
-    public async saveUser(user: UserApp): Promise<any> {
-        try {
-            const userFirebase = await this.authRepository.register(user);
-            const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.addCustomItem('user', user, userFirebase.user.uid);
-            return Promise.resolve(user.uid);
-        } catch (error) {
-            return await Promise.reject(error);
-        }
-    }
 
     public async getUsers(): Promise<UserApp[]> {
         try {
@@ -49,7 +39,7 @@ export class UserRepository {
     public async getUser(uid): Promise<UserApp> {
         try {
             const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.getItemByKey('user', uid);
+            const result = await gateway.getItemByKey('userApp', uid);
             result.uid = uid;
             return Promise.resolve(this.userParser.parse(result));
         } catch (error) {

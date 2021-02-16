@@ -1,11 +1,11 @@
-import { UserApp } from '../user/user-app.model';
-import { User } from '../user/user.model';
+import { Donator } from './../user/donator.model';
+import { Institution } from './../user/institution.model';
 
 export class Donation {
 
     createdAt: Date;
-    instituicao: UserApp;
-    doador: UserApp;
+    instituicao: Institution;
+    doador: Donator;
     tipoEntrega: 'presencial' | 'telebusca';
     tipo: number;
     quantidade: number;

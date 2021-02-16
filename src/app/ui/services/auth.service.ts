@@ -1,15 +1,13 @@
+import { UserService } from 'app/ui/services/user.service';
 import { Injectable } from "@angular/core";
 import { AuthRepository } from "../repositories/auth.repository";
 import { User } from 'firebase';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { UserService } from "./user.service";
 import { UserType } from "../models/user/user-type.enum";
-import { UserRepository } from "../repositories/user.repository";
 import { UserApp } from "../models/user/user-app.model";
-import { UserParser } from "../repositories/parser/user.parser";
+import { UserParser } from "../repositories/parser/user-app.parser";
 import * as firebase from "firebase";
-import { debug } from 'console';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +17,7 @@ export class AuthService {
 
     constructor(
         private authRepository: AuthRepository,
-        private userRepository: UserRepository,
+        private userServ: UserService,
         public afAuth: AngularFireAuth,
         public router: Router,
         private userParser: UserParser
@@ -49,7 +47,7 @@ export class AuthService {
         if(!uid){
             uid = await (await this.getUser()).uid;
         }
-        const user = await this.userRepository.getUser(uid);
+        const user = await this.userServ.getUser(uid);
         localStorage.setItem('userApp', JSON.stringify(user));
         return user;
     }
