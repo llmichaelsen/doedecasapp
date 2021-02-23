@@ -13,9 +13,9 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { MaterialModule } from "./core/material/material.module";
 import { ParserModule } from "./ui/repositories/parser/parser.module";
-import { ProfileComponent } from "./examples/profile/profile.component";
+import { ProfileDonatorComponent } from "./ui/pages/profile-donator/profile-donator.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
-import { UserPageComponent } from "./ui/pages/user-page/user-page.component";
+import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
 import { MinhasDoacoesComponent } from "./ui/pages/minhas-doacoes/minhas-doacoes.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
 import { AngularFireModuleModule } from "./core/material/angular-fire.module";
@@ -24,9 +24,9 @@ import { AngularFireModuleModule } from "./core/material/angular-fire.module";
   declarations: [
     AppComponent,
     NavbarComponent,
-    ProfileComponent,
+    ProfileDonatorComponent,
     InstitutionsComponent,
-    UserPageComponent,
+    ProfileInstitutionComponent,
     MinhasDoacoesComponent,
     RatingComponent,
   ],

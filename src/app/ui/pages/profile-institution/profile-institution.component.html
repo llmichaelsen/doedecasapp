@@ -1,0 +1,144 @@
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="orange">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+            style="background-image: url('assets/img/background-1.jpg') ;">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <div class="photo-container">
+                    <img src="assets/img/instituicao.png" alt="">
+                </div>
+                <h3 class="title">{{instituicao?.name}}</h3>
+                <!-- <div class="content">
+                    <div class="social-description">
+                        <h2>26</h2>
+                        <p>Doações</p>
+                    </div>
+                    <div class="social-description">
+                        <h2>5</h2>
+                        <p>Comentários</p>
+                    </div>
+                    <div class="social-description">
+                        <h2>48</h2>
+                        <p>Bookmarks</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="button-container">
+                <a *ngIf="!uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Fazer Doação</a>
+                <a *ngIf="uid" (click)="editProfile()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+            </div>
+            <h3 class="title">Sobre mim</h3>
+            <h5 class="description">{{instituicao?.description}}</h5>
+            <h3 class="title">Endereço</h3>
+            <h5 class="description">{{instituicao?.address.getFullAddress()}}</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="title text-center">My Portfolio</h4>
+                    <ngb-tabset [justify]="'center'" type="pills"
+                        class="nav nav-pills nav-pills-primary  nav-pills-just-icons justify-content-center tab-space">
+                        <ngb-tab>
+                            <ng-template ngbTabTitle>
+                                <i class="now-ui-icons design_image"></i>
+                            </ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto">
+                                        <div class="row collections">
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg1.jpg" alt="" class="img-raised">
+                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
+                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab>
+                            <ng-template ngbTabTitle>
+                                <i class="now-ui-icons location_world"></i>
+                            </ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto">
+                                        <div class="row collections">
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg6.jpg" class="img-raised">
+                                                <img src="assets/img/bg11.jpg" alt="" class="img-raised">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
+                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab>
+                            <ng-template ngbTabTitle>
+                                <i class="now-ui-icons sport_user-run"></i>
+                            </ng-template>
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto">
+                                        <div class="row collections">
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
+                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
+                                                <img src="assets/img/bg6.jpg" class="img-raised">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://www.creative-tim.com">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.creative-tim.com/about-us">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://blog.creative-tim.com">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md">
+                            MIT License
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+            </div>
+        </div>
+    </footer>
+</div>

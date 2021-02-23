@@ -27,10 +27,10 @@ export class AuthRepository {
     });
   }
 
-  unRegister(user: UserApp) {
+  unRegister(email, password) {
     return new Promise((resolve, reject) => {
       let firebase = this.afAuth;
-      firebase.signInWithEmailAndPassword(user.email, user.password)
+      firebase.signInWithEmailAndPassword(email, password)
         .then(async ()  => {
           var user = await firebase.currentUser;
           user.delete();

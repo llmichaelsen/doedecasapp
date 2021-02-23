@@ -16,25 +16,6 @@ export class UserRepository {
                 private authRepository: AuthRepository
                 ){}
 
-    public async getUsers(): Promise<UserApp[]> {
-        try {
-            const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.getList('user');
-            return Promise.resolve(this.userParser.parseList(result));
-        } catch (error) {
-            return await Promise.reject(error);
-        }
-    }
-
-    public async updateUser(user: UserApp): Promise<any> {
-        try {
-            const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.updateItem('user', user);
-            return Promise.resolve(this.userParser.parseList(result));
-        } catch (error) {
-            return await Promise.reject(error);
-        }
-    }
 
     public async getUser(uid): Promise<UserApp> {
         try {
@@ -42,17 +23,6 @@ export class UserRepository {
             const result = await gateway.getItemByKey('userApp', uid);
             result.uid = uid;
             return Promise.resolve(this.userParser.parse(result));
-        } catch (error) {
-            return await Promise.reject(error);
-        }
-    }
-
-    public async deleteUser(user: UserApp): Promise<any> {
-        try {
-            await this.authRepository.unRegister(user);
-            const gateway = new FirebaseGateway(this.db);
-            const result = await gateway.deleteItem('user', user.key);
-            return Promise.resolve(result);
         } catch (error) {
             return await Promise.reject(error);
         }

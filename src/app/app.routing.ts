@@ -5,10 +5,10 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { ComponentsComponent } from "./components/components.component";
 import { LandingComponent } from "./examples/landing/landing.component";
-import { ProfileComponent } from "./examples/profile/profile.component";
+import { ProfileDonatorComponent } from "./ui/pages/profile-donator/profile-donator.component";
 import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
-import { UserPageComponent } from "./ui/pages/user-page/user-page.component";
+import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
 import { MinhasDoacoesComponent } from "./ui/pages/minhas-doacoes/minhas-doacoes.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
 
@@ -40,9 +40,10 @@ const routes: Routes = [
       ),
   },
   { path: "minhas-doacoes", component: MinhasDoacoesComponent },
-  { path: "perfil", component: ProfileComponent },
+  { path: "perfil", component: ProfileDonatorComponent },
   { path: "avaliacao", component: RatingComponent },
-  { path: "perfil/:id", component: UserPageComponent },
+  { path: "instituicao", component: ProfileInstitutionComponent },
+  { path: "instituicao/:id", component: ProfileInstitutionComponent },
 ];
 
 @NgModule({

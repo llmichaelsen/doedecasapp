@@ -1,8 +1,11 @@
-
 .logo-container img {
-    filter: brightness(5);
+  filter: brightness(5);
 }
 
 .register {
-    font-size: 14px;
+  font-size: 14px;
+}
+
+.page-header[filter-color="orange"] {
+  background: linear-gradient(0deg, rgb(78 7 0 / 30%), rgb(78 7 0 / 30%));
 }

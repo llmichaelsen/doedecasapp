@@ -64,7 +64,6 @@ export class RegisterInstitutionComponent implements OnInit {
   }
 
   successMessage(): void {
-    debugger
     this.router.navigate(["/"]);
   }
 

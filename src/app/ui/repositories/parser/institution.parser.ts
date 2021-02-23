@@ -10,7 +10,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
         super();
     }
 
-    parse(payload): Institution {debugger
+    parse(payload): Institution {
         const institution: Institution = new Institution();
         if(!payload) return institution;
 

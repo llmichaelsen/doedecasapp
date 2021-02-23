@@ -1,0 +1,33 @@
+a.btn-primary {
+  color: #fff;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-container {
+  margin-top: 0;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+}
+
+.page-header .page-header-image {
+  background-position: center 0%;
+}
+
+.page-header[filter-color="orange"] {
+  background: rgba(224, 23, 3, 0.6);
+}
+
+.page-header-small {
+  min-height: 40vh;
+  max-height: 260px;
+}

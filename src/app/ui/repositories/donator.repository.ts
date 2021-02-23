@@ -51,7 +51,28 @@ export class DonatorRepository {
       );
       return Promise.resolve(userFirebase.user.uid);
     } catch (error) {
-      return await Promise.reject(error);
+      throw await Promise.reject(error);
+    }
+  }
+
+  public async updateDonator(donator: Donator): Promise<boolean> {
+    try {
+      const gateway = new FirebaseGateway(this.db);
+      await gateway.updateItem("donator", donator);
+      return Promise.resolve(true);
+    } catch (error) {
+      throw await Promise.reject(error);
+    }
+  }
+
+  public async deleteDonator(donator: Donator): Promise<any> {
+    try {
+      const gateway = new FirebaseGateway(this.db);
+      await gateway.deleteItem("donator", donator.uid);
+      await gateway.deleteItem("userApp", donator.uid);
+      return Promise.resolve(true);
+    } catch (error) {
+      throw await Promise.reject(error);
     }
   }
 }
