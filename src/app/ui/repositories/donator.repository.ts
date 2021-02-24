@@ -25,8 +25,10 @@ export class DonatorRepository {
 
   async getItem(uid): Promise<Donator> {
     try {
+      debugger
       const gateway = new FirebaseGateway(this.db);
       const result = await gateway.getItemByKey("donator", uid);
+      console.log(result)
       return Promise.resolve(this.parser.parse(result));
     } catch (error) {
       throw Promise.reject(error);
@@ -36,12 +38,12 @@ export class DonatorRepository {
   public async saveDonator(donator: Donator): Promise<any> {
     try {
       const userFirebase = await this.authRepository.register(
-        donator.getUserAppModel()
+        donator.getRegisterModel()
       );
       const gateway = new FirebaseGateway(this.db);
       await gateway.addCustomItem(
         "userApp",
-        donator.getUserAppModel(),
+        donator.getDatabaseModel(),
         userFirebase.user.uid
       );
       await gateway.addCustomItem(

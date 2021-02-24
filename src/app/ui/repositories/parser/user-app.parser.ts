@@ -3,7 +3,6 @@ import { DonatorParser } from "./donator.parser";
 import { UserType } from "app/ui/models/user/user-type.enum";
 import { UserApp } from "app/ui/models/user/user-app.model";
 import { AbstractParser } from "./parser";
-import { AddressParser } from "./address.parser";
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -19,10 +18,12 @@ export class UserParser extends AbstractParser<UserApp> {
     const user = new UserApp();
     if (!payload) return user;
 
-    user.password = payload.password;
-    user.uid = payload.uid;
-    user.type = payload.type;
-    user.email = payload.email;
+    const info = payload.val();
+
+    user.password = info.password;
+    user.uid = payload.key;
+    user.type = info.type;
+    user.email = info.email;
 
     return user;
   }

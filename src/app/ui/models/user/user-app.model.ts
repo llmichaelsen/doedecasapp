@@ -8,11 +8,17 @@ export class UserApp {
     email: string;
     type: UserType;
 
-    getUserAppModel(): UserApp {
+    getRegisterModel(): UserApp {
+        const user = new UserApp();
+        user.email = this.email;
+        user.password = this.password;
+        return user;
+    }
+
+    getDatabaseModel(): UserApp {
         const user = new UserApp();
         user.type = this.type;
         user.email = this.email;
-        user.password = this.password;
         return user;
     }
 

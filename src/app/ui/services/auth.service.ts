@@ -54,6 +54,7 @@ export class AuthService {
 
   async logout() {
     await firebase.auth().signOut();
+    this.updateLogin();
     this.router.navigate(["/"]);
   }
 
@@ -107,4 +108,13 @@ export class AuthService {
       throw error;
     }
   }
+
+  async sendRecoverEmail(email: string): Promise<void> {
+    try {
+      await this.authRepository.sendRecoverEmail(email);
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 }

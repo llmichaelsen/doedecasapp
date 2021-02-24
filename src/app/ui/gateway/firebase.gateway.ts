@@ -32,6 +32,7 @@ export class FirebaseGateway {
   }
 
   updateItem(list: string, item: any) {
+    debugger
     const ref = firebase.database().ref(list + "/" + item.key);
     const obj = item.getUpdateObject();
     return new Promise((resolve, reject) => {
@@ -53,7 +54,7 @@ export class FirebaseGateway {
         .snapshotChanges()
         .first()
         .toPromise()
-        .then((r: Array<any>) => resolve(r))
+        .then((r: Array<any>) => resolve(r.map(item=>item.payload)))
         .catch((error) => reject(error));
     });
   }
@@ -73,7 +74,7 @@ export class FirebaseGateway {
   getItemByKey(list, key): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db.database.ref(list).child(key).once('value')
-        .then((r) => resolve(r.val()))
+        .then((r) => resolve(r))
         .catch((e) => reject(e));
     });
   }

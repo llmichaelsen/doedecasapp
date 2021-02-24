@@ -17,6 +17,7 @@ export class InstitutionRepository {
     try {
       const gateway = new FirebaseGateway(this.db);
       const items = await gateway.getList("institution");
+      console.log(items)
       return this.parser.parseList(items);
     } catch (error) {
       throw Promise.reject(error);
@@ -36,12 +37,12 @@ export class InstitutionRepository {
   public async saveInstitution(institution: Institution): Promise<string> {
     try {
       const userFirebase = await this.authRepository.register(
-        institution.getUserAppModel()
+        institution.getRegisterModel()
       );
       const gateway = new FirebaseGateway(this.db);
       const result = await gateway.addCustomItem(
         "userApp",
-        institution.getUserAppModel(),
+        institution.getDatabaseModel(),
         userFirebase.user.uid
       );
       const result2 = await gateway.addCustomItem(

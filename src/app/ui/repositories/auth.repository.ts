@@ -40,5 +40,16 @@ export class AuthRepository {
     });
   }
 
+  sendRecoverEmail(email): Promise<void> {
+    return new Promise((resolve, reject) => {
+      let firebase = this.afAuth;
+      firebase.sendPasswordResetEmail(email)
+        .then(r => {
+          resolve(r);
+        })
+        .catch(error => reject(error));
+    });
+  }
+
 
 }

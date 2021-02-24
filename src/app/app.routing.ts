@@ -1,3 +1,4 @@
+import { ProfileGuard } from "./ui/guards/profile.guard";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
@@ -35,12 +36,14 @@ const routes: Routes = [
   {
     path: "map",
     loadChildren: () =>
-      import("./ui/pages/map/map.module").then(
-        (module) => module.MapModule
-      ),
+      import("./ui/pages/map/map.module").then((module) => module.MapModule),
   },
   { path: "minhas-doacoes", component: MinhasDoacoesComponent },
-  { path: "perfil", component: ProfileDonatorComponent },
+  {
+    path: "perfil",
+    component: ProfileDonatorComponent,
+    canActivate: [ProfileGuard],
+  },
   { path: "avaliacao", component: RatingComponent },
   { path: "instituicao", component: ProfileInstitutionComponent },
   { path: "instituicao/:id", component: ProfileInstitutionComponent },

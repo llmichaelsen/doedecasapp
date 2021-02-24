@@ -50,4 +50,8 @@ export class LoginComponent implements OnInit {
         setTimeout(()=> this.errors = false, 3000)
       });
   }
+
+  async sendRecoverEmail(): Promise<void> {
+    await this.authServ.sendRecoverEmail("llmichaelsen@gmail.com");
+  }
 }

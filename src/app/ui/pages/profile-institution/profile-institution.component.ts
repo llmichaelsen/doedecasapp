@@ -5,9 +5,6 @@ import { EditInstitutionModalComponent } from "./../../../components/edit-instit
 import { InstitutionService } from "../../services/institution.service";
 import { Institution } from "../../models/user/institution.model";
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroupDirective,
-} from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { UserApp } from "app/ui/models/user/user-app.model";
 import { AuthService } from "app/ui/services/auth.service";

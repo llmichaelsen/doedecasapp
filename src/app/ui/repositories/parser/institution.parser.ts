@@ -14,7 +14,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
         const institution: Institution = new Institution();
         if(!payload) return institution;
 
-        const info = payload.payload ? payload.payload.val() : payload;
+        const info = payload.val();
 
         institution.uid = payload.key || payload.uid;
         institution.name = info.name;

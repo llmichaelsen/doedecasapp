@@ -30,7 +30,6 @@ export class ProfileDonatorComponent implements OnInit {
   ngOnInit() {
 
     this.createForm();
-
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('profile-page');
   }
