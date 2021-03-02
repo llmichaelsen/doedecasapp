@@ -34,4 +34,13 @@ export class InstitutionService {
       throw await Promise.reject(error);
     }
   }
+
+  public async updateInstitution(inst: Institution): Promise<any> {
+    try {
+      const result = await this.institutionRepository.updateInstitution(inst);
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
 }

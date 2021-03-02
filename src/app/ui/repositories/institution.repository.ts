@@ -34,6 +34,16 @@ export class InstitutionRepository {
     }
   }
 
+  public async updateInstitution(inst: Institution): Promise<boolean> {
+    try {
+      const gateway = new FirebaseGateway(this.db);
+      await gateway.updateItem("institution", inst);
+      return Promise.resolve(true);
+    } catch (error) {
+      throw await Promise.reject(error);
+    }
+  }
+
   public async saveInstitution(institution: Institution): Promise<string> {
     try {
       const userFirebase = await this.authRepository.register(

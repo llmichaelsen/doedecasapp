@@ -1,3 +1,4 @@
+import { FoodService } from './food.service';
 import { InstitutionService } from './institution.service';
 import { DonatorService } from './donator.service';
 import { DonationService } from './donation.service';
@@ -16,7 +17,8 @@ export class ServiceModule {
                 UserService,
                 DonationService,
                 DonatorService,
-                InstitutionService
+                InstitutionService,
+                FoodService
             ]
         }
     }

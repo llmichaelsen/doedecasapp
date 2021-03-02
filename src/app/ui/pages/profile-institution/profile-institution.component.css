@@ -20,9 +20,6 @@ a.btn-primary {
     z-index: 99;
   }
 
-.mat-form-field {
-    width: 100%;
-}
 
 .page-header .page-header-image {
     background-position: center 0%;
@@ -35,4 +32,20 @@ a.btn-primary {
 .page-header-small {
     min-height: 40vh;
     max-height: 260px;
+}
+
+.title {
+    margin-top: 15px;
+}
+
+h5.description {
+    margin-bottom: 20px;
+}
+
+.work-day {
+    margin-right: 10px;
+}
+
+.work-time {
+    display: block;
 }

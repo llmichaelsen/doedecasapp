@@ -15,4 +15,12 @@ export abstract class AbstractParser<T> implements IAbstractParser<T> {
         return payload.map(p => this.parse(p))
             .filter(p => p);
     }
+
+    reparse(payload): T {
+        return this.parse(payload);
+    }
+
+    reparseList(payload): Array<T> {
+        return this.parseList(payload);
+    }
 }

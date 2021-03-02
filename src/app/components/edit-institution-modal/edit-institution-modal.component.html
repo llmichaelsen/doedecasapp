@@ -1,72 +1,171 @@
 <div class="modal-header justify-content-center">
-    <button type="button" class="close" (click)="close('Cross click')">
+    <h4 class="title title-up">Editar Perfil</h4>
+    <button type="button" class="close" (click)="close(false)">
         <i class="now-ui-icons ui-1_simple-remove"></i>
     </button>
-    <h4 class="title title-up">Editar Perfil</h4>
 </div>
 <div class="modal-body">
     <div class="card-body">
-        <form id="form" [formGroup]="profileForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
+        <form id="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm"
+            *ngIf="profileForm">
             <div class="row">
                 <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Primeiro Nome</mat-label>
-                        <input matInput type="text" formControlName="firstName" />
-                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Instituição</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Nome</mat-label>
+                                <input matInput type="text" formControlName="name" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>CNPJ</mat-label>
+                                <input matInput placeholder="Sobrenome" type="text" formControlName="cpnj" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field appearance="fill">
+                                <label>Descrição</label>
+                                <textarea matInput formControlName="description"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <h5>Responsável</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Primeiro Nome</mat-label>
+                                <input matInput type="text" formControlName="responsibleFirstName" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Sobrenome</mat-label>
+                                <input matInput type="text" formControlName="responsibleLastName" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Telefone</mat-label>
+                                <input matInput type="text" formControlName="responsiblePhone" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Cargo</mat-label>
+                                <input matInput type="text" formControlName="responsibleRole" />
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Primeiro Nome</mat-label>
-                        <input matInput placeholder="Sobrenome" type="text" formControlName="lastName" />
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row" formGroupName="address">
-                <div class="col-md-8">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Logradouro</mat-label>
-                        <input matInput type="text" formControlName="street" />
-                    </mat-form-field>
-                </div>
-                <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Número</mat-label>
-                        <input matInput type="text" formControlName="number" />
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row" formGroupName="address">
-                <div class="col-md-5">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Bairro</mat-label>
-                        <input matInput type="text" formControlName="district" />
-                    </mat-form-field>
-                </div>
-                <div class="col-md-5">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Cidade</mat-label>
-                        <input matInput type="text" formControlName="city" />
-                    </mat-form-field>
-                </div>
-                <div class="col-md-2">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Estado</mat-label>
-                        <input matInput type="text" />
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <mat-form-field appearance="fill">
-                        <label>Sobre mim</label>
-                        <textarea matInput formControlName="obs"></textarea>
-                    </mat-form-field>
+                <div class="col-md-6 border-dashed">
+                    <div class="row" formGroupName="address">
+                        <div class="col-md-12">
+                            <h5>Endereço</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Logradouro</mat-label>
+                                <input matInput type="text" formControlName="street" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Número</mat-label>
+                                <input matInput type="text" formControlName="number" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" formControlName="district" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Cidade</mat-label>
+                                <input matInput type="text" formControlName="city" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Estado</mat-label>
+                                <input matInput type="text" formControlName="uf" />
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Infomações para doações</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-checkbox formControlName="enableDonation" class="example-margin">Habilitar para receber doações.</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-label>Alimentos prioritários (5 no máximo)</mat-label>
+                            <mat-select formControlName="foodNeeded" multiple>
+                                <mat-option *ngFor="let food of foods" [disabled]="isItemDisabled(food)"
+                                    [value]="food.id">{{food.title}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div class="row" formGroupName="workingTime">
+                        <div class="col-md-6 working-time">
+                            <h5>Horário de Funcionamento</h5>
+                            <mat-checkbox formControlName="monday" class="example-margin">Segunda-Feira</mat-checkbox>
+                            <mat-checkbox formControlName="tuesday" class="example-margin">Terça-Feira</mat-checkbox>
+                            <mat-checkbox formControlName="wednesday" class="example-margin">Quarta-Feira</mat-checkbox>
+                            <mat-checkbox formControlName="thursday" class="example-margin">Quinta-Feira</mat-checkbox>
+                            <mat-checkbox formControlName="friday" class="example-margin">Sexta-Feira</mat-checkbox>
+                            <mat-checkbox formControlName="saturday" class="example-margin">Sábado</mat-checkbox>
+                            <mat-checkbox formControlName="sunday" class="example-margin">Domingo</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row time-work">
+                                <div class="col-md-12">
+                                    <h5>Horário dia de semana</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Início</mat-label>
+                                        <input matInput type="text" formControlName="weekDayBegin"/>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Final</mat-label>
+                                        <input matInput type="text" formControlName="weekDayFinal"/>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <h5>Horário final de semana</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Início</mat-label>
+                                        <input matInput type="text" formControlName="weekEndBegin"/>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Final</mat-label>
+                                        <input matInput type="text" formControlName="weekEndFinal"/>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" (click)="close('Close click')">Cancelar</button>
-    <button type="submit" form="form" class="btn btn-primary">Salvar</button>
+    <button class="btn btn-default" (click)="close(false)">Cancelar</button>
+    <button type="submit" form="login-form" class="btn btn-primary">Salvar</button>
 </div>

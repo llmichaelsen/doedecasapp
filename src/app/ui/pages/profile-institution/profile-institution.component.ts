@@ -1,5 +1,5 @@
 import { DonateModalComponent } from "./../../../components/donate-modal/donate-modal.component";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { MatDialog } from "@angular/material/dialog";
 import { EditInstitutionModalComponent } from "./../../../components/edit-institution-modal/edit-institution-modal.component";
 import { InstitutionService } from "../../services/institution.service";
@@ -49,14 +49,21 @@ export class ProfileInstitutionComponent implements OnInit {
     }
     this.donateModal = this.dialog.open(DonateModalComponent);
     this.donateModal.afterClosed().subscribe((result) => {
-      console.log(result);
+      console.log(result)
     });
   }
 
-  editProfile(): void {
+  async reloadInfo(): Promise<void> {
+    await this.authServ.setUserApp(this.uid);
+    this.instituicao = this.uid
+      ? await this.institutionServ.getItem(this.uid)
+      : (this.authServ.getUserApp() as Institution);
+  }
+
+  editProfile(): void {MatDialogConfig
     this.editModal = this.dialog.open(EditInstitutionModalComponent);
     this.editModal.afterClosed().subscribe((result) => {
-      console.log(result);
+      if(result) this.reloadInfo();
     });
   }
 

@@ -1,0 +1,35 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.title-up {
+    margin: 0;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.working-time .mat-checkbox {
+    margin-right: 10px;
+}
+
+.time-work h5 {
+    margin-bottom: 0;
+}
+
+.time-work ::ng-deep .mat-form-field-infix {
+    border-top: .4em solid transparent;
+}
+
+.time-work ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: .95em;
+}
+
+.working-time ::ng-deep .mat-checkbox-label {
+    font-size: 12px;
+}
+
+.modal-footer {
+    padding: 0;
+}

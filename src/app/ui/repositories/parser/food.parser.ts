@@ -9,8 +9,10 @@ export class FoodParser extends AbstractParser<Food> {
         const food: Food = new Food();
         if(!payload) return food;
 
+        const info = payload.val();
+
         food.id = payload.key;
-        food.title = payload.payload.val();
+        food.title = info;
         return food;
     }
 }

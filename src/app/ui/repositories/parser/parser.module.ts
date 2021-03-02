@@ -1,3 +1,4 @@
+import { WorkingTimeParser } from './working-time.parser';
 import { DonatorParser } from './donator.parser';
 import { InstitutionParser } from './institution.parser';
 import { NgModule, ModuleWithProviders } from "@angular/core";
@@ -17,7 +18,8 @@ export class ParserModule {
                 DonationParser,
                 FoodParser,
                 InstitutionParser,
-                DonatorParser
+                DonatorParser,
+                WorkingTimeParser
             ]
         }
     }

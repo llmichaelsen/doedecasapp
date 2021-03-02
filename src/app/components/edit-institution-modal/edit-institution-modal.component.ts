@@ -1,10 +1,13 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { InstitutionService } from './../../ui/services/institution.service';
-import { LoadingService } from './../../ui/services/loading.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from './../../ui/services/auth.service';
+import { FoodService } from "./../../ui/services/food.service";
+import { Institution } from "./../../ui/models/user/institution.model";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { InstitutionService } from "./../../ui/services/institution.service";
+import { LoadingService } from "./../../ui/services/loading.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AuthService } from "./../../ui/services/auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Component, Inject, OnInit } from "@angular/core";
+import { Food } from "app/ui/models/food/food";
 
 @Component({
   selector: "app-edit-institution-modal",
@@ -13,6 +16,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 })
 export class EditInstitutionModalComponent implements OnInit {
   profileForm: FormGroup;
+  institution: Institution;
+  foods: Food[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<EditInstitutionModalComponent>,
@@ -20,32 +25,30 @@ export class EditInstitutionModalComponent implements OnInit {
     public authServ: AuthService,
     private service: InstitutionService,
     private loadingServ: LoadingService,
-    private fb: FormBuilder) {}
+    private fb: FormBuilder,
+    private foodService: FoodService
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-    this.createForm();
+  async ngOnInit() {
+    try {
+      this.createForm();
+      this.foods = await this.foodService.list();
+    } catch (error) {
+      alert(error);
+    }
   }
 
   createForm(): void {
-    this.profileForm = this.fb.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-      obs: [""],
-      address: this.fb.group({
-        street: [""],
-        number: [""],
-        district: [""],
-        city: [""]
-      })
-    });
+    this.institution = this.authServ.getUserApp() as Institution;
+    this.profileForm = this.institution.getFormGroup();
   }
-  
-  close(): void {
-    this.dialogRef.close(false);
+
+  close(success: boolean): void {
+    this.dialogRef.close(success);
   }
 
   async onSubmit(): Promise<void> {
@@ -53,12 +56,22 @@ export class EditInstitutionModalComponent implements OnInit {
       return;
     }
 
-    // const load = this.loadingServ.show();
-    // const user = this.createUser();
-    // this.service
-    //   .updateDonator(user)
-    //   .then(() => this.successMessage(formDirective))
-    //   .catch((error) => console.log(error))
-    //   .finally(() => this.loadingServ.close(load));
+    const load = this.loadingServ.show();
+    const user = this.institution.createUser(this.profileForm);
+    this.service
+      .updateInstitution(user)
+      .then((r) => this.close(true))
+      .catch((error) => alert(error))
+      .finally(() => this.loadingServ.close(load));
+  }
+
+  isItemDisabled(food: Food): boolean {
+    if (
+      this.profileForm.get("foodNeeded").value.length > 4 &&
+      !this.profileForm.get("foodNeeded").value.includes(food.id)
+    ) {
+      return true;
+    }
+    return false;
   }
 }
