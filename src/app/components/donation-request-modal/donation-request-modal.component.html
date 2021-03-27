@@ -1,0 +1,52 @@
+<div class="modal-header justify-content-center">
+    <h4 class="title title-up">Agendar Doação</h4>
+    <button type="button" class="close" (click)="close(false)">
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="card-body" *ngIf="donationForm">
+        <form id="form" [formGroup]="donationForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill" formGroupName="deliveryTime">
+                        <mat-label>Selecione o dia</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="day">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field appearance="fill" formGroupName="deliveryTime">
+                        <mat-label>A partir da hora:</mat-label>
+                        <input appMask="timeMask" matInput formControlName="initTime" placeholder="00:00">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field appearance="fill" formGroupName="deliveryTime">
+                        <mat-label>Até a hora:</mat-label>
+                        <input appMask="timeMask" matInput formControlName="endTime" placeholder="00:00">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Alimento</mat-label>
+                        <mat-select formControlName="food">
+                            <mat-option *ngFor="let food of foods" [value]="food.id">{{food.title}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantidade (kg)</mat-label>
+                        <input matInput placeholder="0" type="number" formControlName="amount">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="close(false)">Cancelar</button>
+    <button type="submit" form="form" class="btn btn-primary">Salvar</button>
+</div>

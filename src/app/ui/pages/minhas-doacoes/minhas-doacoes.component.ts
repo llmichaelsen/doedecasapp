@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Donation } from 'app/ui/models/donation/donation';
-import { DonationService } from 'app/ui/services/donation.service';
+import { DonationOffer } from 'app/ui/models/donation/donation-offer';
+//import { DonationService } from 'app/ui/services/donation.service';
 
 @Component({
   selector: 'app-minhas-doacoes',
@@ -10,10 +10,10 @@ import { DonationService } from 'app/ui/services/donation.service';
 export class MinhasDoacoesComponent implements OnInit {
 
   displayedColumns: string[] = ['data', 'instituicao', 'tipo', 'quantidade', 'mensagem'];
-  dataSource: Donation[] = [];
+  dataSource: DonationOffer[] = [];
 
   constructor(
-    private donationServ: DonationService
+    //private donationServ: DonationService
   ) { }
 
   async ngOnInit() {
@@ -22,7 +22,7 @@ export class MinhasDoacoesComponent implements OnInit {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
 
-    this.dataSource = await this.donationServ.getDonations();
+    //this.dataSource = await this.donationServ.getDonations();
   }
   ngOnDestroy(){
     var body = document.getElementsByTagName('body')[0];

@@ -1,10 +1,12 @@
+import { DonationRequestService } from './donation-request.service';
 import { FoodService } from './food.service';
 import { InstitutionService } from './institution.service';
 import { DonatorService } from './donator.service';
-import { DonationService } from './donation.service';
+import { DonationOfferService } from './donation-offer.service';
 import { UserService } from './user.service';
 import { LoadingService } from './loading.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { GeocodeService } from './geocode.service';
 
 
 @NgModule({})
@@ -15,10 +17,12 @@ export class ServiceModule {
             providers: [
                 LoadingService,
                 UserService,
-                DonationService,
+                DonationOfferService,
+                DonationRequestService,
                 DonatorService,
                 InstitutionService,
-                FoodService
+                FoodService,
+                GeocodeService
             ]
         }
     }

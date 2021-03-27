@@ -1,3 +1,4 @@
+import { DirectiveModule } from './../utils/directive.module';
 import { MaterialModule } from './../core/material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { NgbdModalBasic } from './modal/modal.component';
 import { LoadingComponent } from './loading/loading.component';
 import { EditInstitutionModalComponent } from './edit-institution-modal/edit-institution-modal.component';
-import { DonateModalComponent } from './donate-modal/donate-modal.component';
+import { DonationRequestModal } from './donation-request-modal/donation-request-modal.component';
+import { EditDonatorModalComponent } from './edit-donator-modal/edit-donator-modal.component';
+import { DonationOfferModalComponent } from './donation-offer-modal/donation-offer-modal.component';
 
 @NgModule({
     imports: [
@@ -27,7 +30,8 @@ import { DonateModalComponent } from './donate-modal/donate-modal.component';
         RouterModule,
         JwBootstrapSwitchNg2Module,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule,
+        DirectiveModule.forRoot(),
       ],
     declarations: [
         ComponentsComponent,
@@ -39,7 +43,9 @@ import { DonateModalComponent } from './donate-modal/donate-modal.component';
         NgbdModalBasic,
         LoadingComponent,
         EditInstitutionModalComponent,
-        DonateModalComponent
+        DonationRequestModal,
+        EditDonatorModalComponent,
+        DonationOfferModalComponent
     ],
     exports:[ ComponentsComponent, LoadingComponent ]
 })

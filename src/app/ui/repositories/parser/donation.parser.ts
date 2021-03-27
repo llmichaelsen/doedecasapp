@@ -1,32 +1,29 @@
-import { InstitutionParser } from './institution.parser';
-import { DonatorParser } from './donator.parser';
+import { WorkingTimeParser } from './working-time.parser';
+import { DonationOffer } from '../../models/donation/donation-offer';
 import { AbstractParser } from "./parser";
 import { Injectable } from "@angular/core";
-import { Donation } from 'app/ui/models/donation/donation';
-import { UserParser } from './user-app.parser';
 
 @Injectable()
-export class DonationParser extends AbstractParser<Donation> {
+export class DonationOfferParser extends AbstractParser<DonationOffer> {
 
     constructor(
-        private donatorParser: DonatorParser,
-        private institutionParser: InstitutionParser
+        private wtParser: WorkingTimeParser,
     ){
         super();
     }
     
-    parse(payload): Donation {
-        const donation: Donation = new Donation();
+    parse(payload): DonationOffer {
+        const donation: DonationOffer = new DonationOffer();
         if(!payload) return donation;
 
         const data = payload.payload.val();
 
-        donation.instituicao = this.institutionParser.reparse(data.instituicao);
+        donation.institution = data.institution;
+        donation.donator = data.donator;
         donation.createdAt = new Date(data.createdAt);
-        donation.doador = this.donatorParser.reparse(data.doador);
-        donation.tipo = data.tipo;
-        donation.quantidade = data.quantidade;
-        donation.mensagem = data.mensagem;
+        donation.amount = data.amount;
+        donation.food = data.food;
+        donation.workingTime = this.wtParser.parse(data.workingTime);
         return donation;
     }
 }

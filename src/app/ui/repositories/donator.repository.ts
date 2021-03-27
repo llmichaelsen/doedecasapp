@@ -25,10 +25,8 @@ export class DonatorRepository {
 
   async getItem(uid): Promise<Donator> {
     try {
-      debugger
       const gateway = new FirebaseGateway(this.db);
       const result = await gateway.getItemByKey("donator", uid);
-      console.log(result)
       return Promise.resolve(this.parser.parse(result));
     } catch (error) {
       throw Promise.reject(error);

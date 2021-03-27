@@ -1,9 +1,11 @@
 import { UserType } from 'app/ui/models/user/user-type.enum';
 
+export type Key = string;
+
 export class UserApp {
 
-    key: string;
-    uid: string;
+    key: Key;
+    uid: Key;
     password: string;
     email: string;
     type: UserType;

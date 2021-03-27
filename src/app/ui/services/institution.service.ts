@@ -35,6 +35,15 @@ export class InstitutionService {
     }
   }
 
+  public async getEnabledInstitutions(): Promise<Institution[]> {
+    try {
+      const insts = await this.institutionRepository.list();
+      return insts.filter(item => item.enableDonation);
+    } catch (error) {
+      throw await Promise.reject(error);
+    }
+  }
+
   public async updateInstitution(inst: Institution): Promise<any> {
     try {
       const result = await this.institutionRepository.updateInstitution(inst);

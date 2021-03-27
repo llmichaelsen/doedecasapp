@@ -3,7 +3,6 @@ import { UserType } from "app/ui/models/user/user-type.enum";
 import { WorkingTime } from "./working-time.model";
 import { Address } from "./address.model";
 import { UserApp } from "app/ui/models/user/user-app.model";
-import { Food } from "../food/food";
 
 export class Institution extends UserApp {
   name: string;
@@ -16,7 +15,7 @@ export class Institution extends UserApp {
   responsiblePhone: string;
   responsibleRole: string;
 
-  foodNeeded: Food[] = [];
+  foodNeeded: string[] = [];
   enableDonation: boolean = false;
   workingTime: WorkingTime = new WorkingTime();
 
@@ -46,7 +45,6 @@ export class Institution extends UserApp {
   }
 
   getFormGroup(): FormGroup {
-    debugger
     const fb = new FormBuilder();
     return fb.group({
       name: [this.name, Validators.required],
@@ -65,19 +63,7 @@ export class Institution extends UserApp {
       responsibleRole: [this.responsibleRole, Validators.required],
       enableDonation: [this.enableDonation, Validators.required],
       foodNeeded: [this.foodNeeded || []],
-      workingTime: fb.group({
-        monday: [this.workingTime.monday],
-        tuesday: [this.workingTime.tuesday],
-        wednesday: [this.workingTime.wednesday],
-        thursday: [this.workingTime.thursday],
-        friday: [this.workingTime.friday],
-        saturday: [this.workingTime.saturday],
-        sunday: [this.workingTime.sunday],
-        weekEndBegin: [this.workingTime.weekEndBegin],
-        weekEndFinal: [this.workingTime.weekEndFinal],
-        weekDayBegin: [this.workingTime.weekDayBegin],
-        weekDayFinal: [this.workingTime.weekDayFinal],
-      })
+      workingTime: this.workingTime.getFormGroup()
     });
   }
 

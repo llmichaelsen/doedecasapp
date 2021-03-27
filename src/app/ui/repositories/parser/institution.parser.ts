@@ -30,7 +30,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
     institution.responsibleLastName = info.responsibleLastName;
     institution.responsiblePhone = info.responsiblePhone;
     institution.responsibleRole = info.responsibleRole;
-    institution.foodNeeded = info.foodNeeded;
+    institution.foodNeeded = info.foodNeeded || [];
     institution.enableDonation = info.enableDonation;
     institution.workingTime = this.workingTimeParser.parse(info.workingTime);
     return institution;
@@ -50,7 +50,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
     institution.responsibleLastName = info.responsibleLastName;
     institution.responsiblePhone = info.responsiblePhone;
     institution.responsibleRole = info.responsibleRole;
-    institution.foodNeeded = info.foodNeeded;
+    institution.foodNeeded = info.foodNeeded || [];
     institution.enableDonation = info.enableDonation;
     institution.workingTime = this.workingTimeParser.reparse(info.workingTime);
     return institution;

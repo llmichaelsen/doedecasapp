@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Time } from "@angular/common";
 
 export class WorkingTime {
@@ -28,5 +29,22 @@ export class WorkingTime {
       this.friday
       ? true
       : false;
+  }
+
+  getFormGroup(): FormGroup {
+    const fb = new FormBuilder();
+    return fb.group({
+      monday: [this.monday],
+      tuesday: [this.tuesday],
+      wednesday: [this.wednesday],
+      thursday: [this.thursday],
+      friday: [this.friday],
+      saturday: [this.saturday],
+      sunday: [this.sunday],
+      weekEndBegin: [this.weekEndBegin],
+      weekEndFinal: [this.weekEndFinal],
+      weekDayBegin: [this.weekDayBegin],
+      weekDayFinal: [this.weekDayFinal],
+    })
   }
 }

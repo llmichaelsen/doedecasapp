@@ -29,11 +29,13 @@
     <div class="section">
         <div class="container">
             <div class="button-container">
-                <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Fazer Doação</a>
+                <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Agendar Doação</a>
                 <a *ngIf="!uid" (click)="editProfile()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
             </div>
             <h3 class="title">Sobre a instituição</h3>
             <h5 class="description">{{instituicao?.description}}</h5>
+            <h3 class="title">Alimentos prioritários</h3>
+            <h5 class="description">{{priorityFoods}}</h5>
             <h3 class="title">Endereço</h3>
             <h5 class="description">{{instituicao?.address.getFullAddress()}}</h5>
             <h3 class="title">Dias de funcionamento</h3>
@@ -55,7 +57,7 @@
                     {{instituicao?.workingTime.weekEndBegin}} até
                     {{instituicao?.workingTime.weekEndFinal}}</span>
             </h5>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12">
                     <h4 class="title text-center">My Portfolio</h4>
                     <ngb-tabset [justify]="'center'" type="pills"
@@ -124,8 +126,8 @@
                             </ng-template>
                         </ngb-tab>
                     </ngb-tabset>
-                </div>
-            </div>
+                </div> 
+            </div>-->
         </div>
     </div>
     <footer class="footer footer-default">

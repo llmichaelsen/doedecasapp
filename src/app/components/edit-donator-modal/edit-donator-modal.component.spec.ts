@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DonateModalComponent } from './donate-modal.component';
+import { EditDonatorModalComponent } from './edit-donator-modal.component';
 
-describe('DonateModalComponent', () => {
-  let component: DonateModalComponent;
-  let fixture: ComponentFixture<DonateModalComponent>;
+describe('EditDonatorModalComponent', () => {
+  let component: EditDonatorModalComponent;
+  let fixture: ComponentFixture<EditDonatorModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DonateModalComponent ]
+      declarations: [ EditDonatorModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DonateModalComponent);
+    fixture = TestBed.createComponent(EditDonatorModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

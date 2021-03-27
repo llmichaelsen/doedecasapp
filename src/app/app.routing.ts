@@ -1,3 +1,4 @@
+import { MapsComponent } from './ui/pages/maps/maps.component';
 import { ProfileGuard } from "./ui/guards/profile.guard";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -34,9 +35,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: "map",
+    path: "maps",
     loadChildren: () =>
-      import("./ui/pages/map/map.module").then((module) => module.MapModule),
+      import("./ui/pages/maps/maps.module").then((module) => module.MapsModule),
   },
   { path: "minhas-doacoes", component: MinhasDoacoesComponent },
   {

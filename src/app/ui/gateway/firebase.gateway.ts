@@ -6,7 +6,7 @@ import * as firebase from "firebase";
 export class FirebaseGateway {
   constructor(private db: AngularFireDatabase) {}
 
-  addItem(list: string, item: any) {
+  async addItem(list: string, item: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .list(list)

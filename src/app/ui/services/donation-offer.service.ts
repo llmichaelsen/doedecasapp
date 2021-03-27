@@ -1,13 +1,14 @@
+
 import { Injectable } from '@angular/core';
-import { Donation } from '../models/donation/donation';
-import { DonationRepository } from '../repositories/donation.repository';
+import { DonationOffer } from '../models/donation/donation-offer';
+import { DonationOfferRepository } from '../repositories/donation-offer.repository';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class DonationService {
+export class DonationOfferService {
 
     constructor(
-        private userRepository: DonationRepository,
+        private userRepository: DonationOfferRepository,
         private authServ: AuthService
     ){}
 
@@ -20,10 +21,10 @@ export class DonationService {
         }         
     }
 
-    public async getDonations(): Promise<Donation[]> {
+    public async getDonations(): Promise<DonationOffer[]> {
         try {
             const user = this.authServ.getUserApp()
-            const result = await (await this.userRepository.getDonations()).filter(el => el.doador.uid === user.uid );
+            const result = await (await this.userRepository.getDonations());
             return Promise.resolve(result);
         } catch (error) {
             return await Promise.reject(error);
