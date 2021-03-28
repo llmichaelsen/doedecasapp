@@ -11,14 +11,26 @@ export class WorkingTime {
   saturday: boolean = false;
   sunday: boolean = false;
 
-  weekEndBegin: Time;
-  weekEndFinal: Time;
+  weekEndBegin: Time = null;
+  weekEndFinal: Time = null;
 
-  weekDayBegin: Time;
-  weekDayFinal: Time;
+  weekDayBegin: Time = null;
+  weekDayFinal: Time = null;
 
   workOnWeekend(): boolean {
     return this.saturday || this.sunday ? true : false;
+  }
+
+  getDayList(): string[] {
+     let result = [];
+     this.monday ? result.push("Segunda-feira") : null;
+     this.tuesday ? result.push("Terça-feira") : null;
+     this.wednesday ? result.push("Quarta-feira") : null;
+     this.thursday ? result.push("Quinta-feira") : null;
+     this.friday ? result.push("Sexta-feira") : null;
+     this.saturday ? result.push("Sábado") : null;
+     this.sunday ? result.push("Domingo") : null;
+     return result
   }
 
   workOnWeekday(): boolean {

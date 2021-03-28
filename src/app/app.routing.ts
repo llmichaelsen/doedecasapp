@@ -1,4 +1,3 @@
-import { MapsComponent } from './ui/pages/maps/maps.component';
 import { ProfileGuard } from "./ui/guards/profile.guard";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";

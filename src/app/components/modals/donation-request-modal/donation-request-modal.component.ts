@@ -1,13 +1,13 @@
-import { DeliveryTime } from './../../ui/models/donation/delivery-time';
-import { DonationStatus } from './../../ui/models/donation/donation-status.enum';
-import { Institution } from './../../ui/models/user/institution.model';
-import { Donator } from './../../ui/models/user/donator.model';
-import { AuthService } from './../../ui/services/auth.service';
-import { DonationRequest } from './../../ui/models/donation/donation-request';
-import { FoodService } from "./../../ui/services/food.service";
-import { DonationRequestService } from "./../../ui/services/donation-request.service";
+import { DeliveryTime } from '../../../ui/models/donation/delivery-time';
+import { DonationStatus } from '../../../ui/models/donation/donation-status.enum';
+import { Institution } from '../../../ui/models/user/institution.model';
+import { Donator } from '../../../ui/models/user/donator.model';
+import { AuthService } from '../../../ui/services/auth.service';
+import { DonationRequest } from '../../../ui/models/donation/donation-request';
+import { FoodService } from "../../../ui/services/food.service";
+import { DonationRequestService } from "../../../ui/services/donation-request.service";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { LoadingService } from "../../ui/services/loading.service";
+import { LoadingService } from "../../../ui/services/loading.service";
 import {
   Validators,
   FormBuilder,

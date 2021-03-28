@@ -14,12 +14,12 @@ import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
-import { NgbdModalBasic } from './modal/modal.component';
 import { LoadingComponent } from './loading/loading.component';
-import { EditInstitutionModalComponent } from './edit-institution-modal/edit-institution-modal.component';
-import { DonationRequestModal } from './donation-request-modal/donation-request-modal.component';
-import { EditDonatorModalComponent } from './edit-donator-modal/edit-donator-modal.component';
-import { DonationOfferModalComponent } from './donation-offer-modal/donation-offer-modal.component';
+import { EditInstitutionModalComponent } from './modals/edit-institution-modal/edit-institution-modal.component';
+import { DonationRequestModal } from './modals/donation-request-modal/donation-request-modal.component';
+import { EditDonatorModalComponent } from './modals/edit-donator-modal/edit-donator-modal.component';
+import { DonationOfferModalComponent } from './modals/donation-offer-modal/donation-offer-modal.component';
+import { DonationCollectModalComponent } from './modals/donation-collect-modal/donation-collect-modal.component';
 
 @NgModule({
     imports: [
@@ -40,12 +40,12 @@ import { DonationOfferModalComponent } from './donation-offer-modal/donation-off
         TypographyComponent,
         NucleoiconsComponent,
         NotificationComponent,
-        NgbdModalBasic,
         LoadingComponent,
         EditInstitutionModalComponent,
         DonationRequestModal,
         EditDonatorModalComponent,
-        DonationOfferModalComponent
+        DonationOfferModalComponent,
+        DonationCollectModalComponent
     ],
     exports:[ ComponentsComponent, LoadingComponent ]
 })

@@ -1,10 +1,10 @@
-import { FoodService } from "./../../ui/services/food.service";
-import { Institution } from "./../../ui/models/user/institution.model";
+import { FoodService } from "../../../ui/services/food.service";
+import { Institution } from "../../../ui/models/user/institution.model";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { InstitutionService } from "./../../ui/services/institution.service";
-import { LoadingService } from "./../../ui/services/loading.service";
+import { InstitutionService } from "../../../ui/services/institution.service";
+import { LoadingService } from "../../../ui/services/loading.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { AuthService } from "./../../ui/services/auth.service";
+import { AuthService } from "../../../ui/services/auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Component, Inject, OnInit } from "@angular/core";
 import { Food } from "app/ui/models/food/food";

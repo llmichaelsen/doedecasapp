@@ -11,7 +11,6 @@ export class WorkingTimeParser extends AbstractParser<WorkingTime> {
 
         const info: any = payload;
 
-        workingTime.key = payload.key;
         workingTime.monday = info.monday;
         workingTime.tuesday = info.tuesday;
         workingTime.wednesday = info.wednesday;
@@ -19,10 +18,10 @@ export class WorkingTimeParser extends AbstractParser<WorkingTime> {
         workingTime.friday = info.friday;
         workingTime.saturday = info.saturday;
         workingTime.sunday = info.sunday;
-        workingTime.weekEndBegin = info.weekEndBegin;
-        workingTime.weekEndFinal = info.weekEndFinal;
-        workingTime.weekDayBegin = info.weekDayBegin;
-        workingTime.weekDayFinal = info.weekDayFinal;
+        workingTime.weekEndBegin = info.weekEndBegin || null;
+        workingTime.weekEndFinal = info.weekEndFinal || null;
+        workingTime.weekDayBegin = info.weekDayBegin || null;
+        workingTime.weekDayFinal = info.weekDayFinal || null;
         return workingTime;
     }
 
@@ -32,7 +31,6 @@ export class WorkingTimeParser extends AbstractParser<WorkingTime> {
 
         const info: any = payload;
 
-        workingTime.key = payload.key;
         workingTime.monday = info.monday;
         workingTime.tuesday = info.tuesday;
         workingTime.wednesday = info.wednesday;

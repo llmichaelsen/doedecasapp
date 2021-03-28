@@ -4,8 +4,8 @@ import { DonatorService } from "./../../services/donator.service";
 import { Donator } from "../../models/user/donator.model";
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "app/ui/services/auth.service";
-import { EditDonatorModalComponent } from "app/components/edit-donator-modal/edit-donator-modal.component";
-import { DonationOfferModalComponent } from "app/components/donation-offer-modal/donation-offer-modal.component";
+import { EditDonatorModalComponent } from "app/components/modals/edit-donator-modal/edit-donator-modal.component";
+import { DonationOfferModalComponent } from "app/components/modals/donation-offer-modal/donation-offer-modal.component";
 
 @Component({
   selector: "app-profile",

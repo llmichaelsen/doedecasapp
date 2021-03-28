@@ -8,6 +8,7 @@ import { DonationCompletionMotive } from './donation-status-motive.enum';
 
 export class DonationRequest {
 
+    key: Key;
     createdAt: Date = new Date();
     food: Food;
     amount: number;

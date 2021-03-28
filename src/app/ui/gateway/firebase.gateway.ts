@@ -32,6 +32,7 @@ export class FirebaseGateway {
   }
 
   updateItem(list: string, item: any) {
+    debugger
     const ref = firebase.database().ref(list + "/" + item.key);
     const obj = item.getUpdateObject();
     return new Promise((resolve, reject) => {

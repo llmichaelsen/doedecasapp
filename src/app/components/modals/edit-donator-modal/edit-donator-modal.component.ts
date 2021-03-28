@@ -1,10 +1,10 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DonatorService } from './../../ui/services/donator.service';
-import { AuthService } from './../../ui/services/auth.service';
-import { Address } from './../../ui/models/user/address.model';
-import { Donator } from './../../ui/models/user/donator.model';
-import { LoadingService } from './../../ui/services/loading.service';
+import { DonatorService } from '../../../ui/services/donator.service';
+import { AuthService } from '../../../ui/services/auth.service';
+import { Address } from '../../../ui/models/user/address.model';
+import { Donator } from '../../../ui/models/user/donator.model';
+import { LoadingService } from '../../../ui/services/loading.service';
 import { FormGroup, FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 

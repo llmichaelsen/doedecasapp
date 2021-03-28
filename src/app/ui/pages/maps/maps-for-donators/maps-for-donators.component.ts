@@ -1,17 +1,17 @@
-import { Institution } from './../../models/user/institution.model';
-import { FoodService } from './../../services/food.service';
-import { GeocodeService } from "./../../services/geocode.service";
-import { InstitutionService } from "./../../services/institution.service";
-import { MapsAPILoader } from "@agm/core";
-import { Component, OnInit } from "@angular/core";
+import { Institution } from './../../../models/user/institution.model';
+import { FoodService } from './../../../services/food.service';
+import { GeocodeService } from './../../../services/geocode.service';
+import { InstitutionService } from './../../../services/institution.service';
+import { MapsAPILoader } from '@agm/core';
+import { Component, OnInit } from '@angular/core';
 
-declare const google: any;
 @Component({
-  selector: "app-maps",
-  templateUrl: "./maps.component.html",
-  styleUrls: ["./maps.component.css"],
+  selector: 'app-maps-for-donators',
+  templateUrl: './maps-for-donators.component.html',
+  styleUrls: ['./maps-for-donators.component.css']
 })
-export class MapsComponent implements OnInit {
+export class MapsForDonatorsComponent implements OnInit {
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private instServ: InstitutionService,

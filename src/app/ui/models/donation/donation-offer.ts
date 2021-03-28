@@ -9,6 +9,7 @@ import { DonationCompletionMotive } from './donation-status-motive.enum';
 
 export class DonationOffer {
 
+  key: Key;
   createdAt: Date = new Date();
   institution: Institution | Key = null;
   donator: Donator | Key;
@@ -19,4 +20,16 @@ export class DonationOffer {
   status: DonationStatus = DonationStatus.Initiated;
   completionMotive: DonationCompletionMotive;
 
+  getUpdateObject() {
+    return {
+      createdAt: this.createdAt,
+      donator: this.donator,
+      amount: this.amount,
+      food: this.food,
+      workingTime: this.workingTime,
+      deliveryTime: this.deliveryTime,
+      status: this.status,
+      institution: this.institution,
+    };
+  }
 }

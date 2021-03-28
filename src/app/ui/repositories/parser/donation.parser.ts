@@ -16,13 +16,17 @@ export class DonationOfferParser extends AbstractParser<DonationOffer> {
         const donation: DonationOffer = new DonationOffer();
         if(!payload) return donation;
 
-        const data = payload.payload.val();
+        const data = payload.val();
 
+        donation.key = payload.key;
         donation.institution = data.institution;
         donation.donator = data.donator;
         donation.createdAt = new Date(data.createdAt);
         donation.amount = data.amount;
         donation.food = data.food;
+        donation.deliveryTime = data.deliveryTime;
+        donation.status = data.status;
+        donation.completionMotive = data.completionMotive;
         donation.workingTime = this.wtParser.parse(data.workingTime);
         return donation;
     }

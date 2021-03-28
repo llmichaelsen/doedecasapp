@@ -1,11 +1,11 @@
-import { WorkingTime } from './../../ui/models/user/working-time.model';
-import { DonationStatus } from './../../ui/models/donation/donation-status.enum';
-import { DonationOfferService } from '../../ui/services/donation-offer.service';
-import { DonationOffer } from '../../ui/models/donation/donation-offer';
-import { FoodService } from '../../ui/services/food.service';
+import { WorkingTime } from '../../../ui/models/user/working-time.model';
+import { DonationStatus } from '../../../ui/models/donation/donation-status.enum';
+import { DonationOfferService } from '../../../ui/services/donation-offer.service';
+import { DonationOffer } from '../../../ui/models/donation/donation-offer';
+import { FoodService } from '../../../ui/services/food.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingService } from '../../ui/services/loading.service';
-import { AuthService } from '../../ui/services/auth.service';
+import { LoadingService } from '../../../ui/services/loading.service';
+import { AuthService } from '../../../ui/services/auth.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';

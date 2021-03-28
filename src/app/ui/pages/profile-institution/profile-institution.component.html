@@ -9,20 +9,6 @@
                     <img src="assets/img/instituicao.png" alt="">
                 </div>
                 <h3 class="title">{{instituicao?.name}}</h3>
-                <!-- <div class="content">
-                    <div class="social-description">
-                        <h2>26</h2>
-                        <p>Doações</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>5</h2>
-                        <p>Comentários</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>48</h2>
-                        <p>Bookmarks</p>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -31,6 +17,8 @@
             <div class="button-container">
                 <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Agendar Doação</a>
                 <a *ngIf="!uid" (click)="editProfile()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                <a *ngIf="!uid" (click)="redirectToInstitutionMap()" class="btn btn-info btn-round btn-lg ancor">Buscar
+                    Doadores</a>
             </div>
             <h3 class="title">Sobre a instituição</h3>
             <h5 class="description">{{instituicao?.description}}</h5>
@@ -40,13 +28,7 @@
             <h5 class="description">{{instituicao?.address.getFullAddress()}}</h5>
             <h3 class="title">Dias de funcionamento</h3>
             <h5 class="description">
-                <span class="work-day" *ngIf="instituicao?.workingTime.monday">Segunda-feira</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.tuesday">Terça-feira</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.wednesday">Quarta-feira</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.thursday">Quinta-feira</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.friday">Sexta-feira</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.saturday">Sábado</span>
-                <span class="work-day" *ngIf="instituicao?.workingTime.sunday">Domingo</span>
+                <span class="work-day" *ngFor="let day of instituicao?.workingTime.getDayList()">{{day}}</span>
             </h5>
             <h3 class="title">Horário de funcionamento</h3>
             <h5 class="description">
@@ -57,77 +39,6 @@
                     {{instituicao?.workingTime.weekEndBegin}} até
                     {{instituicao?.workingTime.weekEndFinal}}</span>
             </h5>
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <h4 class="title text-center">My Portfolio</h4>
-                    <ngb-tabset [justify]="'center'" type="pills"
-                        class="nav nav-pills nav-pills-primary  nav-pills-just-icons justify-content-center tab-space">
-                        <ngb-tab>
-                            <ng-template ngbTabTitle>
-                                <i class="now-ui-icons design_image"></i>
-                            </ng-template>
-                            <ng-template ngbTabContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg1.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ngb-tab>
-                        <ngb-tab>
-                            <ng-template ngbTabTitle>
-                                <i class="now-ui-icons location_world"></i>
-                            </ng-template>
-                            <ng-template ngbTabContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg6.jpg" class="img-raised">
-                                                <img src="assets/img/bg11.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ngb-tab>
-                        <ngb-tab>
-                            <ng-template ngbTabTitle>
-                                <i class="now-ui-icons sport_user-run"></i>
-                            </ng-template>
-                            <ng-template ngbTabContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg6.jpg" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ngb-tab>
-                    </ngb-tabset>
-                </div> 
-            </div>-->
         </div>
     </div>
     <footer class="footer footer-default">
