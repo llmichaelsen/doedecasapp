@@ -21,7 +21,6 @@ export class ServiceModule {
                 DonationRequestService,
                 DonatorService,
                 InstitutionService,
-                FoodService,
                 GeocodeService
             ]
         }

@@ -16,10 +16,8 @@ import { ParserModule } from "./ui/repositories/parser/parser.module";
 import { ProfileDonatorComponent } from "./ui/pages/profile-donator/profile-donator.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
 import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
-import { MinhasDoacoesComponent } from "./ui/pages/minhas-doacoes/minhas-doacoes.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
 import { AngularFireModuleModule } from "./core/material/angular-fire.module";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +25,6 @@ import { AngularFireModuleModule } from "./core/material/angular-fire.module";
     ProfileDonatorComponent,
     InstitutionsComponent,
     ProfileInstitutionComponent,
-    MinhasDoacoesComponent,
     RatingComponent,
   ],
   imports: [

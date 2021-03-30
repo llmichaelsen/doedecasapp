@@ -17,6 +17,7 @@ export class DonatorParser extends AbstractParser<Donator> {
         const info = payload.val();
 
         donator.uid = payload.key;
+        donator.key = payload.key;
         donator.firstName = info.firstName;
         donator.lastName = info.lastName;
         donator.address = this.addressParser.parse(info.address);

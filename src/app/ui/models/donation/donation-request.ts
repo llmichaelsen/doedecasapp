@@ -1,20 +1,26 @@
-import { Key } from './../user/user-app.model';
-import { DonationStatus } from './donation-status.enum';
-import { Institution } from './../user/institution.model';
-import { Donator } from './../user/donator.model';
-import { DeliveryTime } from './delivery-time';
-import { Food } from "../food/food";
-import { DonationCompletionMotive } from './donation-status-motive.enum';
+import { DonationStatus } from "./donation-status.enum";
+import { Donation, DonationType } from "./donation";
+import { Type } from "@angular/core";
+import { Donator } from "../user/donator.model";
+import { Institution } from "../user/institution.model";
 
-export class DonationRequest {
+export class DonationRequest extends Donation {
+  status: DonationStatus = DonationStatus.Scheduled;
 
-    key: Key;
-    createdAt: Date = new Date();
-    food: Food;
-    amount: number;
-    deliveryTime: DeliveryTime = new DeliveryTime();
-    donator: Donator | Key;
-    institution: Institution | Key;
-    status: DonationStatus = DonationStatus.Pending;
-    completionMotive: DonationCompletionMotive = null;
+  getType(): Type<DonationType> {
+    return DonationRequest;
+  }
+
+  getUpdateObject() {
+    return {
+      createdAt: this.createdAt,
+      donator: this.donator instanceof Donator ? this.donator.key : this.donator,
+      amount: this.amount,
+      food: this.food,
+      deliveryTime: this.deliveryTime,
+      status: this.status,
+      institution: this.institution instanceof Institution ? this.institution.key : this.institution,
+      completionMotive: this.completionMotive,
+    };
+  }
 }

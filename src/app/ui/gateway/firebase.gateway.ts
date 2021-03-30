@@ -7,6 +7,7 @@ export class FirebaseGateway {
   constructor(private db: AngularFireDatabase) {}
 
   async addItem(list: string, item: any): Promise<any> {
+    console.log(item)
     return new Promise((resolve, reject) => {
       this.db
         .list(list)

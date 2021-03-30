@@ -70,6 +70,7 @@ export class DonationRequestModal implements OnInit {
   createDonation(): DonationRequest {
     const data = this.donationForm.getRawValue();
     const donation = new DonationRequest();
+    console.log(donation)
     donation.deliveryTime.day = (data.deliveryTime.day as Date).getTime();
     donation.deliveryTime.initTime = data.deliveryTime.initTime;
     donation.deliveryTime.endTime = data.deliveryTime.endTime;

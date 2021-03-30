@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Time } from "@angular/common";
 
 export class WorkingTime {
-  key: string;
+  
   monday: boolean = false;
   tuesday: boolean = false;
   wednesday: boolean = false;

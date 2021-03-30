@@ -74,13 +74,12 @@ export class DonationCollectModalComponent implements OnInit {
     donation.key = this.data.key;
     debugger
     donation.workingTime = this.data.workingTime;
-    donation.status = DonationStatus.Pending;
+    donation.status = DonationStatus.Scheduled;
     return donation;
   }
 
   close(result: boolean) {
-    console.log(this.dialogRef);
-    this.dialogRef.close();
+    this.dialogRef.close(result);
   }
 
   async successMessage(formDirective: FormGroupDirective): Promise<void> {

@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    min-width: 600px;
+}
+
+.team {
+    margin-bottom: 40px;
+}
+
+td.mat-cell {
+    text-align: left;
+}
+
+.btn-icon {
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .team>.row {
+        overflow: scroll;
+    }
+}

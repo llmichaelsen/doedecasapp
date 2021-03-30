@@ -10,7 +10,6 @@ import { ProfileDonatorComponent } from "./ui/pages/profile-donator/profile-dona
 import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
 import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
-import { MinhasDoacoesComponent } from "./ui/pages/minhas-doacoes/minhas-doacoes.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
 
 const routes: Routes = [
@@ -38,7 +37,13 @@ const routes: Routes = [
     loadChildren: () =>
       import("./ui/pages/maps/maps.module").then((module) => module.MapsModule),
   },
-  { path: "minhas-doacoes", component: MinhasDoacoesComponent },
+  {
+    path: "my-donations",
+    loadChildren: () =>
+      import("./ui/pages/my-donations/my-donations.module").then(
+        (module) => module.MyDonationsModule
+      ),
+  },
   {
     path: "perfil",
     component: ProfileDonatorComponent,
