@@ -8,16 +8,22 @@
     <div class="card-body">
         <form id="form" [formGroup]="profileForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <mat-form-field appearance="fill">
                         <mat-label>Primeiro Nome</mat-label>
                         <input matInput type="text" formControlName="firstName" />
                     </mat-form-field>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Primeiro Nome</mat-label>
+                        <mat-label>Sobrenome</mat-label>
                         <input matInput placeholder="Sobrenome" type="text" formControlName="lastName" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput placeholder="Telefone" appMask="cellphoneMask" type="text" formControlName="phone" />
                     </mat-form-field>
                 </div>
             </div>

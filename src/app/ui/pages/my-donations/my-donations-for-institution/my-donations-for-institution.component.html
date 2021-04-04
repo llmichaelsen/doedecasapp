@@ -15,7 +15,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="donator">
                 <th mat-header-cell *matHeaderCellDef> Doador </th>
-                <td mat-cell *matCellDef="let element"> {{element.donator?.getFullName()}}</td>
+                <td mat-cell *matCellDef="let element"> <a (click)="openDonatorInfo(element.donator, true)">{{element.donator?.getFullName()}}</a></td>
             </ng-container>
 
             <!-- Weight Column -->
@@ -48,6 +48,11 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Ações </th>
                 <td mat-cell *matCellDef="let element">
+                    <button title="Concluir Doação" (click)="completeDonation(element)"
+                        *ngIf="element.status === DonationStatus.Scheduled" class="btn btn-success btn-icon btn-round"
+                        type="button">
+                        <i class="now-ui-icons ui-1_check"></i>
+                    </button>
                     <button title="Cancelar Doação" (click)="cancelDonation(element)"
                         *ngIf="element.status === DonationStatus.Scheduled" class="btn btn-danger btn-icon btn-round"
                         type="button">
@@ -76,7 +81,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="donator">
                 <th mat-header-cell *matHeaderCellDef> Doador </th>
-                <td mat-cell *matCellDef="let element"> {{element.donator?.getFullName() }} </td>
+                <td mat-cell *matCellDef="let element"> <a (click)="openDonatorInfo(element.donator, false)">{{element.donator?.getFullName() }}</a> </td>
             </ng-container>
 
             <!-- Weight Column -->

@@ -1,3 +1,4 @@
+import { DonatorInfoModalComponent } from './../../../../components/modals/donator-info-modal/donator-info-modal.component';
 import { DonationRequest } from 'app/ui/models/donation/donation-request';
 import { DonationOffer } from 'app/ui/models/donation/donation-offer';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,7 @@ import { DonationStatus, DonationStatusInstitutionColumn } from 'app/ui/models/d
 import { IDonationService } from 'app/ui/services/donation-service.interface';
 import { Food } from 'app/ui/models/food/food';
 import { IDonationStatusStrategy } from 'app/ui/models/donation/donation-status-strategy';
+import { Donator } from 'app/ui/models/user/donator.model';
 
 @Component({
   selector: 'app-my-donations-for-institution',
@@ -36,6 +38,7 @@ export class MyDonationsForInstitutionComponent implements OnInit {
   donationRequest: DonationRequest[] = [];
   donationStatusStrategy: IDonationStatusStrategy;
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
+  donatorInfoModal: MatDialogRef<DonatorInfoModalComponent>;
 
   constructor(
     private donationOfferServ: DonationOfferService,
@@ -87,6 +90,13 @@ export class MyDonationsForInstitutionComponent implements OnInit {
     this.completeModal.afterClosed().subscribe((result) => {
       if (result) this.loadDonations();
     });
+  }
+
+  openDonatorInfo(donator: Donator, showAddress: boolean): void {
+    this.donatorInfoModal = this.dialog.open(DonatorInfoModalComponent, {
+      data: {donator, showAddress: showAddress },
+      width: "600px",
+    });    
   }
 
   get DonationStatus(): any {

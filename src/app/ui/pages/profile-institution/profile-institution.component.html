@@ -17,6 +17,7 @@
             <div class="button-container">
                 <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Agendar Doação</a>
                 <a *ngIf="!uid" (click)="editProfile()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                <a *ngIf="!uid" (click)="editConfig()" class="btn btn-primary btn-round btn-lg ancor">Configurações de Doações</a>
                 <a *ngIf="!uid" (click)="redirectToInstitutionMap()" class="btn btn-info btn-round btn-lg ancor">Buscar
                     Doadores</a>
             </div>

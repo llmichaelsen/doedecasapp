@@ -1,3 +1,4 @@
+import { ConfigDonationModalComponent } from './../../../components/modals/config-donation-modal/config-donation-modal.component';
 import { RoutePath } from './../../models/route-path';
 import { FoodService } from "./../../services/food.service";
 import { DonationRequestModal } from "../../../components/modals/donation-request-modal/donation-request-modal.component";
@@ -25,6 +26,7 @@ export class ProfileInstitutionComponent implements OnInit {
   foods: Food[] = [];
 
   editModal: MatDialogRef<EditInstitutionModalComponent>;
+  configModal: MatDialogRef<ConfigDonationModalComponent>;
   donateModal: MatDialogRef<DonationRequestModal>;
 
   constructor(
@@ -60,6 +62,13 @@ export class ProfileInstitutionComponent implements OnInit {
   editProfile(): void {
     this.editModal = this.dialog.open(EditInstitutionModalComponent);
     this.editModal.afterClosed().subscribe((result) => {
+      if (result) this.reloadInfo();
+    });
+  }
+
+  editConfig(): void {
+    this.configModal = this.dialog.open(ConfigDonationModalComponent, {width: "800px"});
+    this.configModal.afterClosed().subscribe((result) => {
       if (result) this.reloadInfo();
     });
   }

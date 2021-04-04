@@ -35,6 +35,7 @@ export class EditDonatorModalComponent implements OnInit {
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
       obs: [this.user.obs],
+      phone: [this.user.phone, Validators.required],
       address: this.fb.group({
         street: [this.user.address.street],
         number: [this.user.address.number],
@@ -75,6 +76,7 @@ export class EditDonatorModalComponent implements OnInit {
     user.firstName = this.profileForm.controls.firstName.value;
     user.lastName = this.profileForm.controls.lastName.value;
     user.obs = this.profileForm.controls.obs.value;
+    user.phone = this.profileForm.controls.phone.value;
 
     const addressForm = this.profileForm.controls.address as FormGroup;
     address.street = addressForm.controls.street.value;

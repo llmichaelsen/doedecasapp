@@ -30,7 +30,8 @@ export class Donator extends UserApp {
             firstName: this.firstName,
             lastName: this.lastName,
             address: this.address,
-            obs: this.obs
+            obs: this.obs,
+            phone: this.phone
         }
     }
 }

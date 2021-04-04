@@ -21,6 +21,9 @@ import { EditDonatorModalComponent } from './modals/edit-donator-modal/edit-dona
 import { DonationOfferModalComponent } from './modals/donation-offer-modal/donation-offer-modal.component';
 import { DonationCollectModalComponent } from './modals/donation-collect-modal/donation-collect-modal.component';
 import { DonationCompleteModalComponent } from './modals/donation-complete-modal/donation-complete-modal.component';
+import { DonatorInfoModalComponent } from './modals/donator-info-modal/donator-info-modal.component';
+import { ConfigDonationModalComponent } from './modals/config-donation-modal/config-donation-modal.component';
+import { InstitutionInfoModalComponent } from './modals/institution-info-modal/institution-info-modal.component';
 
 @NgModule({
     imports: [
@@ -48,6 +51,9 @@ import { DonationCompleteModalComponent } from './modals/donation-complete-modal
         DonationOfferModalComponent,
         DonationCollectModalComponent,
         DonationCompleteModalComponent,
+        DonatorInfoModalComponent,
+        ConfigDonationModalComponent,
+        InstitutionInfoModalComponent,
     ],
     exports:[ ComponentsComponent, LoadingComponent ]
 })

@@ -4,22 +4,16 @@
 }
 
 .button-container {
-    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 a.btn-primary {
     color: #fff;
 }
 
-.button-container {
-    margin-top: 0;
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 99;
-  }
-
+.button-container {}
 
 .page-header .page-header-image {
     background-position: center 0%;

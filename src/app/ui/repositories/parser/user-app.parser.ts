@@ -24,6 +24,7 @@ export class UserParser extends AbstractParser<UserApp> {
     user.uid = payload.key;
     user.type = info.type;
     user.email = info.email;
+    user.phone = info.phone;
 
     return user;
   }
@@ -42,6 +43,7 @@ export class UserParser extends AbstractParser<UserApp> {
     user.password = payload.password;
     user.uid = payload.uid;
     user.email = payload.email;
+    user.phone = payload.phone;
     return user;
   }
 }

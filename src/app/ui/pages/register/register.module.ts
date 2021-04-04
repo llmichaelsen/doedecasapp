@@ -1,3 +1,4 @@
+import { DirectiveModule } from './../../../utils/directive.module';
 import { RegisterComponent } from './register.component';
 import { MaterialModule } from './../../../core/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { RegisterInstitutionComponent } from './register-institution/register-in
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    DirectiveModule
   ]
 })
 export class RegisterModule { }

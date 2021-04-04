@@ -1,3 +1,5 @@
+import { InstitutionInfoModalComponent } from './../../../../components/modals/institution-info-modal/institution-info-modal.component';
+import { Institution } from 'app/ui/models/user/institution.model';
 import { MatDialog } from "@angular/material/dialog";
 import { MatDialogRef } from "@angular/material/dialog";
 import { DonationStatusInstitutionColumn } from "./../../../models/donation/donation-status.enum";
@@ -37,6 +39,7 @@ export class MyDonationsForDonatorComponent implements OnInit {
   donationRequest: DonationRequest[] = [];
   donationStatusStrategy: IDonationStatusStrategy;
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
+  infoModal: MatDialogRef<InstitutionInfoModalComponent>;
 
   constructor(
     private donationOfferServ: DonationOfferService,
@@ -58,8 +61,6 @@ export class MyDonationsForDonatorComponent implements OnInit {
     this.donationRequest = await this.donationRequestServ.getDonationsByDonator(
       this.authServ.getUserApp().uid
     );
-
-    console.log(this.donationRequest)
   }
 
   cancelDonation(donation: DonationType): void {
@@ -88,6 +89,13 @@ export class MyDonationsForDonatorComponent implements OnInit {
     this.completeModal.afterClosed().subscribe((result) => {
       if (result) this.loadDonations();
     });
+  }
+
+  openInstitutionInfo(donator: Institution): void {
+    this.infoModal = this.dialog.open(InstitutionInfoModalComponent, {
+      data: donator,
+      width: "600px",
+    });    
   }
 
   get DonationStatus(): any {

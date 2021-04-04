@@ -1,3 +1,4 @@
+import { Masks } from './../../../utils/masks';
 import { UserType } from 'app/ui/models/user/user-type.enum';
 
 export type Key = string;
@@ -8,6 +9,7 @@ export class UserApp {
     uid: Key;
     password: string;
     email: string;
+    phone: string;
     type: UserType;
 
     getRegisterModel(): UserApp {
@@ -26,5 +28,9 @@ export class UserApp {
 
     getName(): string {
         return '';
+    }
+
+    getMaskedPhone(): string {
+        return Masks.cellphoneMask(this.phone);
     }
 }

@@ -22,6 +22,7 @@ export class DonatorParser extends AbstractParser<Donator> {
         donator.lastName = info.lastName;
         donator.address = this.addressParser.parse(info.address);
         donator.obs = info.obs;
+        donator.phone = info.phone;
         return donator;
     }
 
@@ -35,6 +36,7 @@ export class DonatorParser extends AbstractParser<Donator> {
         donator.lastName = info.lastName;
         donator.address = this.addressParser.parse(info.address);
         donator.obs = info.obs;
+        donator.phone = info.phone;
         return donator;
     }
 }
