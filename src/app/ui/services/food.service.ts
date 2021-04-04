@@ -11,7 +11,6 @@ export class FoodService {
   private foodEmitter: EventEmitter<Food[]> = new EventEmitter<Food[]>();
 
   public async initServ(): Promise<void> {
-    debugger;
     this.foods = await this.foodRepository.list();
     this.foodEmitter.emit(this.foods);
   }
@@ -23,7 +22,6 @@ export class FoodService {
   }
 
   private async waitingForFoods(): Promise<Food[]> {
-    debugger;
     return new Promise((resolve, reject) => {
       this.foodEmitter.subscribe(
         (foods) => resolve(foods),

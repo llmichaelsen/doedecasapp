@@ -64,7 +64,6 @@ export class MyDonationsForDonatorComponent implements OnInit {
 
   cancelDonation(donation: DonationType): void {
     if (confirm("Você tem certeza disso?")) {
-      debugger
       donation.status = DonationStatus.Canceled;
       let service: IDonationService;
       if (donation.getType() === DonationOffer)

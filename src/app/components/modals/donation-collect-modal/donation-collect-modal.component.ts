@@ -72,7 +72,6 @@ export class DonationCollectModalComponent implements OnInit {
     donation.amount = this.data.amount;
     donation.food = this.data.food;
     donation.key = this.data.key;
-    debugger
     donation.workingTime = this.data.workingTime;
     donation.status = DonationStatus.Scheduled;
     return donation;

@@ -94,7 +94,6 @@ export class DonationOfferRepository {
       const result = await gateway.updateItem("donation-offer", donation);
       return Promise.resolve(result);
     } catch (error) {
-      debugger;
       return await Promise.reject(error);
     }
   }
