@@ -2,12 +2,13 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/first";
 import * as firebase from "firebase";
+import { Observable } from "rxjs";
 
 export class FirebaseGateway {
   constructor(private db: AngularFireDatabase) {}
 
   async addItem(list: string, item: any): Promise<any> {
-    console.log(item)
+    console.log(item);
     return new Promise((resolve, reject) => {
       this.db
         .list(list)
@@ -25,6 +26,23 @@ export class FirebaseGateway {
         .ref(list)
         .child(key)
         .set(item)
+        .then((r) => {
+          resolve(r);
+        })
+        .catch((error) => reject(error));
+    });
+  }
+
+  async addCustomItemInList(
+    list: string,
+    item: any,
+    key: string
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db.database
+        .ref(list)
+        .child(key)
+        .push(item)
         .then((r) => {
           resolve(r);
         })
@@ -54,9 +72,15 @@ export class FirebaseGateway {
         .snapshotChanges()
         .first()
         .toPromise()
-        .then((r: Array<any>) => resolve(r.map(item=>item.payload)))
+        .then((r: Array<any>) => resolve(r.map((item) => item.payload)))
         .catch((error) => reject(error));
     });
+  }
+
+  getListObservable(list: string): Observable<any> {
+    return this.db
+      .list(list)
+      .snapshotChanges();
   }
 
   deleteItem(list: string, key: string) {
@@ -73,7 +97,10 @@ export class FirebaseGateway {
 
   getItemByKey(list, key): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.db.database.ref(list).child(key).once('value')
+      this.db.database
+        .ref(list)
+        .child(key)
+        .once("value")
         .then((r) => resolve(r))
         .catch((e) => reject(e));
     });

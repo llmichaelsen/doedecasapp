@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 import { LoadingService } from './loading.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { GeocodeService } from './geocode.service';
+import { NotificationService } from './notification.service';
 
 
 @NgModule({})
@@ -21,7 +22,8 @@ export class ServiceModule {
                 DonationRequestService,
                 DonatorService,
                 InstitutionService,
-                GeocodeService
+                GeocodeService,
+                NotificationService
             ]
         }
     }

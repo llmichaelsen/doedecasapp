@@ -1,10 +1,21 @@
-
 .logo {
-    filter: brightness(5);
-    width: 25px;
-    margin-right: 10px;
+  filter: brightness(5);
+  width: 25px;
+  margin-right: 10px;
 }
 
 .navbar-brand {
-    display: flex;
+  display: flex;
+}
+
+.not-number {
+  position: absolute;
+  right: 8px;
+  bottom: 0px;
+  background: #2ca8ff;
+  height: 15px;
+  line-height: 15px;
+  width: 15px;
+  text-align: center;
+  border-radius: 25%;
 }

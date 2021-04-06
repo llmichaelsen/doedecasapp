@@ -1,3 +1,4 @@
+import { NotificationRepository } from './notification.repository';
 import { DonatorRepository } from './donator.repository';
 import { InstitutionRepository } from './institution.repository';
 import { UserRepository } from './user.repository';
@@ -18,7 +19,8 @@ export class RepositoryModule {
                 FoodRepository,
                 UserRepository,
                 InstitutionRepository,
-                DonatorRepository
+                DonatorRepository,
+                NotificationRepository
             ]
         }
     }

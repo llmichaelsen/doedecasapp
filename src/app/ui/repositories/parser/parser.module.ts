@@ -7,6 +7,7 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { AddressParser } from "./address.parser";
 import { UserParser } from "./user-app.parser";
 import { FoodParser } from './food.parser';
+import { NotificationParser } from './notification.parser';
 
 @NgModule({})
 export class ParserModule {
@@ -21,7 +22,8 @@ export class ParserModule {
                 FoodParser,
                 InstitutionParser,
                 DonatorParser,
-                WorkingTimeParser
+                WorkingTimeParser,
+                NotificationParser
             ]
         }
     }

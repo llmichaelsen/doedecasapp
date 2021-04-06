@@ -1,5 +1,5 @@
-import { InstitutionInfoModalComponent } from './../../../../components/modals/institution-info-modal/institution-info-modal.component';
-import { Institution } from 'app/ui/models/user/institution.model';
+import { InstitutionInfoModalComponent } from "./../../../../components/modals/institution-info-modal/institution-info-modal.component";
+import { Institution } from "app/ui/models/user/institution.model";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDialogRef } from "@angular/material/dialog";
 import { DonationStatusInstitutionColumn } from "./../../../models/donation/donation-status.enum";
@@ -17,6 +17,9 @@ import { Food } from "app/ui/models/food/food";
 import { Donation, DonationType } from "app/ui/models/donation/donation";
 import { IDonationStatusStrategy } from "app/ui/models/donation/donation-status-strategy";
 import { DonationCompleteModalComponent } from "app/components/modals/donation-complete-modal/donation-complete-modal.component";
+import { NotificationService } from "app/ui/services/notification.service";
+import { Notification } from "app/ui/models/notification/notification";
+import { Donator } from "app/ui/models/user/donator.model";
 
 @Component({
   selector: "app-my-donations-for-donator",
@@ -47,10 +50,14 @@ export class MyDonationsForDonatorComponent implements OnInit {
     private authServ: AuthService,
     public dialog: MatDialog,
     private loadingServ: LoadingService,
-    public foodServ: FoodService
+    public foodServ: FoodService,
+    private notificationServ: NotificationService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.notificationServ.readAllNotifications(
+      this.authServ.getUserApp().uid
+    );
     this.loadDonations();
   }
 
@@ -75,10 +82,22 @@ export class MyDonationsForDonatorComponent implements OnInit {
       const load = this.loadingServ.show();
       service
         .cancelDonation(donation)
-        .then(() => this.loadDonations())
+        .then(() => {
+          if (donation.getType() === DonationRequest) this.notificationServ.saveNotification(this.createNotification(donation))
+          this.loadDonations();
+        })
         .catch((error) => alert(error))
         .finally(() => this.loadingServ.close(load));
     }
+  }
+
+  createNotification(donation: DonationRequest): Notification {
+    const not = new Notification();
+    not.message = `O doador ${
+      (this.authServ.getUserApp() as Donator).getFullName()
+    } cancelou uma doação para entrega na instituição.`;
+    not.userApp = (donation.institution as Institution).uid;
+    return not;
   }
 
   completeDonation(donation: DonationType): void {
@@ -95,7 +114,7 @@ export class MyDonationsForDonatorComponent implements OnInit {
     this.infoModal = this.dialog.open(InstitutionInfoModalComponent, {
       data: donator,
       width: "600px",
-    });    
+    });
   }
 
   get DonationStatus(): any {

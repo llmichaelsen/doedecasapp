@@ -1,3 +1,4 @@
+import { AuthService } from './../../../ui/services/auth.service';
 import { DonationStatus } from "app/ui/models/donation/donation-status.enum";
 import { donationCompletionMotiveSelect } from "app/ui/models/donation/donation-status-motive.enum";
 import { DonationCompletionMotive } from "./../../../ui/models/donation/donation-status-motive.enum";
@@ -12,6 +13,8 @@ import { DonationOffer } from "app/ui/models/donation/donation-offer";
 import { FormGroupDirective, Validators, FormBuilder } from "@angular/forms";
 import { Component, Inject, OnInit } from "@angular/core";
 import { DonationRequest } from "app/ui/models/donation/donation-request";
+import { NotificationService } from "app/ui/services/notification.service";
+import { Notification } from "app/ui/models/notification/notification";
 
 @Component({
   selector: "app-donation-complete-modal",
@@ -28,7 +31,9 @@ export class DonationCompleteModalComponent implements OnInit {
     private donationOffServ: DonationOfferService,
     private donationReqServ: DonationRequestService,
     public dialogRef: MatDialogRef<DonationCompleteModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private notificationServ: NotificationService,
+    private authServ: AuthService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -58,7 +63,10 @@ export class DonationCompleteModalComponent implements OnInit {
     const load = this.loadingServ.show();
     serv
       .updateDonation(this.data)
-      .then(() => this.successMessage(formDirective))
+      .then(() => {
+        this.notificationServ.saveNotification(Notification.createFromDonation(this.data, this.authServ.getUserApp()))
+        this.successMessage(formDirective)
+      })
       .catch((error) => console.log(error))
       .finally(() => this.loadingServ.close(load));
   }

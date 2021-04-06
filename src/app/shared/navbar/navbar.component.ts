@@ -3,6 +3,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { AuthService } from 'app/ui/services/auth.service';
 import { UserApp } from 'app/ui/models/user/user-app.model';
 import { UserService } from 'app/ui/services/user.service';
+import { NotificationService } from 'app/ui/services/notification.service';
 
 @Component({
     selector: 'app-navbar',
@@ -12,20 +13,25 @@ import { UserService } from 'app/ui/services/user.service';
 export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
+    notifications = [];
 
     user: UserApp;
     constructor(
         public location: Location, 
         private element: ElementRef,
         public authServ: AuthService,
-        public userServ: UserService) {
+        public userServ: UserService,
+        private notificationServ: NotificationService) {
         this.sidebarVisible = false;
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.user = this.authServ.getUserApp();
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.notificationServ.getUnreadNotifications(this.user.uid).subscribe(
+            result => this.notifications = result
+        )
     }
 
     sidebarOpen() {

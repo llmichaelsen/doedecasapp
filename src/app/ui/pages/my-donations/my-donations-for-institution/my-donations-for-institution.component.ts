@@ -1,28 +1,33 @@
-import { DonatorInfoModalComponent } from './../../../../components/modals/donator-info-modal/donator-info-modal.component';
-import { DonationRequest } from 'app/ui/models/donation/donation-request';
-import { DonationOffer } from 'app/ui/models/donation/donation-offer';
-import { Component, OnInit } from '@angular/core';
-import { DonationCompleteModalComponent } from 'app/components/modals/donation-complete-modal/donation-complete-modal.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DonationOfferService } from 'app/ui/services/donation-offer.service';
-import { DonationRequestService } from 'app/ui/services/donation-request.service';
-import { AuthService } from 'app/ui/services/auth.service';
-import { LoadingService } from 'app/ui/services/loading.service';
-import { FoodService } from 'app/ui/services/food.service';
-import { DonationType } from 'app/ui/models/donation/donation';
-import { DonationStatus, DonationStatusInstitutionColumn } from 'app/ui/models/donation/donation-status.enum';
-import { IDonationService } from 'app/ui/services/donation-service.interface';
-import { Food } from 'app/ui/models/food/food';
-import { IDonationStatusStrategy } from 'app/ui/models/donation/donation-status-strategy';
-import { Donator } from 'app/ui/models/user/donator.model';
+import { Institution } from 'app/ui/models/user/institution.model';
+import { DonatorInfoModalComponent } from "./../../../../components/modals/donator-info-modal/donator-info-modal.component";
+import { DonationRequest } from "app/ui/models/donation/donation-request";
+import { DonationOffer } from "app/ui/models/donation/donation-offer";
+import { Component, OnInit } from "@angular/core";
+import { DonationCompleteModalComponent } from "app/components/modals/donation-complete-modal/donation-complete-modal.component";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { DonationOfferService } from "app/ui/services/donation-offer.service";
+import { DonationRequestService } from "app/ui/services/donation-request.service";
+import { AuthService } from "app/ui/services/auth.service";
+import { LoadingService } from "app/ui/services/loading.service";
+import { FoodService } from "app/ui/services/food.service";
+import { DonationType } from "app/ui/models/donation/donation";
+import {
+  DonationStatus,
+  DonationStatusInstitutionColumn,
+} from "app/ui/models/donation/donation-status.enum";
+import { IDonationService } from "app/ui/services/donation-service.interface";
+import { Food } from "app/ui/models/food/food";
+import { IDonationStatusStrategy } from "app/ui/models/donation/donation-status-strategy";
+import { Donator } from "app/ui/models/user/donator.model";
+import { NotificationService } from "app/ui/services/notification.service";
+import { Notification } from 'app/ui/models/notification/notification';
 
 @Component({
-  selector: 'app-my-donations-for-institution',
-  templateUrl: './my-donations-for-institution.component.html',
-  styleUrls: ['./my-donations-for-institution.component.css']
+  selector: "app-my-donations-for-institution",
+  templateUrl: "./my-donations-for-institution.component.html",
+  styleUrls: ["./my-donations-for-institution.component.css"],
 })
 export class MyDonationsForInstitutionComponent implements OnInit {
-
   displayedColumns: string[] = [
     "createdAt",
     "donator",
@@ -46,10 +51,14 @@ export class MyDonationsForInstitutionComponent implements OnInit {
     private authServ: AuthService,
     public dialog: MatDialog,
     private loadingServ: LoadingService,
-    public foodServ: FoodService
+    public foodServ: FoodService,
+    private notificationServ: NotificationService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.notificationServ.readAllNotifications(
+      this.authServ.getUserApp().uid
+    );
     this.loadDonations();
   }
 
@@ -60,26 +69,32 @@ export class MyDonationsForInstitutionComponent implements OnInit {
     this.donationRequest = await this.donationRequestServ.getDonationsByInstitution(
       this.authServ.getUserApp().uid
     );
-
-    console.log(this.donationRequest)
   }
 
-  cancelDonation(donation: DonationType): void {
+  cancelDonation(donation: DonationOffer): void {
     if (confirm("Você tem certeza disso?")) {
       donation.status = DonationStatus.Canceled;
-      let service: IDonationService;
-      if (donation.getType() === DonationOffer)
-        service = this.donationOfferServ;
-      if (donation.getType() === DonationRequest)
-        service = this.donationRequestServ;
+      let service = this.donationOfferServ;
 
       const load = this.loadingServ.show();
       service
         .cancelDonation(donation)
-        .then(() => this.loadDonations())
+        .then(() => {
+          this.notificationServ.saveNotification(this.createNotification(donation));
+          this.loadDonations();
+        })
         .catch((error) => alert(error))
         .finally(() => this.loadingServ.close(load));
     }
+  }
+
+  createNotification(donation: DonationOffer): Notification {
+    const not = new Notification();
+    not.message = `A instituição ${
+      (this.authServ.getUserApp() as Institution).name
+    } cancelou uma coleta para retirada em seu endereço.`;
+    not.userApp = (donation.donator as Donator).uid;
+    return not;
   }
 
   completeDonation(donation: DonationType): void {
@@ -94,9 +109,9 @@ export class MyDonationsForInstitutionComponent implements OnInit {
 
   openDonatorInfo(donator: Donator, showAddress: boolean): void {
     this.donatorInfoModal = this.dialog.open(DonatorInfoModalComponent, {
-      data: {donator, showAddress: showAddress },
+      data: { donator, showAddress: showAddress },
       width: "600px",
-    });    
+    });
   }
 
   get DonationStatus(): any {
@@ -106,5 +121,4 @@ export class MyDonationsForInstitutionComponent implements OnInit {
   getDonationStatusInstitutionColumn(DonationStatus): string {
     return DonationStatusInstitutionColumn[DonationStatus];
   }
-
 }

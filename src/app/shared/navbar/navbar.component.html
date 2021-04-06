@@ -42,6 +42,20 @@
             <p>Instituições</p>
           </a>
         </li>
+        <div ngbDropdown placement="right" >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+            <i class="now-ui-icons ui-1_bell-53" aria-hidden="true"></i>
+            <span class="not-number" *ngIf="notifications.length">{{notifications.length}}</span>
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-header">Notificações</a>
+            <a *ngFor="let notification of notifications" class="dropdown-item"
+              routerLink="/my-donations">{{notification.message}}</a>
+          </div>
+        </div>
+        <li class="nav-item">
+
+        </li>
       </ul>
     </div>
   </div>

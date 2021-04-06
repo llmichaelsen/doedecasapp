@@ -1,4 +1,4 @@
-import { DonationOfferService } from './../../../ui/services/donation-offer.service';
+import { DonationOfferService } from "./../../../ui/services/donation-offer.service";
 import { FormGroup } from "@angular/forms";
 import { LoadingService } from "./../../../ui/services/loading.service";
 import { AuthService } from "./../../../ui/services/auth.service";
@@ -13,6 +13,8 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { Food } from "app/ui/models/food/food";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
 import { DonationStatus } from "app/ui/models/donation/donation-status.enum";
+import { NotificationService } from "app/ui/services/notification.service";
+import { Notification } from "app/ui/models/notification/notification";
 
 @Component({
   selector: "app-donation-collect-modal",
@@ -30,7 +32,8 @@ export class DonationCollectModalComponent implements OnInit {
     private donationServ: DonationOfferService,
     public dialogRef: MatDialogRef<DonationCollectModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private foodService: FoodService
+    private foodService: FoodService,
+    private notificationServ: NotificationService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -56,7 +59,10 @@ export class DonationCollectModalComponent implements OnInit {
     const load = this.loadingServ.show();
     this.donationServ
       .updateDonation(this.createDonation())
-      .then(() => this.successMessage(formDirective))
+      .then(() => {
+        this.notificationServ.saveNotification(this.createNotification());
+        this.successMessage(formDirective);
+      })
       .catch((error) => console.log(error))
       .finally(() => this.loadingServ.close(load));
   }
@@ -75,6 +81,15 @@ export class DonationCollectModalComponent implements OnInit {
     donation.workingTime = this.data.workingTime;
     donation.status = DonationStatus.Scheduled;
     return donation;
+  }
+
+  createNotification(): Notification {
+    const not = new Notification();
+    not.message = `A instituição ${
+      (this.authServ.getUserApp() as Institution).name
+    } agendou uma coleta para retirada em seu endereço.`;
+    not.userApp = this.data.donator.uid;
+    return not;
   }
 
   close(result: boolean) {
