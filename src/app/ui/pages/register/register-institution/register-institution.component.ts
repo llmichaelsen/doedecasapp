@@ -8,6 +8,8 @@ import { Address } from "./../../../models/user/address.model";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { UserType } from "app/ui/models/user/user-type.enum";
+import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-register-institution",
@@ -16,12 +18,15 @@ import { UserType } from "app/ui/models/user/user-type.enum";
 })
 export class RegisterInstitutionComponent implements OnInit {
   profileForm: FormGroup;
+  messageModal: MatDialogRef<MessageModalComponent>;
+
 
   constructor(
     private service: InstitutionService,
     private loadingServ: LoadingService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +70,18 @@ export class RegisterInstitutionComponent implements OnInit {
   }
 
   successMessage(): void {
+    this.openMessageModal();
     this.router.navigate(["/"]);
+  }
+
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Instituição cadastrada e autenticada com sucesso.",
+      },
+    });
   }
 
   private createUser(): Institution {
@@ -75,6 +91,7 @@ export class RegisterInstitutionComponent implements OnInit {
     user.name = this.profileForm.controls.name.value;
     user.cpnj = this.profileForm.controls.cpnj.value;
     user.description = this.profileForm.controls.description.value;
+    user.phone = this.profileForm.controls.phone.value;
 
     const addressForm = this.profileForm.controls.address as FormGroup;
     address.street = addressForm.controls.street.value;

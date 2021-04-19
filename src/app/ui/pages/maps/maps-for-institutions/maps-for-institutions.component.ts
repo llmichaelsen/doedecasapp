@@ -8,6 +8,7 @@ import { MapsAPILoader } from "@agm/core";
 import { Component, NgZone, OnInit } from "@angular/core";
 import { Donator } from "app/ui/models/user/donator.model";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
+import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 
 @Component({
   selector: "app-maps-for-institutions",
@@ -28,6 +29,7 @@ export class MapsForInstitutionsComponent implements OnInit {
   markers = [];
   foods = [];
   collectModal: MatDialogRef<DonationCollectModalComponent>;
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   async ngOnInit() {
     this.mapsAPILoader.load().then(async (r) => {
@@ -106,8 +108,19 @@ export class MapsForInstitutionsComponent implements OnInit {
         if (result) {
           this.initMap();
           this.loadDonatorsMarkers();
+          this.openMessageModal();
         }
       });
+    });
+  }
+
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Doação agendada com sucesso. Veja suas doações na aba de Minhas Doações.",
+      },
     });
   }
 }

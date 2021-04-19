@@ -24,6 +24,7 @@ import { DonationCompleteModalComponent } from './modals/donation-complete-modal
 import { DonatorInfoModalComponent } from './modals/donator-info-modal/donator-info-modal.component';
 import { ConfigDonationModalComponent } from './modals/config-donation-modal/config-donation-modal.component';
 import { InstitutionInfoModalComponent } from './modals/institution-info-modal/institution-info-modal.component';
+import { MessageModalComponent } from './modals/message-modal/message-modal.component';
 
 @NgModule({
     imports: [
@@ -54,6 +55,7 @@ import { InstitutionInfoModalComponent } from './modals/institution-info-modal/i
         DonatorInfoModalComponent,
         ConfigDonationModalComponent,
         InstitutionInfoModalComponent,
+        MessageModalComponent,
     ],
     exports:[ ComponentsComponent, LoadingComponent ]
 })

@@ -1,0 +1,17 @@
+<div class="modal-body">
+    <div class="card-body">
+        <form id="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-icon [class]="data.type" *ngIf="data.type === 'success'">check_circle_outline</mat-icon>
+                    <mat-icon [class]="data.type" *ngIf="data.type === 'warning'">warning</mat-icon>
+                    <mat-icon [class]="data.type" *ngIf="data.type === 'error'">error</mat-icon>
+                    <p>{{ data.text }}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" (click)="close(false)">Ok</button>
+</div>

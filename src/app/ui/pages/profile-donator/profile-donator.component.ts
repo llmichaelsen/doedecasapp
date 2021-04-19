@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "app/ui/services/auth.service";
 import { EditDonatorModalComponent } from "app/components/modals/edit-donator-modal/edit-donator-modal.component";
 import { DonationOfferModalComponent } from "app/components/modals/donation-offer-modal/donation-offer-modal.component";
+import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 
 @Component({
   selector: "app-profile",
@@ -15,6 +16,7 @@ import { DonationOfferModalComponent } from "app/components/modals/donation-offe
 export class ProfileDonatorComponent implements OnInit {
   editModal: MatDialogRef<EditDonatorModalComponent>;
   donationOfferModal: MatDialogRef<DonationOfferModalComponent>;
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   constructor(
     private service: DonatorService,
@@ -34,14 +36,39 @@ export class ProfileDonatorComponent implements OnInit {
 
   openEdit(): void {
     this.editModal = this.dialog.open(EditDonatorModalComponent);
-    this.editModal.afterClosed().subscribe(() => {});
+    this.editModal.afterClosed().subscribe((result) => {
+      if (result) this.openMessageModalEditPerfil();
+    });
   }
 
   openDonationOffer(): void {
     this.donationOfferModal = this.dialog.open(DonationOfferModalComponent, {
       width: "800px",
     });
-    this.donationOfferModal.afterClosed().subscribe(() => {});
+    this.donationOfferModal.afterClosed().subscribe((result) => {
+      if (result) this.openMessageModal();
+    });
+  }
+
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text:
+          "Oferta de doação criada com sucesso. Veja suas doações na aba de Minhas Doações.",
+      },
+    });
+  }
+
+  openMessageModalEditPerfil() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Informações de perfil alteradas com sucesso.",
+      },
+    });
   }
 
   async deleteAccount(): Promise<void> {

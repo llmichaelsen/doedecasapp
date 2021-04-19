@@ -46,6 +46,7 @@ export class InstitutionRepository {
 
   public async saveInstitution(institution: Institution): Promise<string> {
     try {
+      debugger
       const userFirebase = await this.authRepository.register(
         institution.getRegisterModel()
       );

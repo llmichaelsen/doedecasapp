@@ -1,4 +1,4 @@
-import { Institution } from 'app/ui/models/user/institution.model';
+import { Institution } from "app/ui/models/user/institution.model";
 import { DonatorInfoModalComponent } from "./../../../../components/modals/donator-info-modal/donator-info-modal.component";
 import { DonationRequest } from "app/ui/models/donation/donation-request";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
@@ -20,7 +20,8 @@ import { Food } from "app/ui/models/food/food";
 import { IDonationStatusStrategy } from "app/ui/models/donation/donation-status-strategy";
 import { Donator } from "app/ui/models/user/donator.model";
 import { NotificationService } from "app/ui/services/notification.service";
-import { Notification } from 'app/ui/models/notification/notification';
+import { Notification } from "app/ui/models/notification/notification";
+import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 
 @Component({
   selector: "app-my-donations-for-institution",
@@ -44,6 +45,7 @@ export class MyDonationsForInstitutionComponent implements OnInit {
   donationStatusStrategy: IDonationStatusStrategy;
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
   donatorInfoModal: MatDialogRef<DonatorInfoModalComponent>;
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   constructor(
     private donationOfferServ: DonationOfferService,
@@ -80,8 +82,11 @@ export class MyDonationsForInstitutionComponent implements OnInit {
       service
         .cancelDonation(donation)
         .then(() => {
-          this.notificationServ.saveNotification(this.createNotification(donation));
+          this.notificationServ.saveNotification(
+            this.createNotification(donation)
+          );
           this.loadDonations();
+          this.openMessageModalCancel()
         })
         .catch((error) => alert(error))
         .finally(() => this.loadingServ.close(load));
@@ -103,7 +108,30 @@ export class MyDonationsForInstitutionComponent implements OnInit {
       width: "800px",
     });
     this.completeModal.afterClosed().subscribe((result) => {
-      if (result) this.loadDonations();
+      if (result) {
+        this.loadDonations();
+        this.openMessageModalComplete();
+      }
+    });
+  }
+
+  openMessageModalComplete() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Doação concluída com sucesso.",
+      },
+    });
+  }
+
+  openMessageModalCancel() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Doação cancelada com sucesso.",
+      },
     });
   }
 
