@@ -7,23 +7,47 @@
                 <div class="photo-container">
                     <img src="assets/img/user-icon.jfif" alt="" />
                 </div>
-                <h3 class="title">{{ user.getFullName() }}</h3>
-                <p class="category">{{ user.type }}</p>
+                <h3 class="header">{{ user.getFullName() }}</h3>
             </div>
         </div>
     </div>
     <div class="section">
         <div class="container">
-            <div class="button-container">
-                <a (click)="openEdit()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
-                <a (click)="openDonationOffer()" class="btn btn-info btn-round btn-lg ancor">Oferecer Doação</a>
-                <a (click)="deleteAccount()" class="btn btn-danger btn-round btn-lg ancor">
-                    <i class="fas fa-trash-alt"></i>
-                    Excluir Conta
-                </a>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-card>
+                        <div class="">
+                            <h2 class="title">Doador(a) </h2>
+                            <p class="description">Sobre: {{user.obs}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Nome:</h3>
+                            <p class="description">{{user.getFullName()}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Endereço:</h3>
+                            <p class="description">{{user.getFullAddress()}}</p>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-4">
+                    <mat-card>
+                        <div class="">
+                            <h2 class="title">Opções </h2>
+                        </div>
+                        <div class="button-container">
+                            <a (click)="openEdit()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                            <a (click)="openDonationOffer()" class="btn btn-info btn-round btn-lg ancor">Oferecer
+                                Doação</a>
+                            <a (click)="deleteAccount()" class="btn btn-danger btn-round btn-lg ancor">
+                                <i class="fas fa-trash-alt"></i>
+                                Excluir Conta
+                            </a>
+                        </div>
+                    </mat-card>
+
+                </div>
             </div>
-            <h3 class="title">Sobre mim</h3>
-            <h5 class="description">{{ user.obs }}</h5>
         </div>
     </div>
     <footer class="footer footer-default">

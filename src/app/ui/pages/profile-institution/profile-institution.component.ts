@@ -18,7 +18,7 @@ import { MessageModalComponent } from "app/components/modals/message-modal/messa
 @Component({
   selector: "profile-institution",
   templateUrl: "./profile-institution.component.html",
-  styleUrls: ["./profile-institution.component.css"],
+  styleUrls: ["./profile-institution.component.scss"],
 })
 export class ProfileInstitutionComponent implements OnInit {
   userLogado: UserApp;

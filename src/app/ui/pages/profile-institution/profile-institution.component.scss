@@ -6,14 +6,13 @@
 .button-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+    margin-top: 0;
 }
 
 a.btn-primary {
     color: #fff;
 }
-
-.button-container {}
 
 .page-header .page-header-image {
     background-position: center 0%;
@@ -28,16 +27,35 @@ a.btn-primary {
     max-height: 260px;
 }
 
-.title {
+.header {
     margin-top: 15px;
+    text-align: center;
 }
 
-h5.description {
-    margin-bottom: 20px;
+.title {
+    margin-top: 15px;
+    text-align: left;
+}
+
+p.description {
+    text-align: left;
 }
 
 .work-day {
     margin-right: 10px;
+}
+
+.line-inst {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    > p {
+        margin-left: 10px;
+    }
+    > * {
+        margin: 0;
+    }
 }
 
 .work-time {

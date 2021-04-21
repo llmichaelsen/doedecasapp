@@ -8,38 +8,69 @@
                 <div class="photo-container">
                     <img src="assets/img/instituicao.png" alt="">
                 </div>
-                <h3 class="title">{{instituicao?.name}}</h3>
+                <h3 class="header">{{instituicao?.name}}</h3>
             </div>
         </div>
     </div>
     <div class="section">
         <div class="container">
-            <div class="button-container">
-                <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Agendar Doação</a>
-                <a *ngIf="!uid" (click)="editProfile()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
-                <a *ngIf="!uid" (click)="editConfig()" class="btn btn-primary btn-round btn-lg ancor">Configurações de Doações</a>
-                <a *ngIf="!uid" (click)="redirectToInstitutionMap()" class="btn btn-info btn-round btn-lg ancor">Buscar
-                    Doadores</a>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-card>
+                        <div class="">
+                            <h2 class="title">Sobre a instituição</h2>
+                            <p class="description">{{instituicao?.description}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Alimentos prioritários:</h3>
+                            <p class="description">{{priorityFoods}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Endereço:</h3>
+                            <p class="description">{{instituicao?.address.getFullAddress()}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Dias de funcionamento:</h3>
+                            <p class="description">
+                                <span class="work-day"
+                                    *ngFor="let day of instituicao?.workingTime.getDayList()">{{day}}</span>
+                            </p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Horário de funcionamento:</h3>
+                            <p class="description">
+                                <span class="work-time" *ngIf="instituicao?.workingTime.workOnWeekday()">Dias de Semana:
+                                    {{instituicao?.workingTime.weekDayBegin}} até
+                                    {{instituicao?.workingTime.weekDayFinal}}</span>
+                                <span class="work-time" *ngIf="instituicao?.workingTime.workOnWeekend()">Finais de
+                                    Semana:
+                                    {{instituicao?.workingTime.weekEndBegin}} até
+                                    {{instituicao?.workingTime.weekEndFinal}}</span>
+                            </p>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-4">
+                    <mat-card>
+                        <div class="">
+                            <h2 class="title">Opções</h2>
+                        </div>
+                        <div class="button-container">
+                            <a *ngIf="uid" (click)="donation()" class="btn btn-primary btn-round btn-lg ancor">Agendar
+                                Doação</a>
+                            <a *ngIf="!uid" (click)="editProfile()"
+                                class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                            <a *ngIf="!uid" (click)="editConfig()"
+                                class="btn btn-primary btn-round btn-lg ancor">Configurações de Doações</a>
+                            <a *ngIf="!uid" (click)="redirectToInstitutionMap()"
+                                class="btn btn-info btn-round btn-lg ancor">Buscar
+                                Doadores</a>
+                        </div>
+                    </mat-card>
+                </div>
             </div>
-            <h3 class="title">Sobre a instituição</h3>
-            <h5 class="description">{{instituicao?.description}}</h5>
-            <h3 class="title">Alimentos prioritários</h3>
-            <h5 class="description">{{priorityFoods}}</h5>
-            <h3 class="title">Endereço</h3>
-            <h5 class="description">{{instituicao?.address.getFullAddress()}}</h5>
-            <h3 class="title">Dias de funcionamento</h3>
-            <h5 class="description">
-                <span class="work-day" *ngFor="let day of instituicao?.workingTime.getDayList()">{{day}}</span>
-            </h5>
-            <h3 class="title">Horário de funcionamento</h3>
-            <h5 class="description">
-                <span class="work-time" *ngIf="instituicao?.workingTime.workOnWeekday()">Dias de Semana:
-                    {{instituicao?.workingTime.weekDayBegin}} até
-                    {{instituicao?.workingTime.weekDayFinal}}</span>
-                <span class="work-time" *ngIf="instituicao?.workingTime.workOnWeekend()">Finais de Semana:
-                    {{instituicao?.workingTime.weekEndBegin}} até
-                    {{instituicao?.workingTime.weekEndFinal}}</span>
-            </h5>
+
+
         </div>
     </div>
     <footer class="footer footer-default">
