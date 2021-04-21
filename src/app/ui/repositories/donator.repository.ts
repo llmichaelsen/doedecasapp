@@ -35,6 +35,7 @@ export class DonatorRepository {
 
   public async saveDonator(donator: Donator): Promise<any> {
     try {
+      debugger
       const userFirebase = await this.authRepository.register(
         donator.getRegisterModel()
       );

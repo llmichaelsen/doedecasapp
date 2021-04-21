@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit {
     donator.firstName = this.profileForm.controls.firstName.value;
     donator.lastName = this.profileForm.controls.lastName.value;
     donator.email = this.profileForm.controls.email.value;
+    donator.phone = this.profileForm.controls.phone.value;
     donator.password = this.profileForm.controls.password.value;
     donator.obs = this.profileForm.controls.obs.value;
 
