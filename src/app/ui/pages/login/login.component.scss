@@ -9,3 +9,7 @@
 .page-header[filter-color="orange"] {
   background: linear-gradient(0deg, rgb(78 7 0 / 30%), rgb(78 7 0 / 30%));
 }
+
+.page-header{
+  height: calc(100vh - 130px);
+}

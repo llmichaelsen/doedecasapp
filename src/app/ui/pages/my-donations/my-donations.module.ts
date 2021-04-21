@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../../components/components.module';
 import { MaterialModule } from './../../../core/material/material.module';
 import { MyDonationsComponent } from './my-donations.component';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { MyDonationsForInstitutionComponent } from './my-donations-for-instituti
   imports: [
     CommonModule,
     MyDonationsRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ComponentsModule
   ]
 })
 export class MyDonationsModule { }
