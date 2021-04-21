@@ -15,8 +15,13 @@ td.mat-cell {
     margin-right: 10px;
 }
 
+mat-paginator {
+    width: 100%;
+}
+
 @media (max-width: 600px) {
     .team>.row {
         overflow: scroll;
     }
 }
+

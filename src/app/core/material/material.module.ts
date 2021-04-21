@@ -19,7 +19,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTableModule } from "@angular/material/table";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatIconModule } from "@angular/material/icon";
+import { MatPaginatorIntl, MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { getPortuguesIntl } from "app/utils/paginator.config";
 
 @NgModule({
   declarations: [],
@@ -39,7 +41,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   exports: [
     CommonModule,
@@ -57,11 +60,13 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: "pt-BR" },
     { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MatPaginatorIntl, useValue: getPortuguesIntl() }
   ],
 })
 export class MaterialModule {}

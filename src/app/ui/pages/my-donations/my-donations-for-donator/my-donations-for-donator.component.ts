@@ -10,7 +10,7 @@ import { AuthService } from "./../../../services/auth.service";
 import { DonationRequestService } from "./../../../services/donation-request.service";
 import { DonationOfferService } from "./../../../services/donation-offer.service";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
-import { Component, OnInit, Type } from "@angular/core";
+import { Component, OnInit, Type, ViewChild } from "@angular/core";
 import { DonationRequest } from "app/ui/models/donation/donation-request";
 import { DonationStatus } from "app/ui/models/donation/donation-status.enum";
 import { Food } from "app/ui/models/food/food";
@@ -21,6 +21,8 @@ import { NotificationService } from "app/ui/services/notification.service";
 import { Notification } from "app/ui/models/notification/notification";
 import { Donator } from "app/ui/models/user/donator.model";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "app-my-donations-for-donator",
@@ -38,9 +40,13 @@ export class MyDonationsForDonatorComponent implements OnInit {
     "actions",
   ];
 
+  @ViewChild('paginatorOffer', {static: true}) paginatorOffer: MatPaginator;
+  @ViewChild('paginatorRequest', {static: true}) paginatorRequest: MatPaginator;
+
+  dataSourceOffer = new MatTableDataSource<DonationOffer>();
+  dataSourceRequest = new MatTableDataSource<DonationRequest>();
+
   foods: Food[] = [];
-  donationOffer: DonationOffer[] = [];
-  donationRequest: DonationRequest[] = [];
   donationStatusStrategy: IDonationStatusStrategy;
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
   infoModal: MatDialogRef<InstitutionInfoModalComponent>;
@@ -61,13 +67,15 @@ export class MyDonationsForDonatorComponent implements OnInit {
       this.authServ.getUserApp().uid
     );
     this.loadDonations();
+    this.dataSourceOffer.paginator = this.paginatorOffer;
+    this.dataSourceRequest.paginator = this.paginatorRequest;
   }
 
   async loadDonations(): Promise<void> {
-    this.donationOffer = await this.donationOfferServ.getDonationsByDonator(
+    this.dataSourceOffer.data = await this.donationOfferServ.getDonationsByDonator(
       this.authServ.getUserApp().uid
     );
-    this.donationRequest = await this.donationRequestServ.getDonationsByDonator(
+    this.dataSourceRequest.data = await this.donationRequestServ.getDonationsByDonator(
       this.authServ.getUserApp().uid
     );
   }

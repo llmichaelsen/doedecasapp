@@ -2,7 +2,7 @@ import { Institution } from "app/ui/models/user/institution.model";
 import { DonatorInfoModalComponent } from "./../../../../components/modals/donator-info-modal/donator-info-modal.component";
 import { DonationRequest } from "app/ui/models/donation/donation-request";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { DonationCompleteModalComponent } from "app/components/modals/donation-complete-modal/donation-complete-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { DonationOfferService } from "app/ui/services/donation-offer.service";
@@ -15,13 +15,14 @@ import {
   DonationStatus,
   DonationStatusInstitutionColumn,
 } from "app/ui/models/donation/donation-status.enum";
-import { IDonationService } from "app/ui/services/donation-service.interface";
 import { Food } from "app/ui/models/food/food";
 import { IDonationStatusStrategy } from "app/ui/models/donation/donation-status-strategy";
 import { Donator } from "app/ui/models/user/donator.model";
 import { NotificationService } from "app/ui/services/notification.service";
 import { Notification } from "app/ui/models/notification/notification";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "app-my-donations-for-institution",
@@ -38,10 +39,13 @@ export class MyDonationsForInstitutionComponent implements OnInit {
     "deliveryTime",
     "actions",
   ];
+  @ViewChild('paginatorOffer', {static: true}) paginatorOffer: MatPaginator;
+  @ViewChild('paginatorRequest', {static: true}) paginatorRequest: MatPaginator;
+
+  dataSourceOffer = new MatTableDataSource<DonationOffer>();
+  dataSourceRequest = new MatTableDataSource<DonationRequest>();
 
   foods: Food[] = [];
-  donationOffer: DonationOffer[] = [];
-  donationRequest: DonationRequest[] = [];
   donationStatusStrategy: IDonationStatusStrategy;
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
   donatorInfoModal: MatDialogRef<DonatorInfoModalComponent>;
@@ -62,13 +66,15 @@ export class MyDonationsForInstitutionComponent implements OnInit {
       this.authServ.getUserApp().uid
     );
     this.loadDonations();
+    this.dataSourceOffer.paginator = this.paginatorOffer;
+    this.dataSourceRequest.paginator = this.paginatorRequest;
   }
 
   async loadDonations(): Promise<void> {
-    this.donationOffer = await this.donationOfferServ.getDonationsByInstitution(
+    this.dataSourceOffer.data = await this.donationOfferServ.getDonationsByInstitution(
       this.authServ.getUserApp().uid
     );
-    this.donationRequest = await this.donationRequestServ.getDonationsByInstitution(
+    this.dataSourceRequest.data = await this.donationRequestServ.getDonationsByInstitution(
       this.authServ.getUserApp().uid
     );
   }

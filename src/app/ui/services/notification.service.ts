@@ -25,6 +25,15 @@ export class NotificationService {
       return error;
     }
   }
+
+  public async readNotification(userApp: string, not: Notification): Promise<any> {
+    try {
+      const rsult = await this.repository.readNotification(userApp, not);
+      return rsult;
+    } catch (error) {
+      return error;
+    }
+  }
   
   public async readAllNotifications(userApp: string): Promise<any> {
     try {

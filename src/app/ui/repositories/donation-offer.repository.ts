@@ -1,4 +1,4 @@
-import { DonatorRepository } from './donator.repository';
+import { DonatorRepository } from "./donator.repository";
 import { InstitutionRepository } from "./institution.repository";
 import { InstitutionParser } from "./parser/institution.parser";
 import { FoodService } from "./../services/food.service";
@@ -51,14 +51,17 @@ export class DonationOfferRepository {
         .map((d) => {
           d.institution = insts.find((i) => i.key === d.institution);
           return d;
-        });
+        })
+        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
       return Promise.resolve(result);
     } catch (error) {
       return await Promise.reject(error);
     }
   }
 
-  public async getDonationsByInstitution(institution: Key): Promise<DonationOffer[]> {
+  public async getDonationsByInstitution(
+    institution: Key
+  ): Promise<DonationOffer[]> {
     try {
       const gateway = new FirebaseGateway(this.db);
       const donators = await this.donatorRepository.list();
@@ -68,7 +71,8 @@ export class DonationOfferRepository {
         .map((d) => {
           d.donator = donators.find((i) => i.key === d.donator);
           return d;
-        });
+        })
+        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
       return Promise.resolve(result);
     } catch (error) {
       return await Promise.reject(error);

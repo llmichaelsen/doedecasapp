@@ -43,6 +43,17 @@ export class NotificationRepository {
     }
   }
 
+  public async readNotification(userApp: string, not: Notification): Promise<any> {
+    try {
+      const gateway = new FirebaseGateway(this.db);
+      not.read = true;
+      const result = gateway.updateItem(`notification/${userApp}`, not.getUpdateObject());
+      return Promise.resolve(result);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   public async readAllNotifications(userApp: string): Promise<any> {
     try {
       const gateway = new FirebaseGateway(this.db);

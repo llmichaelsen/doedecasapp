@@ -1,9 +1,12 @@
+import { RoutePath } from './../../ui/models/route-path';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthService } from 'app/ui/services/auth.service';
 import { UserApp } from 'app/ui/models/user/user-app.model';
 import { UserService } from 'app/ui/services/user.service';
 import { NotificationService } from 'app/ui/services/notification.service';
+import { Router } from '@angular/router';
+import { Notification } from 'app/ui/models/notification/notification';
 
 @Component({
     selector: 'app-navbar',
@@ -19,6 +22,7 @@ export class NavbarComponent implements OnInit {
     constructor(
         public location: Location, 
         private element: ElementRef,
+        private router: Router,
         public authServ: AuthService,
         public userServ: UserService,
         private notificationServ: NotificationService) {
@@ -32,6 +36,12 @@ export class NavbarComponent implements OnInit {
         this.notificationServ.getUnreadNotifications(this.user.uid).subscribe(
             result => this.notifications = result
         )
+    }
+
+    notificationClick(not: Notification) {
+        if(this.router.url.includes(RoutePath.MyDonations)) {
+            this.notificationServ.readNotification(this.authServ.getUserApp().uid, not);
+        }
     }
 
     sidebarOpen() {

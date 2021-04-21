@@ -65,7 +65,8 @@ export class DonationRequestRepository {
         .map((d) => {
           d.institution = insts.find((i) => i.key === d.institution);
           return d;
-        });
+        })
+        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
       return Promise.resolve(result);
     } catch (error) {
       return await Promise.reject(error);
@@ -83,7 +84,8 @@ export class DonationRequestRepository {
         .map((d) => {
           d.donator = donators.find((i) => i.key === d.donator);
           return d;
-        });
+        })
+        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
       return Promise.resolve(result);
     } catch (error) {
       return await Promise.reject(error);
