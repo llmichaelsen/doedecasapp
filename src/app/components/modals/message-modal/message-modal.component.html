@@ -1,4 +1,7 @@
 <div class="modal-body">
+    <button type="button" class="close" (click)="close(false)">
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
     <div class="card-body">
         <form id="form">
             <div class="row">
@@ -13,5 +16,8 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" (click)="close(false)">Ok</button>
+    <div *ngIf="data.buttons" class="custom-buttons">
+        <button *ngFor="let button of data.buttons" class="btn btn-default" (click)="customCallback(button.callback)">{{button.text}}</button>
+    </div>
+    <button *ngIf="!data.buttons" class="btn btn-default" (click)="close(false)">Ok</button>
 </div>

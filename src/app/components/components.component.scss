@@ -15,3 +15,24 @@ ngb-progressbar {
 .page-header[filter-color="orange"] {
   background: linear-gradient(0deg, rgb(78 7 0 / 60%), rgb(78 7 0 / 60%));
 }
+
+
+.separator {
+  margin: 60px auto;
+}
+
+.team-player {
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.b-right {
+  border-right: 1px dashed #ddd;
+}
+
+.btn-primary {
+  color: #fff !important;
+}

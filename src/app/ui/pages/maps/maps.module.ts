@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { googleMapsKey } from './../../../../environments/credentials';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { MapsForDonatorsComponent } from './maps-for-donators/maps-for-donators.
   imports: [
     CommonModule,
     MapsRoutingModule,
+    NgbModule,
     AgmCoreModule.forRoot({ apiKey: googleMapsKey }),
   ]
 })

@@ -1,1 +1,20 @@
 <div id="map"></div>
+<ngb-alert [type]="'info'" *ngIf="notification" [dismissible]="false" >
+    <div class="container">
+        <div class="alert-wrapper">
+            <button type="button" name="button" class="close" (click)="closeAlert()">
+              <span aria-hidden="true">
+                  <i class="now-ui-icons ui-1_simple-remove"></i>
+              </span>
+            </button>
+            <div class="message">
+                <ng-container>
+                  <div class="alert-icon">
+                      <i class="now-ui-icons travel_info"></i>
+                  </div>
+                </ng-container>
+                Os <strong>marcadores</strong> no mapa são as instituições que estão recebendo doações, clique e agende sua doação.
+            </div>
+        </div>
+    </div>
+</ngb-alert>

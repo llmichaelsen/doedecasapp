@@ -23,6 +23,7 @@ export class MapsForDonatorsComponent implements OnInit {
   markers = [];
   foods = [];
   currentWindom;
+  notification = true;
 
   async ngOnInit() {
     this.mapsAPILoader.load().then(async (r) => {
@@ -95,5 +96,9 @@ export class MapsForDonatorsComponent implements OnInit {
   getPriorityFoods(inst: Institution): string[] {
     return this.foods.filter((f) => inst.foodNeeded.includes(f.id))
       .map(f=> " " + f.title);
+  }
+
+  closeAlert() {
+    this.notification = false;
   }
 }

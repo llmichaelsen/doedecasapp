@@ -19,11 +19,17 @@ export class MessageModalComponent implements OnInit {
     this.dialogRef.close(result);
   }
 
+  customCallback(callback: Function) {
+    callback();
+    this.close(true);
+  }
+
 }
 
 export interface MessageModalData {
   readonly type: MessageModalType;
   readonly text: string;
+  readonly buttons: Array<{text: string, callback: Function}>;
 }
 
 export type MessageModalType = 'success' | 'warning' | 'error';

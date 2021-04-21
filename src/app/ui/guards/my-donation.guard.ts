@@ -27,6 +27,8 @@ export class MyDonationGuard implements CanActivate, CanDeactivate<unknown> {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    if (!this.authServ.isLoggedIn) this.router.navigate([RoutePath.Home]);
+
     if (state.url === RoutePath.MyDonations) {
       if (this.authServ.getUserApp().type === UserType.Doador)
         this.router.navigate([RoutePath.MyDonationsForDonator]);

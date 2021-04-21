@@ -81,8 +81,19 @@ export class ProfileInstitutionComponent implements OnInit {
     this.messageModal = this.dialog.open(MessageModalComponent, {
       width: "500px",
       data: {
-        type: "warning",
-        text: "É preciso acessar como Doador para fazer doações.",
+        type: "success",
+        text:
+          "Para acessar essa funcionalidade você precisa acessar como doador.",
+        buttons: [
+          {
+            text: "Cadastre-se",
+            callback: () => this.router.navigate([RoutePath.RegisterDonator]),
+          },
+          {
+            text: "Já tenha cadastro",
+            callback: () => this.router.navigate([RoutePath.Login]),
+          },
+        ],
       },
     });
   }
@@ -106,7 +117,8 @@ export class ProfileInstitutionComponent implements OnInit {
       width: "500px",
       data: {
         type: "success",
-        text: "Doação agendada com sucesso. Veja suas doações na aba de Minhas Doações",
+        text:
+          "Doação agendada com sucesso. Veja suas doações na aba de Minhas Doações",
       },
     });
   }
