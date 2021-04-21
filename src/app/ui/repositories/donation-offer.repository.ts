@@ -1,6 +1,7 @@
 import { DonatorRepository } from "./donator.repository";
 import { InstitutionRepository } from "./institution.repository";
 import { InstitutionParser } from "./parser/institution.parser";
+import { filter, map } from "rxjs/operators";
 import { FoodService } from "./../services/food.service";
 import { DonationOfferParser } from "./parser/donation-offer.parser";
 import { Key } from "./../models/user/user-app.model";
@@ -10,6 +11,8 @@ import { DonationStatus } from "./../models/donation/donation-status.enum";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { FirebaseGateway } from "../gateway/firebase.gateway";
+import { sortedChanges } from "@angular/fire/firestore";
+import { Observable } from "rxjs";
 @Injectable()
 export class DonationOfferRepository {
   constructor(
@@ -41,19 +44,22 @@ export class DonationOfferRepository {
     }
   }
 
-  public async getDonationsByDonator(donator: Key): Promise<DonationOffer[]> {
+  public async getDonationsByDonator(donator: Key): Promise<Observable<any>> {
     try {
       const gateway = new FirebaseGateway(this.db);
       const insts = await this.institutionRepository.list();
-      const result = this.donationParser
-        .parseList(await gateway.getList("donation-offer"))
-        .filter((d) => d.donator === donator)
-        .map((d) => {
-          d.institution = insts.find((i) => i.key === d.institution);
-          return d;
-        })
-        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
-      return Promise.resolve(result);
+      return gateway.getListObservable("donation-offer").pipe(
+        map((items) =>
+          items
+            .map((item) => this.donationParser.parse(item.payload))
+            .filter((d) => d.donator === donator)
+            .map((d) => {
+              d.institution = insts.find((i) => i.key === d.institution);
+              return d;
+            })
+            .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+        )
+      );
     } catch (error) {
       return await Promise.reject(error);
     }
@@ -61,19 +67,22 @@ export class DonationOfferRepository {
 
   public async getDonationsByInstitution(
     institution: Key
-  ): Promise<DonationOffer[]> {
+  ): Promise<Observable<any>> {
     try {
       const gateway = new FirebaseGateway(this.db);
       const donators = await this.donatorRepository.list();
-      const result = this.donationParser
-        .parseList(await gateway.getList("donation-offer"))
-        .filter((d) => d.institution === institution)
-        .map((d) => {
-          d.donator = donators.find((i) => i.key === d.donator);
-          return d;
-        })
-        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
-      return Promise.resolve(result);
+      return gateway.getListObservable("donation-offer").pipe(
+        map((items) =>
+          items
+            .map((item) => this.donationParser.parse(item.payload))
+            .filter((d) => d.institution === institution)
+            .map((d) => {
+              d.donator = donators.find((i) => i.key === d.donator);
+              return d;
+            })
+            .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+        )
+      );
     } catch (error) {
       return await Promise.reject(error);
     }

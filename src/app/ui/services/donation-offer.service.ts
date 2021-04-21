@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import { IDonationService } from "./donation-service.interface";
 
 import { Key } from "./../models/user/user-app.model";
@@ -45,27 +46,19 @@ export class DonationOfferService implements IDonationService {
     }
   }
 
-  public async getDonationsByDonator(donator: Key): Promise<DonationOffer[]> {
+  public getDonationsByDonator(donator: Key): Promise<Observable<any>> {
     try {
-      const result = await await this.donationRepository.getDonationsByDonator(
-        donator
-      );
-      return Promise.resolve(result);
+      return this.donationRepository.getDonationsByDonator(donator);
     } catch (error) {
-      return await Promise.reject(error);
+      return error;
     }
   }
 
-  public async getDonationsByInstitution(
-    institution: Key
-  ): Promise<DonationOffer[]> {
+  public getDonationsByInstitution(institution: Key): Promise<Observable<any>> {
     try {
-      const result = await await this.donationRepository.getDonationsByInstitution(
-        institution
-      );
-      return Promise.resolve(result);
+      return this.donationRepository.getDonationsByInstitution(institution);
     } catch (error) {
-      return await Promise.reject(error);
+      return error;
     }
   }
 

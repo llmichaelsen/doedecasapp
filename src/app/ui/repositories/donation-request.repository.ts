@@ -4,8 +4,10 @@ import { DonationRequestParser } from './parser/donation-request.parser';
 import { Key } from "./../models/user/user-app.model";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/database";
+import { map } from "rxjs/operators";
 import { FirebaseGateway } from "../gateway/firebase.gateway";
 import { DonatorRepository } from './donator.repository';
+import { Observable } from 'rxjs';
 @Injectable()
 export class DonationRequestRepository {
   constructor(
@@ -55,38 +57,46 @@ export class DonationRequestRepository {
     }
   }
 
-  public async getDonationsByDonator(donator: Key): Promise<DonationRequest[]> {
+  public async getDonationsByDonator(donator: Key): Promise<Observable<any>> {
     try {
       const gateway = new FirebaseGateway(this.db);
       const insts = await this.institutionRepository.list();
-      const result = this.donationParser
-        .parseList(await gateway.getList("donation-request"))
-        .filter((d) => d.donator === donator)
-        .map((d) => {
-          d.institution = insts.find((i) => i.key === d.institution);
-          return d;
-        })
-        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
-      return Promise.resolve(result);
+      return gateway
+        .getListObservable('donation-request')
+        .pipe(
+          map(items => items
+              .map(item => this.donationParser.parse(item.payload))
+              .filter(d => d.donator === donator)
+              .map(d => {
+                d.institution = insts.find((i) => i.key === d.institution);
+                return d;
+              })
+              .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+          )
+        )
     } catch (error) {
       return await Promise.reject(error);
     }
   }
 
-  public async getDonationsByInstitution(institution: Key): Promise<DonationRequest[]> {
+  public async getDonationsByInstitution(
+    institution: Key
+  ): Promise<Observable<any>> {
     try {
       const gateway = new FirebaseGateway(this.db);
       const donators = await this.donatorRepository.list();
-      console.log(donators)
-      const result = this.donationParser
-        .parseList(await gateway.getList("donation-request"))
-        .filter((d) => d.institution === institution)
-        .map((d) => {
-          d.donator = donators.find((i) => i.key === d.donator);
-          return d;
-        })
-        .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
-      return Promise.resolve(result);
+      return gateway.getListObservable("donation-request").pipe(
+        map((items) =>
+          items
+            .map((item) => this.donationParser.parse(item.payload))
+            .filter((d) => d.institution === institution)
+            .map((d) => {
+              d.donator = donators.find((i) => i.key === d.donator);
+              return d;
+            })
+            .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+        )
+      );
     } catch (error) {
       return await Promise.reject(error);
     }

@@ -5,6 +5,7 @@ import { Key } from "./../models/user/user-app.model";
 import { Injectable } from "@angular/core";
 import { DonationRequestRepository } from "../repositories/donation-request.repository";
 import { AuthService } from "./auth.service";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class DonationRequestService implements IDonationService {
@@ -49,25 +50,20 @@ export class DonationRequestService implements IDonationService {
     }
   }
 
-  public async getDonationsByDonator(donator: Key): Promise<DonationRequest[]> {
+  public getDonationsByDonator(donator: Key): Promise<Observable<any>> {
     try {
-      const result = await await this.donationRepository.getDonationsByDonator(
-        donator
-      );
-      return Promise.resolve(result);
+      return this.donationRepository.getDonationsByDonator(donator);
     } catch (error) {
-      return await Promise.reject(error);
+      return error;
     }
   }
 
-  public async getDonationsByInstitution(institution: Key): Promise<DonationRequest[]> {
+  public getDonationsByInstitution(institution: Key): Promise<Observable<any>> {
     try {
-      const result = await await this.donationRepository.getDonationsByInstitution(
-        institution
-      );
-      return Promise.resolve(result);
+      return this.donationRepository.getDonationsByInstitution(institution);
     } catch (error) {
-      return await Promise.reject(error);
+      return error;
     }
   }
+
 }

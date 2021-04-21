@@ -72,12 +72,17 @@ export class MyDonationsForDonatorComponent implements OnInit {
   }
 
   async loadDonations(): Promise<void> {
-    this.dataSourceOffer.data = await this.donationOfferServ.getDonationsByDonator(
+    this.donationOfferServ.getDonationsByDonator(
       this.authServ.getUserApp().uid
-    );
-    this.dataSourceRequest.data = await this.donationRequestServ.getDonationsByDonator(
+    ).then(
+      obs => obs.subscribe(result => this.dataSourceOffer.data = result)
+    )
+
+    this.donationRequestServ.getDonationsByDonator(
       this.authServ.getUserApp().uid
-    );
+    ).then(
+      obs => obs.subscribe(result => this.dataSourceRequest.data = result)
+    )
   }
 
   cancelDonation(donation: DonationType): void {
