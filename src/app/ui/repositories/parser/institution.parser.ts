@@ -20,12 +20,12 @@ export class InstitutionParser extends AbstractParser<Institution> {
     if (!payload) return institution;
 
     const info = payload.val();
-
+    
     institution.uid = payload.key || payload.uid;
     institution.key = payload.key || payload.uid;
     institution.name = info.name;
     institution.cpnj = info.cpnj;
-    institution.phone = info.phone;
+    institution.phone = info.phone.substring(0, 15) || '';
     institution.description = info.description;
     institution.address = this.addressParser.parse(info.address);
     institution.responsibleFirstName = info.responsibleFirstName;
@@ -46,7 +46,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
 
     institution.name = info.name;
     institution.cpnj = info.cpnj;
-    institution.phone = info.phone;
+    institution.phone = info.phone.substring(0, 15) || '';
     institution.description = info.description;
     institution.address = this.addressParser.reparse(info.address);
     institution.responsibleFirstName = info.responsibleFirstName;

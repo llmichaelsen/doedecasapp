@@ -19,6 +19,18 @@ h3 {
     height: 100%;
 }
 
+.header {
+    margin-bottom: 25px;
+    align-items: center;
+    h1 {
+      margin: 0;
+    }
+    .inst-link {
+      margin-left: 10px;
+      color: #0000ee;
+    }
+  }
+
 mat-form-field {
     width: 100%;
 }

@@ -1,12 +1,14 @@
-import { AuthService } from 'app/ui/services/auth.service';
 import { DonatorService } from './../../services/donator.service';
 import { Donator } from './../../models/user/donator.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'app/ui/models/user/address.model';
 import { LoadingService } from 'app/ui/services/loading.service';
 import { UserType } from 'app/ui/models/user/user-type.enum';
+import { MessageModalComponent } from 'app/components/modals/message-modal/message-modal.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { estados } from 'app/utils/estados.array';
 
 @Component({
   selector: 'app-register',
@@ -16,12 +18,14 @@ import { UserType } from 'app/ui/models/user/user-type.enum';
 export class RegisterComponent implements OnInit {
 
   profileForm: FormGroup;
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   constructor(
     private donatorServ: DonatorService,
     private loadingServ: LoadingService,
     private fb: FormBuilder,
-    private router: Router) { }
+    public router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -36,10 +40,11 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       address: this.fb.group({
-        street: [''],
-        number: [''],
-        district: [''],
-        city: ['']
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        district: ['', Validators.required],
+        city: ['', Validators.required],
+        uf: ['', Validators.required]
       })
     });
   }
@@ -59,7 +64,18 @@ export class RegisterComponent implements OnInit {
   }
 
   successMessage(): void {
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
+    this.openMessageModal()
+  }
+
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Agora que está cadastrado, você pode encontrar instituições e começar a doar.",
+      },
+    });
   }
 
   private createUser(): Donator {
@@ -78,8 +94,13 @@ export class RegisterComponent implements OnInit {
     address.number = addressForm.controls.number.value;
     address.district = addressForm.controls.district.value;
     address.city = addressForm.controls.city.value;
+    address.uf = addressForm.controls.uf.value;
     donator.address = address;
     return donator;
+  }
+
+  get estados() {
+    return estados;
   }
 
 }

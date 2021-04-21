@@ -18,10 +18,10 @@ export class WorkingTimeParser extends AbstractParser<WorkingTime> {
         workingTime.friday = info.friday;
         workingTime.saturday = info.saturday;
         workingTime.sunday = info.sunday;
-        workingTime.weekEndBegin = info.weekEndBegin || null;
-        workingTime.weekEndFinal = info.weekEndFinal || null;
-        workingTime.weekDayBegin = info.weekDayBegin || null;
-        workingTime.weekDayFinal = info.weekDayFinal || null;
+        workingTime.weekEndBegin = info.weekEndBegin.substring(0, 5) || '';
+        workingTime.weekEndFinal = info.weekEndFinal.substring(0, 5) || '';
+        workingTime.weekDayBegin = info.weekDayBegin.substring(0, 5) || '';
+        workingTime.weekDayFinal = info.weekDayFinal.substring(0, 5) || '';
         return workingTime;
     }
 
@@ -38,10 +38,10 @@ export class WorkingTimeParser extends AbstractParser<WorkingTime> {
         workingTime.friday = info.friday;
         workingTime.saturday = info.saturday;
         workingTime.sunday = info.sunday;
-        workingTime.weekEndBegin = info.weekEndBegin;
-        workingTime.weekEndFinal = info.weekEndFinal;
-        workingTime.weekDayBegin = info.weekDayBegin;
-        workingTime.weekDayFinal = info.weekDayFinal;
+        workingTime.weekEndBegin = info.weekEndBegin.substring(0, 5) || '';
+        workingTime.weekEndFinal = info.weekEndFinal.substring(0, 5) || '';
+        workingTime.weekDayBegin = info.weekDayBegin.substring(0, 5) || '';
+        workingTime.weekDayFinal = info.weekDayFinal.substring(0, 5) || '';
         return workingTime;
     }
 }

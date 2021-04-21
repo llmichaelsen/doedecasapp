@@ -4,8 +4,9 @@
             <div class="card-body">
                 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 d-flex header">
                             <h1>Cadastro de Instituição</h1>
+                            <a class="ancor inst-link" [routerLink]="'/register'">Sou Doador</a>
                         </div>
                         <div class="col-md-12">
                             <h3>Instituição</h3>
@@ -69,7 +70,11 @@
                         <div class="col-md-3">
                             <mat-form-field appearance="fill">
                                 <mat-label>Estado</mat-label>
-                                <input matInput type="text" formControlName="uf">
+                                <mat-select formControlName="uf">
+                                    <mat-option *ngFor="let estado of estados" [value]="estado.key">
+                                        {{estado.value}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>

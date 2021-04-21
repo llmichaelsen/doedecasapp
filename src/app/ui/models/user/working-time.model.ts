@@ -11,11 +11,11 @@ export class WorkingTime {
   saturday: boolean = false;
   sunday: boolean = false;
 
-  weekEndBegin: Time = null;
-  weekEndFinal: Time = null;
+  weekEndBegin: string = '';
+  weekEndFinal: string = '';
 
-  weekDayBegin: Time = null;
-  weekDayFinal: Time = null;
+  weekDayBegin: string = '';
+  weekDayFinal: string = '';
 
   workOnWeekend(): boolean {
     return this.saturday || this.sunday ? true : false;

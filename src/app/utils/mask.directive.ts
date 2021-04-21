@@ -12,7 +12,6 @@ export class MaskDirective {
 
   @HostListener('input')
   onChange() {
-    console.log(this.eleRef.nativeElement.value)
     this.eleRef.nativeElement.value = Masks[this.mask](this.eleRef.nativeElement.value);
   }
 

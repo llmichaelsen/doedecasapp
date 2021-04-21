@@ -36,9 +36,6 @@ export class ProfileDonatorComponent implements OnInit {
 
   openEdit(): void {
     this.editModal = this.dialog.open(EditDonatorModalComponent);
-    this.editModal.afterClosed().subscribe((result) => {
-      if (result) this.openMessageModalEditPerfil();
-    });
   }
 
   openDonationOffer(): void {
@@ -57,16 +54,6 @@ export class ProfileDonatorComponent implements OnInit {
         type: "success",
         text:
           "Oferta de doação criada com sucesso. Veja suas doações na aba de Minhas Doações.",
-      },
-    });
-  }
-
-  openMessageModalEditPerfil() {
-    this.messageModal = this.dialog.open(MessageModalComponent, {
-      width: "500px",
-      data: {
-        type: "success",
-        text: "Informações de perfil alteradas com sucesso.",
       },
     });
   }

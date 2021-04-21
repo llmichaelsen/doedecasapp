@@ -1,4 +1,4 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DonatorService } from '../../../ui/services/donator.service';
 import { AuthService } from '../../../ui/services/auth.service';
@@ -7,6 +7,8 @@ import { Donator } from '../../../ui/models/user/donator.model';
 import { LoadingService } from '../../../ui/services/loading.service';
 import { FormGroup, FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { estados } from 'app/utils/estados.array';
+import { MessageModalComponent } from '../message-modal/message-modal.component';
 
 @Component({
   selector: 'app-edit-donator-modal',
@@ -16,6 +18,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 export class EditDonatorModalComponent implements OnInit {
   
   profileForm: FormGroup;
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   constructor(
     public dialogRef: MatDialogRef<EditDonatorModalComponent>,
@@ -23,7 +26,8 @@ export class EditDonatorModalComponent implements OnInit {
     private fb: FormBuilder,
     private loadingServ: LoadingService,
     public authServ: AuthService,
-    private service: DonatorService
+    private service: DonatorService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -37,10 +41,11 @@ export class EditDonatorModalComponent implements OnInit {
       obs: [this.user.obs],
       phone: [this.user.phone, Validators.required],
       address: this.fb.group({
-        street: [this.user.address.street],
-        number: [this.user.address.number],
-        district: [this.user.address.district],
-        city: [this.user.address.city]
+        street: [this.user.address.street, Validators.required],
+        number: [this.user.address.number, Validators.required],
+        district: [this.user.address.district, Validators.required],
+        city: [this.user.address.city, Validators.required],
+        uf: [this.user.address.uf, Validators.required]
       })
     });
   }
@@ -58,6 +63,16 @@ export class EditDonatorModalComponent implements OnInit {
       .finally(() => this.loadingServ.close(load));
   }
 
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Informações de perfil alteradas com sucesso.",
+      },
+    });
+  }
+
   close(success: boolean): void {
     this.dialogRef.close(success);
   }
@@ -66,7 +81,8 @@ export class EditDonatorModalComponent implements OnInit {
     await this.authServ.setUserApp();
     this.createForm();
     formDirective.resetForm();
-    this.close(true)
+    this.close(true);
+    this.openMessageModal()
   }
 
   private createUser(): Donator {
@@ -83,12 +99,17 @@ export class EditDonatorModalComponent implements OnInit {
     address.number = addressForm.controls.number.value;
     address.district = addressForm.controls.district.value;
     address.city = addressForm.controls.city.value;
+    address.uf = addressForm.controls.uf.value;
     user.address = address;
     return user;
   }
 
   get user(): Donator {
     return this.authServ.getUserApp() as Donator;
+  }
+
+  get estados() {
+    return estados;
   }
 
 }

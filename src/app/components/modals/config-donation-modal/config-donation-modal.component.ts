@@ -1,23 +1,28 @@
-import { AuthService } from './../../../ui/services/auth.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup } from '@angular/forms';
-import { Component, Inject, OnInit } from '@angular/core';
-import { Food } from 'app/ui/models/food/food';
-import { Institution } from 'app/ui/models/user/institution.model';
-import { InstitutionService } from 'app/ui/services/institution.service';
-import { LoadingService } from 'app/ui/services/loading.service';
-import { FoodService } from 'app/ui/services/food.service';
+import { AuthService } from "./../../../ui/services/auth.service";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
+import { FormGroup } from "@angular/forms";
+import { Component, Inject, OnInit } from "@angular/core";
+import { Food } from "app/ui/models/food/food";
+import { Institution } from "app/ui/models/user/institution.model";
+import { InstitutionService } from "app/ui/services/institution.service";
+import { LoadingService } from "app/ui/services/loading.service";
+import { FoodService } from "app/ui/services/food.service";
+import { MessageModalComponent } from "../message-modal/message-modal.component";
 
 @Component({
-  selector: 'app-config-donation-modal',
-  templateUrl: './config-donation-modal.component.html',
-  styleUrls: ['./config-donation-modal.component.css']
+  selector: "app-config-donation-modal",
+  templateUrl: "./config-donation-modal.component.html",
+  styleUrls: ["./config-donation-modal.component.css"],
 })
 export class ConfigDonationModalComponent implements OnInit {
-
   profileForm: FormGroup;
   institution: Institution;
   foods: Food[] = [];
+  messageModal: MatDialogRef<MessageModalComponent>;
 
   constructor(
     public dialogRef: MatDialogRef<ConfigDonationModalComponent>,
@@ -25,7 +30,8 @@ export class ConfigDonationModalComponent implements OnInit {
     public authServ: AuthService,
     private service: InstitutionService,
     private loadingServ: LoadingService,
-    private foodService: FoodService
+    private foodService: FoodService,
+    public dialog: MatDialog
   ) {}
 
   onNoClick(): void {
@@ -59,9 +65,22 @@ export class ConfigDonationModalComponent implements OnInit {
     const user = this.institution.createUserConfig(this.profileForm);
     this.service
       .updateInstitution(user)
-      .then((r) => this.close(true))
+      .then((r) => {
+        this.close(true);
+        this.openMessageModal();
+      })
       .catch((error) => alert(error))
       .finally(() => this.loadingServ.close(load));
+  }
+
+  openMessageModal() {
+    this.messageModal = this.dialog.open(MessageModalComponent, {
+      width: "500px",
+      data: {
+        type: "success",
+        text: "Configurações de doação alteradas com sucesso.",
+      },
+    });
   }
 
   isItemDisabled(food: Food): boolean {
@@ -73,5 +92,4 @@ export class ConfigDonationModalComponent implements OnInit {
     }
     return false;
   }
-
 }

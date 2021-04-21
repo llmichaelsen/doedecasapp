@@ -9,7 +9,7 @@ export class UserApp {
     uid: Key;
     password: string;
     email: string;
-    phone: string;
+    phone: string = '';
     type: UserType;
 
     getRegisterModel(): UserApp {

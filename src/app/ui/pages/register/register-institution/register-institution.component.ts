@@ -10,11 +10,12 @@ import { Router } from "@angular/router";
 import { UserType } from "app/ui/models/user/user-type.enum";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { estados } from "app/utils/estados.array";
 
 @Component({
   selector: "app-register-institution",
   templateUrl: "./register-institution.component.html",
-  styleUrls: ["./register-institution.component.css"],
+  styleUrls: ["./register-institution.component.scss"],
 })
 export class RegisterInstitutionComponent implements OnInit {
   profileForm: FormGroup;
@@ -42,11 +43,11 @@ export class RegisterInstitutionComponent implements OnInit {
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
       address: this.fb.group({
-        street: [""],
-        number: [""],
-        district: [""],
-        city: [""],
-        uf: [""],
+        street: ["", Validators.required],
+        number: ["", Validators.required],
+        district: ["", Validators.required],
+        city: ["", Validators.required],
+        uf: ["", Validators.required],
       }),
       responsibleFirstName: ["", Validators.required],
       responsibleLastName: ["", Validators.required],
@@ -79,7 +80,7 @@ export class RegisterInstitutionComponent implements OnInit {
       width: "500px",
       data: {
         type: "success",
-        text: "Instituição cadastrada e autenticada com sucesso.",
+        text: "Agora que sua Instituição está cadastrada, você pode ajustar as configurações de doações para começar a receber doações.",
       },
     });
   }
@@ -110,5 +111,9 @@ export class RegisterInstitutionComponent implements OnInit {
     user.responsibleRole = this.profileForm.controls.responsibleRole.value;
 
     return user;
+  }
+
+  get estados() {
+    return estados;
   }
 }
