@@ -54,7 +54,7 @@ export class ComponentsComponent implements OnInit {
 
   async ngOnInit() {}
 
-  redirectDonationsForDonator() {
+  redirectProfileForDonator() {
     if (this.authServ.getUserApp().type === UserType.Doador) {
       this.router.navigateByUrl(RoutePath.Profile + "?openOffer=true");
     } else {
