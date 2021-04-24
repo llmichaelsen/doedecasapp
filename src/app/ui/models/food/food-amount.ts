@@ -1,6 +1,5 @@
-import { Food } from "./food";
 
 export class FoodAmount {
-    food: Food;
+    food: string;
     amount: number;
 }

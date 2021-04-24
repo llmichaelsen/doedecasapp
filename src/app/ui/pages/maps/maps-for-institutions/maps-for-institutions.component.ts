@@ -92,11 +92,11 @@ export class MapsForInstitutionsComponent implements OnInit {
     });
   }
 
-  getPriorityFoods(donation: DonationOffer): string[] {
-    return this.foods
-      .find((f) => donation.food === f.id)
-      .map((f) => " " + f.title);
-  }
+  // getPriorityFoods(donation: DonationOffer): string[] {
+  //   return this.foods
+  //     .find((f) => donation.food === f.id)
+  //     .map((f) => " " + f.title);
+  // }
 
   openDonationModal(donation: DonationOffer): void {
     this.ngZone.run(() => {

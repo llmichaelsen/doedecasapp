@@ -13,6 +13,7 @@ import {
   FormBuilder,
   FormGroup,
   FormGroupDirective,
+  FormArray,
 } from "@angular/forms";
 import { Component, Inject, OnInit } from "@angular/core";
 import { Food } from "app/ui/models/food/food";
@@ -22,11 +23,12 @@ import { Notification } from "app/ui/models/notification/notification";
 @Component({
   selector: "app-donate-modal",
   templateUrl: "./donation-request-modal.component.html",
-  styleUrls: ["./donation-request-modal.component.css"],
+  styleUrls: ["./donation-request-modal.component.scss"],
 })
 export class DonationRequestModal implements OnInit {
   foods: Food[] = [];
   donationForm: FormGroup;
+  items: FormArray = new FormArray([]);
 
   constructor(
     private fb: FormBuilder,
@@ -46,14 +48,31 @@ export class DonationRequestModal implements OnInit {
 
   createForm() {
     this.donationForm = this.fb.group({
-      food: [null, Validators.required],
-      amount: [null, Validators.required],
+      foodAmount: this.fb.array([ this.createFoodItem() ]),
       deliveryTime: this.fb.group({
         day: [null, Validators.required],
         initTime: [null, Validators.required],
         endTime: [null, Validators.required],
       }),
     });
+  }
+
+  createFoodItem(): FormGroup {
+    return this.fb.group({
+      food: [null, Validators.required],
+      amount: [null, Validators.required],
+    });
+  }
+
+  addItem(): void {
+    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items.push(this.createFoodItem());
+  }
+
+  removeItem(i) {
+    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items.removeAt(i);
+    console.log(this.items, i)
   }
 
   onSubmit(formDirective: FormGroupDirective) {
@@ -89,8 +108,7 @@ export class DonationRequestModal implements OnInit {
     donation.deliveryTime.endTime = data.deliveryTime.endTime;
     donation.donator = this.authServ.getUserApp().uid;
     donation.institution = this.data.uid as Institution;
-    donation.amount = data.amount;
-    donation.food = data.food;
+    donation.foodAmount = data.foodAmount;
     return donation;
   }
 

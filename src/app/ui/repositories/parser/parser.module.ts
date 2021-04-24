@@ -8,6 +8,7 @@ import { AddressParser } from "./address.parser";
 import { UserParser } from "./user-app.parser";
 import { FoodParser } from './food.parser';
 import { NotificationParser } from './notification.parser';
+import { FoodAmountParser } from './food-amount.parser';
 
 @NgModule({})
 export class ParserModule {
@@ -23,7 +24,8 @@ export class ParserModule {
                 InstitutionParser,
                 DonatorParser,
                 WorkingTimeParser,
-                NotificationParser
+                NotificationParser,
+                FoodAmountParser
             ]
         }
     }

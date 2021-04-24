@@ -1,10 +1,12 @@
 import { DonationRequest } from './../../models/donation/donation-request';
 import { AbstractParser } from "./parser";
 import { Injectable } from "@angular/core";
+import { FoodAmountParser } from './food-amount.parser';
 
 @Injectable()
 export class DonationRequestParser extends AbstractParser<DonationRequest> {
 
+    foodAmountParser = new FoodAmountParser();
     
     parse(payload): DonationRequest {
         const donation: DonationRequest = new DonationRequest();
@@ -16,8 +18,7 @@ export class DonationRequestParser extends AbstractParser<DonationRequest> {
         donation.institution = data.institution || null;
         donation.donator = data.donator;
         donation.createdAt = data.createdAt;
-        donation.amount = data.amount;
-        donation.food = data.food;
+        donation.foodAmount = this.foodAmountParser.parseList(data.foodAmount);
         donation.deliveryTime = data.deliveryTime || null;
         donation.status = data.status;
         donation.completionMotive = data.completionMotive || null;

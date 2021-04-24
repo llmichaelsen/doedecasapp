@@ -13,8 +13,7 @@ export class DonationOffer extends Donation {
     return {
       createdAt: this.createdAt,
       donator: this.donator instanceof Donator ? this.donator.key : this.donator,
-      amount: this.amount,
-      food: this.food,
+      foodAmount: this.foodAmount,
       workingTime: this.workingTime,
       deliveryTime: this.deliveryTime,
       status: this.status,

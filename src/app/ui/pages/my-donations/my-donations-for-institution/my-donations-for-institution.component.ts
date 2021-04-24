@@ -33,8 +33,7 @@ export class MyDonationsForInstitutionComponent implements OnInit {
   displayedColumns: string[] = [
     "createdAt",
     "donator",
-    "food",
-    "amount",
+    "foodAmount",
     "status",
     "deliveryTime",
     "actions",
@@ -57,7 +56,7 @@ export class MyDonationsForInstitutionComponent implements OnInit {
     private authServ: AuthService,
     public dialog: MatDialog,
     private loadingServ: LoadingService,
-    public foodServ: FoodService,
+    public foodService: FoodService,
     private notificationServ: NotificationService
   ) {}
 

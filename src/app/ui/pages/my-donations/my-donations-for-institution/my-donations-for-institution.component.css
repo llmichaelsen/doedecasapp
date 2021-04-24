@@ -9,6 +9,7 @@ table {
 
 td.mat-cell {
     text-align: left;
+    padding: 10px;
 }
 
 .btn-icon {

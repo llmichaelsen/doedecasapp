@@ -1,0 +1,30 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.title-up {
+    margin: 0;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.food-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: visible;
+
+    .row:first-child {
+        padding-right: 50px;
+    }
+
+    .line {
+        display: flex;
+        width: 100%;
+
+        > * {
+            margin-right: 10px;
+        }
+    }
+}

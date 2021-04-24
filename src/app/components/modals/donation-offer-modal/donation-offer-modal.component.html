@@ -8,22 +8,6 @@
     <div class="card-body">
         <form id="login-form" [formGroup]="donationForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm"
             *ngIf="donationForm">
-            <div class="row">
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Alimento</mat-label>
-                        <mat-select formControlName="food">
-                            <mat-option *ngFor="let food of foods" [value]="food.id">{{food.title}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Quantidade (Kg ou L)</mat-label>
-                        <input matInput placeholder="0" type="number" formControlName="amount">
-                    </mat-form-field>
-                </div>
-            </div>
             <div class="row" formGroupName="workingTime">
                 <div class="col-md-12">
                     <h4>Horário para Coleta</h4>
@@ -46,13 +30,13 @@
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Início</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekDayBegin"/>
+                                <input matInput appMask="timeMask" type="text" formControlName="weekDayBegin" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Final</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekDayFinal"/>
+                                <input matInput appMask="timeMask" type="text" formControlName="weekDayFinal" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-12">
@@ -61,18 +45,42 @@
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Início</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekEndBegin"/>
+                                <input matInput appMask="timeMask" type="text" formControlName="weekEndBegin" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Final</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekEndFinal"/>
+                                <input matInput appMask="timeMask" type="text" formControlName="weekEndFinal" />
                             </mat-form-field>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="food-list container">
+                <div class="row" formArrayName="foodAmount"
+                    *ngFor="let item of donationForm.get('foodAmount')['controls']; let i = index;">
+                    <ng-container [formGroupName]="i">
+                        <div class="line">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Alimento</mat-label>
+                                <mat-select formControlName="food">
+                                    <mat-option *ngFor="let food of foods" [value]="food.id">{{food.title}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Quantidade (Kg ou L)</mat-label>
+                                <input matInput placeholder="0" type="number" formControlName="amount">
+                            </mat-form-field>
+                            <button title="Remover alimento" *ngIf="i > 0" (click)="removeItem(i)"
+                                class="btn btn-danger btn-icon btn-round">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <button *ngIf="items.length < 8" (click)="addItem()" class="btn btn-primary btn-round">Mais alimentos</button>
         </form>
     </div>
 </div>

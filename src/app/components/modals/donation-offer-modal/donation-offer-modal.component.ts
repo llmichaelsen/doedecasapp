@@ -3,7 +3,7 @@ import { DonationStatus } from '../../../ui/models/donation/donation-status.enum
 import { DonationOfferService } from '../../../ui/services/donation-offer.service';
 import { DonationOffer } from '../../../ui/models/donation/donation-offer';
 import { FoodService } from '../../../ui/services/food.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '../../../ui/services/loading.service';
 import { AuthService } from '../../../ui/services/auth.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,12 +14,14 @@ import { Food } from 'app/ui/models/food/food';
 @Component({
   selector: 'app-offer-donation-modal',
   templateUrl: './donation-offer-modal.component.html',
-  styleUrls: ['./donation-offer-modal.component.css']
+  styleUrls: ['./donation-offer-modal.component.scss']
 })
 export class DonationOfferModalComponent implements OnInit {
 
   donationForm: FormGroup;
   foods: Food[] = [];
+  items: FormArray = new FormArray([]);
+
 
   constructor(
     public dialogRef: MatDialogRef<DonationOfferModalComponent>,
@@ -42,12 +44,28 @@ export class DonationOfferModalComponent implements OnInit {
 
   createForm() {
     this.donationForm = this.fb.group({
-      food: [null, Validators.required],
-      amount: [null, Validators.required],
+      foodAmount: this.fb.array([ this.createFoodItem() ]),
       workingTime: new WorkingTime().getFormGroup()
     });
   }
 
+  createFoodItem(): FormGroup {
+    return this.fb.group({
+      food: [null, Validators.required],
+      amount: [null, Validators.required],
+    });
+  }
+
+  addItem(): void {
+    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items.push(this.createFoodItem());
+  }
+
+  removeItem(i) {
+    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items.removeAt(i);
+    console.log(this.items, i)
+  }
 
   async onSubmit(): Promise<void> {
     if (this.donationForm.invalid) {
@@ -66,9 +84,9 @@ export class DonationOfferModalComponent implements OnInit {
   createDonation(): DonationOffer {
     const data = this.donationForm.getRawValue();
     const donation = new DonationOffer();
+
     donation.donator = this.authServ.getUserApp().uid;
-    donation.amount = data.amount;
-    donation.food = data.food;
+    donation.foodAmount = data.foodAmount;
     donation.workingTime = data.workingTime;
     return donation;
   }

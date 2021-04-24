@@ -1,0 +1,28 @@
+
+
+.working-time .mat-checkbox {
+    margin-right: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.food-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: visible;
+
+    .row:first-child {
+        padding-right: 50px;
+    }
+
+    .line {
+        display: flex;
+        width: 100%;
+
+        > * {
+            margin-right: 10px;
+        }
+    }
+}

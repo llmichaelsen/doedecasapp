@@ -75,8 +75,7 @@ export class DonationCollectModalComponent implements OnInit {
     donation.deliveryTime.endTime = data.deliveryTime.endTime;
     donation.donator = this.data.donator.uid;
     donation.institution = this.authServ.getUserApp().uid;
-    donation.amount = this.data.amount;
-    donation.food = this.data.food;
+    donation.foodAmount = this.data.foodAmount;
     donation.key = this.data.key;
     donation.workingTime = this.data.workingTime;
     donation.status = DonationStatus.Scheduled;
