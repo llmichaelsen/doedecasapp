@@ -1,0 +1,21 @@
+<div class="modal-header justify-content-center">
+    <h4 class="title title-up">Informações da Instituição</h4>
+    <button type="button" class="close" (click)="close(false)">
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="card-body">
+        <form id="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Instituição: {{ data.name }}</p>
+                    <p>Endereço: {{ data.getFullAddress() }}</p>
+                    <p>Alimentos prioritários: {{ getPriorityFoods() }}</p>
+                    <p>Telefone: {{ data.phone }}</p>
+                    <button [routerLink]="'/instituicao/'+ data.key" (click)="close(false)" class="btn btn-primary">Ver mais</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

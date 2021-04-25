@@ -37,8 +37,8 @@ export class RegisterInstitutionComponent implements OnInit {
   createForm(): void {
     this.profileForm = this.fb.group({
       name: ["", Validators.required],
-      cpnj: ["", Validators.required],
-      phone: ["", Validators.required],
+      cpnj: ["", [Validators.required, Validators.minLength(18)]],
+      phone: ["", [Validators.required, Validators.minLength(15)]],
       description: [""],
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
@@ -51,8 +51,8 @@ export class RegisterInstitutionComponent implements OnInit {
       }),
       responsibleFirstName: ["", Validators.required],
       responsibleLastName: ["", Validators.required],
-      responsiblePhone: ["", Validators.required],
-      responsibleRole: ["", Validators.required],
+      responsiblePhone: ["", [Validators.required, Validators.minLength(15)]],
+      responsibleRole: [""],
     });
   }
 
@@ -80,7 +80,7 @@ export class RegisterInstitutionComponent implements OnInit {
       width: "500px",
       data: {
         type: "success",
-        text: "Agora que sua Instituição está cadastrada, você pode ajustar as configurações de doações para começar a receber doações.",
+        text: "Agora que sua Instituição está cadastrada, acesse o perfil e cofigure as informações para começar a receber doações.",
       },
     });
   }

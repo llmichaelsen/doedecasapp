@@ -32,11 +32,12 @@ export class DonationCollectModalComponent implements OnInit {
     private donationServ: DonationOfferService,
     public dialogRef: MatDialogRef<DonationCollectModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private foodService: FoodService,
+    public foodService: FoodService,
     private notificationServ: NotificationService
   ) {}
 
   async ngOnInit(): Promise<void> {
+    console.log(this.data)
     this.createForm();
     this.foods = await this.foodService.list();
   }

@@ -1,36 +1,39 @@
-import { Institution } from './../../../models/user/institution.model';
-import { FoodService } from './../../../services/food.service';
-import { GeocodeService } from './../../../services/geocode.service';
-import { InstitutionService } from './../../../services/institution.service';
-import { MapsAPILoader } from '@agm/core';
-import { Component, OnInit } from '@angular/core';
+import { Institution } from "./../../../models/user/institution.model";
+import { FoodService } from "./../../../services/food.service";
+import { GeocodeService } from "./../../../services/geocode.service";
+import { InstitutionService } from "./../../../services/institution.service";
+import { MapsAPILoader } from "@agm/core";
+import { Component, NgZone, OnInit } from "@angular/core";
+import { InstitutionModalComponent } from "app/components/modals/institution-modal/institution-modal.component";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-maps-for-donators',
-  templateUrl: './maps-for-donators.component.html',
-  styleUrls: ['./maps-for-donators.component.css']
+  selector: "app-maps-for-donators",
+  templateUrl: "./maps-for-donators.component.html",
+  styleUrls: ["./maps-for-donators.component.css"],
 })
 export class MapsForDonatorsComponent implements OnInit {
-
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private instServ: InstitutionService,
     private geocodeServ: GeocodeService,
-    private foodServ: FoodService
+    private foodServ: FoodService,
+    public dialog: MatDialog,
+    private ngZone: NgZone
   ) {}
 
   map: any;
   markers = [];
   foods = [];
-  currentWindom;
   notification = true;
+  infoModal: MatDialogRef<InstitutionModalComponent>;
 
   async ngOnInit() {
     this.mapsAPILoader.load().then(async (r) => {
       this.initMap();
       this.requestPosition();
       this.loadInstitutionsMarkers();
-      this.foods = await this.foodServ.list();      
+      this.foods = await this.foodServ.list();
     });
   }
 
@@ -77,25 +80,21 @@ export class MapsForDonatorsComponent implements OnInit {
             map: this.map,
           });
 
-          const infowindow = new google.maps.InfoWindow({
-            content: `
-            <h3>${item.name}</h3>
-            <h5>Alimentos prioritários:<br>${this.getPriorityFoods(item)}</h5>
-            <a href="/instituicao/${item.uid}" target="_blank">Fazer doação</a>
-            `,
-          });
           mrk.addListener("click", () => {
-            if(this.currentWindom) this.currentWindom.close();
-            this.currentWindom = infowindow.open(this.map, mrk);
+            this.openInstitutionInfo(item);
           });
           this.markers.push(mrk);
         });
     });
   }
 
-  getPriorityFoods(inst: Institution): string[] {
-    return this.foods.filter((f) => inst.foodNeeded.includes(f.id))
-      .map(f=> " " + f.title);
+  openInstitutionInfo(inst: Institution): void {
+    this.ngZone.run(() => {
+      this.infoModal = this.dialog.open(InstitutionModalComponent, {
+        data: inst,
+        width: "600px",
+      });
+    });
   }
 
   closeAlert() {

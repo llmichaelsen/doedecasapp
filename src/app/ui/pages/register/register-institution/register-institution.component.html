@@ -20,7 +20,7 @@
                         <div class="col-md-4">
                             <mat-form-field appearance="fill">
                                 <mat-label>CNPJ</mat-label>
-                                <input matInput type="text" formControlName="cpnj">
+                                <input matInput appMask="cpnjMask" type="text" formControlName="cpnj">
                             </mat-form-field>
                         </div>
                         <div class="col-md-4">
@@ -100,7 +100,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Dados de contato</h3>
+                            <h3>Dados do responsável</h3>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill">
@@ -117,7 +117,7 @@
                         <div class="col-md-3">
                             <mat-form-field appearance="fill">
                                 <mat-label>Celular</mat-label>
-                                <input matInput type="text" formControlName="responsiblePhone">
+                                <input matInput appMask="cellphoneMask" type="text" formControlName="responsiblePhone">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">

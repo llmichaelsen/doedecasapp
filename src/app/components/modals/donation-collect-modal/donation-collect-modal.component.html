@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                     <p>Doador: {{ data.donator.getFullName() }}</p>
                     <p>Endereço: {{ data.donator.getFullAddress() }}</p>
-                    <p>Alimento: {{ data.amount }} Kg ou Litros de {{ getFoodName(data.food) }}</p>
+                    <p>Alimentos: {{ data.getFoodList(foodService) }}</p>
                     <p>Dias disponíveis: <span class="work-day"
                             *ngFor="let day of data.workingTime.getDayList(); let i = index">{{day}}{{(i + 1) <
                                 data.workingTime.getDayList().length ? ", " : "" }} </span>

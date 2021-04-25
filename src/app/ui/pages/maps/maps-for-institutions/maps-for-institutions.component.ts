@@ -30,6 +30,7 @@ export class MapsForInstitutionsComponent implements OnInit {
   foods = [];
   collectModal: MatDialogRef<DonationCollectModalComponent>;
   messageModal: MatDialogRef<MessageModalComponent>;
+  notification = true;
 
   async ngOnInit() {
     this.mapsAPILoader.load().then(async (r) => {
@@ -122,5 +123,9 @@ export class MapsForInstitutionsComponent implements OnInit {
         text: "Doação agendada com sucesso. Veja suas doações na aba de Minhas Doações.",
       },
     });
+  }
+
+  closeAlert() {
+    this.notification = false;
   }
 }

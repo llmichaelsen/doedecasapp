@@ -26,6 +26,7 @@ import { ConfigDonationModalComponent } from './modals/config-donation-modal/con
 import { InstitutionInfoModalComponent } from './modals/institution-info-modal/institution-info-modal.component';
 import { MessageModalComponent } from './modals/message-modal/message-modal.component';
 import { FooterComponent } from './footer/footer.component';
+import { InstitutionModalComponent } from './modals/institution-modal/institution-modal.component';
 
 @NgModule({
     imports: [
@@ -58,6 +59,7 @@ import { FooterComponent } from './footer/footer.component';
         InstitutionInfoModalComponent,
         MessageModalComponent,
         FooterComponent,
+        InstitutionModalComponent,
     ],
     exports:[ ComponentsComponent, LoadingComponent, FooterComponent ]
 })

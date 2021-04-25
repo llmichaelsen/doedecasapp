@@ -34,6 +34,18 @@ export class Masks {
     return value;
   }
 
+  static cpnjMask(value: string): string {
+    if (!value) return "";
+
+    value = value.replace(/\D/g, "");
+    value = this.maxLength(value, 14);
+    value = value.replace(/(\d{2})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1/$2");
+    value = value.replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+    return value;
+  }
+
   static crmMask(value: string): string {
     if (!value) return "";
 

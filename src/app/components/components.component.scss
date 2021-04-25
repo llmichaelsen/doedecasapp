@@ -36,3 +36,14 @@ ngb-progressbar {
 .btn-primary {
   color: #fff !important;
 }
+
+
+@media only screen and (max-width: 768px) {
+  .section-story-overview {
+    padding: 0 15px;
+  }
+  .blockquote {
+    margin-bottom: 20px !important;
+  }
+}
+
