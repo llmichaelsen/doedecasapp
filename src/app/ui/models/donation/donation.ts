@@ -35,7 +35,7 @@ export abstract class Donation implements IDonation {
 
   getFoodList(foodService: FoodService): string {
     return this.foodAmount
-      .map((food) => `${food.food} Kg/Litros de ${foodService.getFoodName(food.food)}, `)
+      .map((food) => `${food.amount} Kg/Litros de ${foodService.getFoodName(food.food)}, `)
       .join("")
       .slice(0, -1)
       .slice(0, -1);
