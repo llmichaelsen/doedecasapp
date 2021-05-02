@@ -21,13 +21,21 @@
                             <h2 class="title">Sobre a instituição</h2>
                             <p class="description">{{instituicao?.description}}</p>
                         </div>
-                        <div class="line-inst">
+                        <div class="line-inst"  *ngIf="priorityFoods">
                             <h3 class="title">Alimentos prioritários:</h3>
                             <p class="description">{{priorityFoods}}</p>
                         </div>
                         <div class="line-inst">
                             <h3 class="title">Endereço:</h3>
                             <p class="description">{{instituicao?.address.getFullAddress()}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Telefone:</h3>
+                            <p class="description">{{instituicao?.phone}}</p>
+                        </div>
+                        <div class="line-inst" *ngIf="instituicao?.homepage">
+                            <h3 class="title">Website:</h3>
+                            <a class="ancor" [href]="instituicao?.homepageLink" target="_blank" >{{instituicao?.homepage}}</a>
                         </div>
                         <div class="line-inst">
                             <h3 class="title">Dias de funcionamento:</h3>

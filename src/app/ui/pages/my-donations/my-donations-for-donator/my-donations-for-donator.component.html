@@ -16,7 +16,7 @@
             <ng-container matColumnDef="institution">
                 <th mat-header-cell *matHeaderCellDef> Instituição </th>
                 <td mat-cell *matCellDef="let element">
-                    <a class="ancor" (click)="openInstitutionInfo(element.institution)">
+                    <a class="ancor" href="javascript:void(0);" (click)="openInstitutionInfo(element.institution)">
                         {{element.institution?.name}}
                     </a>
                 </td>
@@ -87,7 +87,7 @@
             <ng-container matColumnDef="institution">
                 <th mat-header-cell *matHeaderCellDef> Instituição </th>
                 <td mat-cell *matCellDef="let element">
-                    <a class="ancor" (click)="openInstitutionInfo(element.institution)">
+                    <a class="ancor" href="javascript:void(0);" (click)="openInstitutionInfo(element.institution)">
                         {{element.institution?.name }}
                     </a>
                 </td>

@@ -9,6 +9,7 @@ export class Institution extends UserApp {
   cpnj: string;
   description: string;
   address: Address;
+  homepage: string;
 
   responsibleFirstName: string;
   responsibleLastName: string;
@@ -24,6 +25,10 @@ export class Institution extends UserApp {
     this.type = UserType.Instituiçao;
   }
 
+  get homepageLink() {
+    return this.homepage.includes('http') ? this.homepage : `http://${this.homepage}`;
+  }
+
   getName(): string {
     return this.responsibleFirstName;
   }
@@ -37,6 +42,7 @@ export class Institution extends UserApp {
       name: this.name,
       cpnj: this.cpnj,
       description: this.description,
+      homepage: this.homepage,
       phone: this.phone,
       address: this.address,
       responsibleFirstName: this.responsibleFirstName,
@@ -55,6 +61,7 @@ export class Institution extends UserApp {
       name: [this.name, Validators.required],
       cpnj: [this.cpnj, Validators.required],
       description: [this.description],
+      homepage: [this.homepage],
       phone: [this.phone, Validators.required],
       address: fb.group({
         street: [this.address.street, Validators.required],
@@ -66,7 +73,7 @@ export class Institution extends UserApp {
       responsibleFirstName: [this.responsibleFirstName, Validators.required],
       responsibleLastName: [this.responsibleLastName, Validators.required],
       responsiblePhone: [this.responsiblePhone, Validators.required],
-      responsibleRole: [this.responsibleRole, Validators.required],
+      responsibleRole: [this.responsibleRole],
     });
   }
 
@@ -88,6 +95,7 @@ export class Institution extends UserApp {
     inst.description = formGroup.get("description").value;
     inst.phone = formGroup.get("phone").value;
     inst.address = formGroup.get("address").value;
+    inst.homepage = formGroup.get("homepage").value;
     inst.responsibleFirstName = formGroup.get("responsibleFirstName").value;
     inst.responsibleLastName = formGroup.get("responsibleLastName").value;
     inst.responsiblePhone = formGroup.get("responsiblePhone").value;

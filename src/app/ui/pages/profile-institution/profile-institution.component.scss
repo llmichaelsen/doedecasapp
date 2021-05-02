@@ -14,6 +14,8 @@ a.btn-primary {
     color: #fff;
 }
 
+
+
 .page-header .page-header-image {
     background-position: center 0%;
 }
@@ -55,6 +57,10 @@ p.description {
     }
     > * {
         margin: 0;
+    }
+    .ancor {
+        margin-left: 10px;
+        font-size: 16px;
     }
 }
 

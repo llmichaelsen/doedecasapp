@@ -40,6 +40,7 @@ export class RegisterInstitutionComponent implements OnInit {
       cpnj: ["", [Validators.required, Validators.minLength(18)]],
       phone: ["", [Validators.required, Validators.minLength(15)]],
       description: [""],
+      homepage: [""],
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
       address: this.fb.group({
@@ -92,6 +93,7 @@ export class RegisterInstitutionComponent implements OnInit {
     user.name = this.profileForm.controls.name.value;
     user.cpnj = this.profileForm.controls.cpnj.value;
     user.description = this.profileForm.controls.description.value;
+    user.homepage = this.profileForm.controls.homepage.value;
     user.phone = this.profileForm.controls.phone.value;
 
     const addressForm = this.profileForm.controls.address as FormGroup;

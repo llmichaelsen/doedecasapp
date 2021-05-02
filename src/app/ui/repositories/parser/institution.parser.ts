@@ -27,6 +27,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
     institution.cpnj = info.cpnj;
     institution.phone = info.phone.substring(0, 15) || '';
     institution.description = info.description;
+    institution.homepage = info.homepage;
     institution.address = this.addressParser.parse(info.address);
     institution.responsibleFirstName = info.responsibleFirstName;
     institution.responsibleLastName = info.responsibleLastName;
@@ -49,6 +50,7 @@ export class InstitutionParser extends AbstractParser<Institution> {
     institution.phone = info.phone.substring(0, 15) || '';
     institution.description = info.description;
     institution.address = this.addressParser.reparse(info.address);
+    institution.homepage = info.homepage;
     institution.responsibleFirstName = info.responsibleFirstName;
     institution.responsibleLastName = info.responsibleLastName;
     institution.responsiblePhone = info.responsiblePhone;
