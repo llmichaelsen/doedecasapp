@@ -100,6 +100,12 @@ export class AuthService {
     return user.type === UserType.Admin;
   }
 
+  get isUserDonator(): boolean {
+    const user = JSON.parse(localStorage.getItem("userApp"));
+    if (!user) return null;
+    return user.type === UserType.Doador;
+  }
+
   async deleteUser(password: string): Promise<boolean> {
     try {
       await this.authRepository.unRegister(this.user.email, password);

@@ -28,12 +28,18 @@
               (click)="notificationClick(notification)" routerLink="/my-donations">{{notification.message}}</a>
           </div>
         </div>
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="'/instituicoes'">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/maps/donator'">
             <i class="now-ui-icons objects_globe"></i>
-            <p>Instituições</p>
+            <p>Ver Mapa</p>
           </a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="'/instituicoes'">
+            <i class="now-ui-icons business_bank"></i>
+            <p>Instituições</p>
+          </a>
+        </li>        
         <li class="nav-item">
           <a class="nav-link" *ngIf="!authServ.isLoggedIn" routerLink="/login">
             <i class="now-ui-icons users_circle-08"></i>
@@ -47,6 +53,7 @@
             <div ngbDropdownMenu>
               <a class="dropdown-header">Opções do Usuário</a>
               <a class="dropdown-item" routerLink="/perfil">Perfil</a>
+              <a class="dropdown-item ancor" *ngIf="authServ.isUserDonator" (click)="redirectDonateFromHome()">Quero doar de casa</a>
               <a class="dropdown-item" routerLink="/my-donations">Minhas Doações</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="logout()">Sair</a>

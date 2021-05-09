@@ -1,6 +1,7 @@
 export enum RoutePath {
   Home = "",
   Profile = "perfil",
+  DonateFromHome = "perfil?openOffer=true",
   Institutions = "instituicoes",
   Login = "login",
   RegisterDonator = "register",
