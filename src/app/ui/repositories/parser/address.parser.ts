@@ -11,6 +11,7 @@ export class AddressParser extends AbstractParser<Address> {
 
         address.street = payload.street;
         address.number = payload.number;
+        address.complement = payload.complement;
         address.district = payload.district;
         address.city = payload.city;
         address.uf = payload.uf;

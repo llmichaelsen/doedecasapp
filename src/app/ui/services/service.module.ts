@@ -8,6 +8,7 @@ import { LoadingService } from './loading.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { GeocodeService } from './geocode.service';
 import { NotificationService } from './notification.service';
+import { AlertService } from './alert.service';
 
 
 @NgModule({})
@@ -23,7 +24,8 @@ export class ServiceModule {
                 DonatorService,
                 InstitutionService,
                 GeocodeService,
-                NotificationService
+                NotificationService,
+                AlertService
             ]
         }
     }

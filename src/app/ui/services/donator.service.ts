@@ -12,7 +12,7 @@ export class DonatorService {
       const uid = await this.repository.saveDonator(donator);
       return true;
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 

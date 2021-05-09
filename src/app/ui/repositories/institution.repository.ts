@@ -46,7 +46,6 @@ export class InstitutionRepository {
 
   public async saveInstitution(institution: Institution): Promise<string> {
     try {
-      debugger
       const userFirebase = await this.authRepository.register(
         institution.getRegisterModel()
       );
@@ -63,7 +62,7 @@ export class InstitutionRepository {
       );
       return userFirebase.user.uid;
     } catch (error) {
-      throw Promise.reject(error);
+      throw error;
     }
   }
 }

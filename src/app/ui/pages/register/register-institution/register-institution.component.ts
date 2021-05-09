@@ -11,6 +11,8 @@ import { UserType } from "app/ui/models/user/user-type.enum";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { estados } from "app/utils/estados.array";
+import { AlertService } from "app/ui/services/alert.service";
+import { AlertMessages } from "app/ui/models/alert/alert-messages.enum";
 
 @Component({
   selector: "app-register-institution",
@@ -21,12 +23,12 @@ export class RegisterInstitutionComponent implements OnInit {
   profileForm: FormGroup;
   messageModal: MatDialogRef<MessageModalComponent>;
 
-
   constructor(
     private service: InstitutionService,
     private loadingServ: LoadingService,
     private fb: FormBuilder,
     private router: Router,
+    private alertServ: AlertService,
     public dialog: MatDialog
   ) {}
 
@@ -42,10 +44,11 @@ export class RegisterInstitutionComponent implements OnInit {
       description: [""],
       homepage: [""],
       email: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.required],
+      password: ["", [Validators.required, Validators.minLength(6)]],
       address: this.fb.group({
         street: ["", Validators.required],
         number: ["", Validators.required],
+        complement: [""],
         district: ["", Validators.required],
         city: ["", Validators.required],
         uf: ["", Validators.required],
@@ -67,7 +70,7 @@ export class RegisterInstitutionComponent implements OnInit {
     this.service
       .saveInstitution(user)
       .then(() => this.successMessage())
-      .catch((error) => console.log(error))
+      .catch((error) => this.alertServ.openError(AlertMessages[error.code]))
       .finally(() => this.loadingServ.close(load));
   }
 
@@ -81,7 +84,8 @@ export class RegisterInstitutionComponent implements OnInit {
       width: "500px",
       data: {
         type: "success",
-        text: "Agora que sua Instituição está cadastrada, acesse o perfil e cofigure as informações para começar a receber doações.",
+        text:
+          "Agora que sua Instituição está cadastrada, acesse o perfil e cofigure as informações para começar a receber doações.",
       },
     });
   }

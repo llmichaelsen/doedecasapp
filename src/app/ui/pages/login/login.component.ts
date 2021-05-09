@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { ForgotPassModalComponent } from "app/components/modals/forgot-pass-modal/forgot-pass-modal.component";
 import { AuthService } from "app/ui/services/auth.service";
 
 @Component({
@@ -15,10 +17,12 @@ export class LoginComponent implements OnInit {
   errors = false;
 
   loginForm: FormGroup;
+  recoveryModal: MatDialogRef<ForgotPassModalComponent>;
 
   constructor(
     private authServ: AuthService,
     private fb: FormBuilder,
+    public dialog: MatDialog,
     private router: Router
   ) {}
 
@@ -51,7 +55,10 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  async sendRecoverEmail(): Promise<void> {
-    await this.authServ.sendRecoverEmail("llmichaelsen@gmail.com");
+  openRecoveryModal(): void {
+    this.recoveryModal = this.dialog.open(ForgotPassModalComponent, {
+      width: "600px",
+    });
   }
+
 }
