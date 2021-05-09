@@ -42,7 +42,7 @@ export class WorkingTime {
       : false;
   }
 
-  dateFilter = (date: Date): boolean => {
+  dateFilter(date: Date): boolean {
     if (
       (this.monday && date.getDay() == 1) ||
       (this.tuesday && date.getDay() == 2) ||

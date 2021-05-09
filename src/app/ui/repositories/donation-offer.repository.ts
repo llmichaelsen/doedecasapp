@@ -1,7 +1,6 @@
 import { DonatorRepository } from "./donator.repository";
 import { InstitutionRepository } from "./institution.repository";
-import { InstitutionParser } from "./parser/institution.parser";
-import { filter, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { FoodService } from "./../services/food.service";
 import { DonationOfferParser } from "./parser/donation-offer.parser";
 import { Key } from "./../models/user/user-app.model";
@@ -11,8 +10,8 @@ import { DonationStatus } from "./../models/donation/donation-status.enum";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { FirebaseGateway } from "../gateway/firebase.gateway";
-import { sortedChanges } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
+import { Donator } from "../models/user/donator.model";
 @Injectable()
 export class DonationOfferRepository {
   constructor(
@@ -96,20 +95,32 @@ export class DonationOfferRepository {
       const result = await gateway.updateItem("donation-offer", donation);
       return Promise.resolve(this.donationParser.parseList(result));
     } catch (error) {
-      console.log(error);
       return await Promise.reject(error);
     }
   }
 
   public async cancelDonation(donation: DonationOffer): Promise<any> {
     try {
+      debugger
       const gateway = new FirebaseGateway(this.db);
       const result = await gateway.updateItem("donation-offer", donation);
+
+      if(donation.institution) {
+        const newDonation = {...donation};
+        newDonation.deliveryTime = null;
+        newDonation.institution = null;
+        newDonation.status = DonationStatus.Initiated;
+        newDonation.donator = (donation.donator as Donator).uid;
+        delete newDonation.key;
+
+        const result = await this.saveDonation(newDonation);
+      }
       return Promise.resolve(result);
     } catch (error) {
       return await Promise.reject(error);
     }
   }
+  
 
   public async getInitiatedDonations(): Promise<DonationOffer[]> {
     try {
