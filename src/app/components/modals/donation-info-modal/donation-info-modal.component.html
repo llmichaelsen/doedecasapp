@@ -1,0 +1,28 @@
+<div class="modal-header justify-content-center">
+    <h4 class="title title-up">Informações do Doação</h4>
+    <button type="button" class="close" (click)="close(false)">
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="card-body">
+        <form id="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <p *ngIf="data?.completionMotive">Motivo da conclusão: {{ data?.completionMotive }}</p>
+                    <p>Dias disponíveis para coleta: <span class="work-day"
+                            *ngFor="let day of data.workingTime.getDayList(); let i = index">{{day}}{{(i + 1) <
+                                data.workingTime.getDayList().length ? ", " : "" }} </span>
+                    </p>
+                    <p *ngIf="data.workingTime.workOnWeekday()">Horário em dias de demana:
+                        {{data.workingTime.weekDayBegin}} até
+                        {{data.workingTime.weekDayFinal}}</p>
+                    <p *ngIf="data.workingTime.workOnWeekend()">Horário em finais de semana:
+                        {{data.workingTime.weekEndBegin}} até
+                        {{data.workingTime.weekEndFinal}}
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

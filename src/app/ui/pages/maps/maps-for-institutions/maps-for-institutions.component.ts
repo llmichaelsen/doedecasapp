@@ -4,7 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { DonationOfferService } from "./../../../services/donation-offer.service";
 import { FoodService } from "./../../../services/food.service";
 import { GeocodeService } from "./../../../services/geocode.service";
-import { MapsAPILoader } from "@agm/core";
+import { MapsAPILoader, MapTypeStyle } from "@agm/core";
 import { Component, NgZone, OnInit } from "@angular/core";
 import { Donator } from "app/ui/models/user/donator.model";
 import { DonationOffer } from "app/ui/models/donation/donation-offer";
@@ -43,10 +43,22 @@ export class MapsForInstitutionsComponent implements OnInit {
 
   initMap(): void {
     var myLatlng = new google.maps.LatLng(-29.363882, -50.809258);
+    var style = [
+      {
+        featureType: "poi.business",
+        elementType: "all",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+    ] as MapTypeStyle[];
     var mapOptions = {
       zoom: 15,
       center: myLatlng,
       scrollwheel: false,
+      styles: style
     };
     this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
   }

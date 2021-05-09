@@ -23,6 +23,7 @@ import { Donator } from "app/ui/models/user/donator.model";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { DonationInfoModalComponent } from "app/components/modals/donation-info-modal/donation-info-modal.component";
 
 @Component({
   selector: "app-my-donations-for-donator",
@@ -50,6 +51,7 @@ export class MyDonationsForDonatorComponent implements OnInit {
   completeModal: MatDialogRef<DonationCompleteModalComponent>;
   infoModal: MatDialogRef<InstitutionInfoModalComponent>;
   messageModal: MatDialogRef<MessageModalComponent>;
+  donationInfoModal: MatDialogRef<DonationInfoModalComponent>;
 
   constructor(
     private donationOfferServ: DonationOfferService,
@@ -131,6 +133,13 @@ export class MyDonationsForDonatorComponent implements OnInit {
   openInstitutionInfo(donator: Institution): void {
     this.infoModal = this.dialog.open(InstitutionInfoModalComponent, {
       data: donator,
+      width: "600px",
+    });
+  }
+
+  openDonationInfo(donation: DonationOffer): void {
+    this.infoModal = this.dialog.open(DonationInfoModalComponent, {
+      data: donation,
       width: "600px",
     });
   }

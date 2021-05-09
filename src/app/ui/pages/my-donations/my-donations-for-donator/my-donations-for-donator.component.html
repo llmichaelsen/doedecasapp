@@ -57,6 +57,10 @@
                         type="button">
                         <i class="now-ui-icons ui-1_check"></i>
                     </button>
+                    <button title="Infomações da Doação" (click)="openDonationInfo(element)"
+                        class="btn btn-info btn-icon btn-round" type="button">
+                        <i class="now-ui-icons files_single-copy-04"></i>
+                    </button>
                     <button title="Cancelar Doação" (click)="cancelDonation(element)"
                         *ngIf="element.status === DonationStatus.Initiated" class="btn btn-danger btn-icon btn-round"
                         type="button">

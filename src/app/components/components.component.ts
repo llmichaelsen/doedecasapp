@@ -1,3 +1,4 @@
+import { registerInstitutionModal } from './../ui/models/modals/modal-content';
 import { RoutePath } from "./../ui/models/route-path";
 import { AuthService } from "./../ui/services/auth.service";
 import { Component, OnInit, Renderer2, OnDestroy } from "@angular/core";
@@ -7,6 +8,7 @@ import { NgbAccordionConfig } from "@ng-bootstrap/ng-bootstrap";
 import { UserType } from "app/ui/models/user/user-type.enum";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MessageModalComponent } from "./modals/message-modal/message-modal.component";
+import { registerDonatorModal } from "app/ui/models/modals/modal-content";
 
 @Component({
   selector: "app-components",
@@ -58,24 +60,23 @@ export class ComponentsComponent implements OnInit {
     if (this.authServ.getUserApp().type === UserType.Doador) {
       this.router.navigateByUrl(RoutePath.Profile + "?openOffer=true");
     } else {
-      this.messageModal = this.dialog.open(MessageModalComponent, {
-        width: "500px",
-        data: {
-          type: "success",
-          text:
-            "Para acessar essa funcionalidade você precisa acessar como doador.",
-          buttons: [
-            {
-              text: "Cadastre-se",
-              callback: () => this.router.navigate([RoutePath.RegisterDonator]),
-            },
-            {
-              text: "Já tenha cadastro",
-              callback: () => this.router.navigate([RoutePath.Login]),
-            },
-          ],
-        },
-      });
+      this.messageModal = this.dialog.open(MessageModalComponent, registerDonatorModal(this.router));
+    }
+  }
+
+  redirectMapsForInstitution() {
+    if (this.authServ.getUserApp().type === UserType.Instituiçao) {
+      this.router.navigateByUrl(RoutePath.MapForInstitutions);
+    } else {
+      this.messageModal = this.dialog.open(MessageModalComponent, registerInstitutionModal(this.router));
+    }
+  }
+
+  redirectProfileForInstitution() {
+    if (this.authServ.getUserApp().type === UserType.Instituiçao) {
+      this.router.navigateByUrl(RoutePath.Profile);
+    } else {
+      this.messageModal = this.dialog.open(MessageModalComponent, registerInstitutionModal(this.router));
     }
   }
 }

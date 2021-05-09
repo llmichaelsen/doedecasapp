@@ -28,6 +28,7 @@ import { MessageModalComponent } from './modals/message-modal/message-modal.comp
 import { FooterComponent } from './footer/footer.component';
 import { InstitutionModalComponent } from './modals/institution-modal/institution-modal.component';
 import { ForgotPassModalComponent } from './modals/forgot-pass-modal/forgot-pass-modal.component';
+import { DonationInfoModalComponent } from './modals/donation-info-modal/donation-info-modal.component';
 
 @NgModule({
     imports: [
@@ -62,6 +63,7 @@ import { ForgotPassModalComponent } from './modals/forgot-pass-modal/forgot-pass
         FooterComponent,
         InstitutionModalComponent,
         ForgotPassModalComponent,
+        DonationInfoModalComponent,
     ],
     exports:[ ComponentsComponent, LoadingComponent, FooterComponent ]
 })

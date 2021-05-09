@@ -80,9 +80,9 @@
                                     <p class="category text-primary">Encontre doadores</p>
                                     <p class="description">Encontre os doadores próximos que já possuem uma doação
                                         disponível.</p>
-                                    <a [routerLink]="'/instituicao/'" type="button"
-                                        class="btn btn-primary btn-round">Ver
-                                        Mais</a>
+                                    <a (click)="redirectMapsForInstitution()" type="button"
+                                        class="btn btn-primary btn-round">Ver no
+                                        Mapa</a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -91,7 +91,7 @@
                                     <p class="category text-primary">Organize sua coleta</p>
                                     <p class="description">Selecione os alimentos mais prioritários no momento e defina
                                         um horario de funcionamento para receber doações na instituição.</p>
-                                    <a [routerLink]="'/instituicao/'" type="button"
+                                    <a (click)="redirectProfileForInstitution()" type="button"
                                         class="btn btn-primary btn-round">Ver
                                         Mais</a>
                                 </div>
@@ -118,7 +118,8 @@
                             </p>
                         </div>
                         <!-- Second image on the left side of the article -->
-                        <div class="image-container d-none d-sm-block" style="background-image: url('assets/img/background-1.jpg')">
+                        <div class="image-container d-none d-sm-block"
+                            style="background-image: url('assets/img/background-1.jpg')">
                         </div>
                     </div>
                     <div class="col-md-5 mt-xs-3">

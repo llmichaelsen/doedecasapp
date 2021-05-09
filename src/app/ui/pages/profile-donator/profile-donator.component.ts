@@ -7,6 +7,7 @@ import { AuthService } from "app/ui/services/auth.service";
 import { EditDonatorModalComponent } from "app/components/modals/edit-donator-modal/edit-donator-modal.component";
 import { DonationOfferModalComponent } from "app/components/modals/donation-offer-modal/donation-offer-modal.component";
 import { MessageModalComponent } from "app/components/modals/message-modal/message-modal.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-profile",
@@ -21,17 +22,14 @@ export class ProfileDonatorComponent implements OnInit {
   constructor(
     private service: DonatorService,
     public dialog: MatDialog,
-    public authServ: AuthService
+    public authServ: AuthService,
+    private actRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("profile-page");
-  }
-
-  ngOnDestroy() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("profile-page");
+    this.actRoute.queryParams.subscribe(params => {
+      if(params.openOffer === "true") this.openDonationOffer();
+    });
   }
 
   openEdit(): void {
