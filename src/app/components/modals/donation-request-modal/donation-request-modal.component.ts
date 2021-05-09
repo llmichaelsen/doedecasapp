@@ -29,6 +29,7 @@ export class DonationRequestModal implements OnInit {
   foods: Food[] = [];
   donationForm: FormGroup;
   items: FormArray = new FormArray([]);
+  minDate = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -42,13 +43,14 @@ export class DonationRequestModal implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    console.log(this.data);
     this.createForm();
     this.foods = await this.foodService.list();
   }
 
   createForm() {
     this.donationForm = this.fb.group({
-      foodAmount: this.fb.array([ this.createFoodItem() ]),
+      foodAmount: this.fb.array([this.createFoodItem()]),
       deliveryTime: this.fb.group({
         day: [null, Validators.required],
         initTime: [null, Validators.required],
@@ -65,14 +67,14 @@ export class DonationRequestModal implements OnInit {
   }
 
   addItem(): void {
-    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items = this.donationForm.get("foodAmount") as FormArray;
     this.items.push(this.createFoodItem());
   }
 
   removeItem(i) {
-    this.items = this.donationForm.get('foodAmount') as FormArray;
+    this.items = this.donationForm.get("foodAmount") as FormArray;
     this.items.removeAt(i);
-    console.log(this.items, i)
+    console.log(this.items, i);
   }
 
   onSubmit(formDirective: FormGroupDirective) {
@@ -84,7 +86,7 @@ export class DonationRequestModal implements OnInit {
     this.donationServ
       .saveDonation(this.createDonation())
       .then(() => {
-        this.notificationServ.saveNotification(this.createNotification())
+        this.notificationServ.saveNotification(this.createNotification());
         this.successMessage(formDirective);
       })
       .catch((error) => console.log(error))
@@ -93,9 +95,7 @@ export class DonationRequestModal implements OnInit {
 
   createNotification(): Notification {
     const not = new Notification();
-    not.message = `O doador ${
-      (this.authServ.getUserApp() as Donator).getFullName()
-    } agendou uma doação para entrega na instituição.`;
+    not.message = `O doador ${(this.authServ.getUserApp() as Donator).getFullName()} agendou uma doação para entrega na instituição.`;
     not.userApp = this.data.uid;
     return not;
   }
@@ -121,4 +121,8 @@ export class DonationRequestModal implements OnInit {
     formDirective.resetForm();
     this.close(true);
   }
+
+  dateFilter = (date: Date) => {
+    return this.data.workingTime.dateFilter(date);
+  };
 }

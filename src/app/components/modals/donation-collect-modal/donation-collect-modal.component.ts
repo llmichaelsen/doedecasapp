@@ -24,6 +24,7 @@ import { Notification } from "app/ui/models/notification/notification";
 export class DonationCollectModalComponent implements OnInit {
   foods: Food[] = [];
   donationForm: FormGroup;
+  minDate = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -105,4 +106,8 @@ export class DonationCollectModalComponent implements OnInit {
   getFoodName(number): string {
     if (this.foods.length) return this.foods.find((f) => f.id === number).title;
   }
+
+  dateFilter = (date: Date) => {
+    return this.data.workingTime.dateFilter(date);
+  };
 }

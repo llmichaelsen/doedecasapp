@@ -11,7 +11,8 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill" formGroupName="deliveryTime">
                         <mat-label>Selecione o dia</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="day">
+                        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [min]="minDate"
+                            formControlName="day">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -50,7 +51,7 @@
                             </button>
                         </div>
                     </ng-container>
-                </div>                
+                </div>
             </div>
             <button *ngIf="items.length < 8" (click)="addItem()" class="btn btn-primary btn-round">Mais
                 alimentos</button>
