@@ -9,6 +9,7 @@ export enum RoutePath {
   MapForDonators = "/maps/donator",
   MapForInstitutions = "/maps/institution",
   MyDonations = "/my-donations",
+  Credits = "/credits",
   MyDonationsForDonator = "/my-donations/donator",
   MyDonationsForInstitution = "/my-donations/institution",
 }

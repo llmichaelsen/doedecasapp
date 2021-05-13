@@ -11,6 +11,7 @@ import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.compo
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
 import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
+import { CreditsComponent } from "./ui/pages/credits/credits.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "index", pathMatch: "full" },
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: "avaliacao", component: RatingComponent },
   { path: "instituicao", component: ProfileInstitutionComponent },
   { path: "instituicao/:id", component: ProfileInstitutionComponent },
+  { path: "credits", component: CreditsComponent },
 ];
 
 @NgModule({

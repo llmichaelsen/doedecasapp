@@ -18,6 +18,7 @@ import { InstitutionsComponent } from "./ui/pages/institutions/institutions.comp
 import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
 import { RatingComponent } from "./ui/pages/rating/rating.component";
 import { AngularFireModuleModule } from "./core/material/angular-fire.module";
+import { CreditsComponent } from './ui/pages/credits/credits.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { AngularFireModuleModule } from "./core/material/angular-fire.module";
     InstitutionsComponent,
     ProfileInstitutionComponent,
     RatingComponent,
+    CreditsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
