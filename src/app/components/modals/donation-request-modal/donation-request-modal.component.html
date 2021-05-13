@@ -20,13 +20,13 @@
                 <div class="col-md-3">
                     <mat-form-field appearance="fill" formGroupName="deliveryTime">
                         <mat-label>A partir da hora:</mat-label>
-                        <input appMask="timeMask" matInput formControlName="initTime" placeholder="00:00">
+                        <input appMask="timeMask" type="tel" matInput formControlName="initTime" placeholder="00:00">
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <mat-form-field appearance="fill" formGroupName="deliveryTime">
                         <mat-label>Até a hora:</mat-label>
-                        <input appMask="timeMask" matInput formControlName="endTime" placeholder="00:00">
+                        <input appMask="timeMask" type="tel" matInput formControlName="endTime" placeholder="00:00">
                     </mat-form-field>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                             </mat-form-field>
                             <mat-form-field appearance="fill">
                                 <mat-label>Quantidade (kg)</mat-label>
-                                <input matInput placeholder="0" type="number" formControlName="amount">
+                                <input matInput placeholder="0" type="tel" formControlName="amount">
                             </mat-form-field>
                             <button title="Remover alimento" *ngIf="i > 0" (click)="removeItem(i)"
                                 class="btn btn-danger btn-icon btn-round">

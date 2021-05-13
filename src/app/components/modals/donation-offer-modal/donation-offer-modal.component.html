@@ -30,13 +30,13 @@
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Início</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekDayBegin" />
+                                <input matInput appMask="timeMask" type="tel" formControlName="weekDayBegin" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Final</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekDayFinal" />
+                                <input matInput appMask="timeMask" type="tel" formControlName="weekDayFinal" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-12">
@@ -45,13 +45,13 @@
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Início</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekEndBegin" />
+                                <input matInput appMask="timeMask" type="tel" formControlName="weekEndBegin" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Final</mat-label>
-                                <input matInput appMask="timeMask" type="text" formControlName="weekEndFinal" />
+                                <input matInput appMask="timeMask" type="tel" formControlName="weekEndFinal" />
                             </mat-form-field>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             </mat-form-field>
                             <mat-form-field appearance="fill">
                                 <mat-label>Quantidade (Kg ou L)</mat-label>
-                                <input matInput placeholder="0" type="number" formControlName="amount">
+                                <input matInput placeholder="0" type="tel" formControlName="amount">
                             </mat-form-field>
                             <button title="Remover alimento" *ngIf="i > 0" (click)="removeItem(i)"
                                 class="btn btn-danger btn-icon btn-round">
