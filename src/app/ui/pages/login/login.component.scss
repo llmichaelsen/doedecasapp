@@ -13,3 +13,16 @@
 .page-header{
   height: calc(100vh - 130px);
 }
+
+@media screen and (max-height: 660px) {
+  .header-primary {
+    height: 90px;
+  }
+  .content {
+    height: 100px;
+  }
+
+  .footer  {
+    padding: 10px 0;
+  }
+}
