@@ -29,6 +29,7 @@ export class AuthService {
         this.setUserApp();
       } else {
         localStorage.setItem("user", null);
+        localStorage.setItem("userApp", null);
       }
     });
   }

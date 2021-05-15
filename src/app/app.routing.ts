@@ -5,19 +5,15 @@ import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
 import { ComponentsComponent } from "./components/components.component";
-import { LandingComponent } from "./examples/landing/landing.component";
 import { ProfileDonatorComponent } from "./ui/pages/profile-donator/profile-donator.component";
-import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.component";
 import { InstitutionsComponent } from "./ui/pages/institutions/institutions.component";
 import { ProfileInstitutionComponent } from "./ui/pages/profile-institution/profile-institution.component";
-import { RatingComponent } from "./ui/pages/rating/rating.component";
 import { CreditsComponent } from "./ui/pages/credits/credits.component";
+import { AuthGuard } from "./ui/services/guards/auth.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "index", pathMatch: "full" },
   { path: "index", component: ComponentsComponent },
-  { path: "nucleoicons", component: NucleoiconsComponent },
-  { path: "examples/landing", component: LandingComponent },
   { path: "instituicoes", component: InstitutionsComponent },
   {
     path: "login",
@@ -44,13 +40,13 @@ const routes: Routes = [
       import("./ui/pages/my-donations/my-donations.module").then(
         (module) => module.MyDonationsModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "perfil",
     component: ProfileDonatorComponent,
-    canActivate: [ProfileGuard],
+    canActivate: [AuthGuard, ProfileGuard],
   },
-  { path: "avaliacao", component: RatingComponent },
   { path: "instituicao", component: ProfileInstitutionComponent },
   { path: "instituicao/:id", component: ProfileInstitutionComponent },
   { path: "credits", component: CreditsComponent },

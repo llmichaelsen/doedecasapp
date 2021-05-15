@@ -6,3 +6,7 @@ table {
     min-height: 40vh;
     max-height: 260px;
 }
+
+.section-team ::ng-deep .mat-elevation-z8 {
+    overflow-x: auto;
+}

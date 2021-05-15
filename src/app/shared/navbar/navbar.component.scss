@@ -19,3 +19,15 @@
   text-align: center;
   border-radius: 25%;
 }
+
+@media screen and (max-width: 991px) {
+  .navbar ::ng-deep .dropdown.show .dropdown-menu {
+    height: auto;
+    max-height: 250px;
+  }
+
+  .not-number {
+    left: 50px;
+    top: 40px;
+  }
+}
