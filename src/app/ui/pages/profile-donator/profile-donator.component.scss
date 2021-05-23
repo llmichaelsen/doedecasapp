@@ -2,16 +2,20 @@ a.btn-primary {
   color: #fff;
 }
 
+.now-ui-icons {
+  font-size: 100px;
+}
+
 
 .button-container {
   display: flex;
   flex-direction: column;
   align-items: left;
   margin-top: 0;
-}
 
-img {
-  border-radius: 100%;
+  .btn {
+    padding: 15px 0;
+  }
 }
 
 .page-header .page-header-image {
@@ -30,13 +34,16 @@ img {
 .header {
   margin-top: 15px;
   text-align: center;
+  font-size: 20px;
 }
 
 .title {
   margin-top: 15px;
+  margin-bottom: 0;
   text-align: left;
 }
 
 .description {
   text-align: left;
+  margin-bottom: 0;
 }

@@ -31,8 +31,6 @@ body {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 768px) {
-  .mat-dialog-container {
-    margin-top: 90px;
-  }
+.mat-dialog-container {
+  margin-top: 90px;
 }

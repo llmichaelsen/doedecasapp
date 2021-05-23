@@ -4,8 +4,8 @@
             style="background-image: url('assets/img/background-1.jpg')"></div>
         <div class="container">
             <div class="content-center">
-                <div class="photo-container">
-                    <img src="assets/img/user-icon.jfif" alt="" />
+                <div class="">
+                    <i class="now-ui-icons users_circle-08"></i>
                 </div>
                 <h3 class="header">{{ user.getFullName() }}</h3>
             </div>
@@ -18,11 +18,14 @@
                     <mat-card>
                         <div class="">
                             <h2 class="title">Doador(a) </h2>
-                            <p class="description">Sobre: {{user.obs}}</p>
                         </div>
                         <div class="line-inst">
                             <h3 class="title">Nome:</h3>
                             <p class="description">{{user.getFullName()}}</p>
+                        </div>
+                        <div class="line-inst">
+                            <h3 class="title">Telefone:</h3>
+                            <p class="description">{{user.phone}}</p>
                         </div>
                         <div class="line-inst">
                             <h3 class="title">Endereço:</h3>
@@ -37,6 +40,7 @@
                         </div>
                         <div class="button-container">
                             <a (click)="openEdit()" class="btn btn-primary btn-round btn-lg ancor">Editar Perfil</a>
+                            <a routerLink="/my-donations" class="btn btn-primary btn-round btn-lg ancor">Minhas Doações</a>
                             <a (click)="openDonationOffer()" class="btn btn-info btn-round btn-lg ancor">Quero doar de Casa</a>
 
                             <!-- <a (click)="deleteAccount()" class="btn btn-danger btn-round btn-lg ancor">
